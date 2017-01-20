@@ -7,6 +7,7 @@ import { OAuthService } from 'angular2-oauth2/oauth-service';
 
 export let MAIN_CONFIG = new OpaqueToken('app.config');
 
+import { HttpClient } from './shared/services/http-client.service';
 import { APP_CONFIG } from './app.config';
 import { AppComponent }  from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     OAuthService,
+    HttpClient,
     { provide: MAIN_CONFIG, useValue: APP_CONFIG }
   ],
   bootstrap:    [ AppComponent ]
