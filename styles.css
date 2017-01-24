@@ -25,25 +25,63 @@ h1 {
   flex-direction: column;
 }
 
+.center {
+  text-align: center;
+}
+
 .left {
   float: left;
 }
 
-header,
-footer {
+.right {
+  float: right;
+}
+
+.button {
+    background: none;
+    outline: none;
+    border: 1px solid #82FF23;
+    padding: 10px 20px;
+    border-radius: 5%;
+    cursor: pointer;
+}
+
+.header,
+.header--secondary,
+.footer {
   width: 100%;
   padding: 10px;
-  background: #141414;
+  background: #000;
   color: #fff;
   box-sizing: border-box;
 }
 
-content {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
+.header {
+  background: #000 url(frequencies.jpg) no-repeat center center;
+  min-height: 100px;
+  background-size: 110% 100%;
 }
 
-nav a {
-  margin: 10px 10px 10px 0;
+.header--secondary {
+  border-top: 1px solid #82FF23;
+  height: 50px;
+  padding: 0 10px;
+  line-height: 50px;
 }
+
+.header--secondary nav a {
+  margin: 10px 10px 10px 0;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.header--secondary nav a.active {
+  color: #82FF23;
+}
+
+/* make this with flexbox */
+.footer {
+  position: fixed;
+  bottom: 0;
+}
+

@@ -5,8 +5,8 @@ import './userbox.css'
   selector: 'userbox',
   template: `
     <div class="userbox">
+      <span class="user__name">{{ userName }}</span>
       <img [src]="userPhoto" alt="user photo" class="user__photo" />
-      <div>{{ userName }}</div>
     </div>
   `,
 })

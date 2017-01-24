@@ -7,21 +7,22 @@ import { User } from './../shared/model/user.model';
 
 @Component({
   template: `
-    <div>
+    <header class="header--secondary">
       <userbox [userName]="user.display_name"
                [userPhoto]="user.images[0].url"
-               *ngIf="isUserDataAvailable"></userbox>
+               *ngIf="isUserDataAvailable"
+               class="right"></userbox>
       <nav>
-        <a [routerLink]="['/catalog/featured-playlists']" 
+        <a routerLink='/catalog/featured-playlists' 
            routerLinkActive="active">
            Featured Playlists
         </a>
-        <a [routerLink]="['/catalog/my-playlists']" 
+        <a routerLink='/catalog/my-playlists' 
            routerLinkActive="active">
            My Playlists
         </a>
       </nav>
-    </div>  
+    </header>  
     <router-outlet></router-outlet>
   `,
 })

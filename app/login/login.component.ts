@@ -4,9 +4,9 @@ import { Component } from '@angular/core';
 @Component({
   providers: [],
   template: `
-    <button class="btn btn-default" (click)="login()">
-        Login
-    </button>
+    <div class="center">
+      <button class="button" (click)="login()">Login</button>
+    </div>   
   `,
 })
 

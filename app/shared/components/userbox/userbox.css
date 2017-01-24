@@ -1,10 +1,11 @@
-.userbox {
-    text-align: center;
-    float: right;
+.user__photo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    vertical-align: middle;
 }
 
-.user__photo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+.user__name {
+    vertical-align: middle;
+    margin-right: 10px;
 }
