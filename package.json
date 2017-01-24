@@ -48,6 +48,7 @@
     "lodash": "^4.16.4",
     "protractor": "~4.0.14",
     "rimraf": "^2.5.4",
+    "systemjs-plugin-css": "^0.1.32",
     "tslint": "^3.15.1",
     "typescript": "~2.0.10"
   },

@@ -1,44 +1,49 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
 import { OpaqueToken } from '@angular/core';
 import { HttpModule }    from '@angular/http';
+
+import { AppRoutingModule } from './app-routing.module';
+
 import { OAuthService } from 'angular2-oauth2/oauth-service';
+import { AuthClientService } from './shared/services/auth.service';
+import { HttpClientService } from './shared/services/http-client.service';
+import { UserService } from './shared/services/user.service';
 
 export let MAIN_CONFIG = new OpaqueToken('app.config');
 
-import { HttpClient } from './shared/services/http-client.service';
-import { APP_CONFIG } from './app.config';
+import { APP_CONFIG } from './shared/app.config';
 import { AppComponent }  from './app.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/homе.component';
 import { FeaturedPlaylistsListComponent } from './featured-playlists/featured-playlists-list.component';
-import { PlaylistComponent } from './shared/components/playlist.component';
+import { PlaylistComponent } from './shared/components/playlist/playlist.component';
 import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
-
-const appRoutes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'featured-playlists', component: FeaturedPlaylistsListComponent },
-  { path: 'my-playlists', component: MyPlaylistsComponent},
-  //{ path: '**', component: AppComponent }
-];
+import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
+import { UserboxComponent } from './shared/components/userbox/userbox.component';
 
 @NgModule({
   imports:      [ 
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   declarations: [ 
     AppComponent,
     LoginComponent,
+    HomeComponent,
     FeaturedPlaylistsListComponent,
     PlaylistComponent,
-    MyPlaylistsComponent 
+    MyPlaylistsComponent,
+    PlaylistDetailsComponent,
+    UserboxComponent
   ],
   providers: [
+    { provide: MAIN_CONFIG, useValue: APP_CONFIG },
     OAuthService,
-    HttpClient,
-    { provide: MAIN_CONFIG, useValue: APP_CONFIG }
+    HttpClientService,
+    AuthClientService,
+    UserService
   ],
   bootstrap:    [ AppComponent ]
 })

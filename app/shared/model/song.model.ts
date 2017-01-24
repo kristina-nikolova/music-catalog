@@ -5,7 +5,7 @@ export class Song {
         public title: string,
         public cover: string,
         public date: Date,
-        public genres: String[],
+        public genres: string[],
         public label: Object
         ){}
 }

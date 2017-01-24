@@ -5,13 +5,13 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { HttpClientService } from './../shared/services/http-client.service';
-import { APP_CONFIG } from './../shared/app.config';
-import { Playlist } from './../shared/model/playlist.model';
+import { HttpClientService } from './http-client.service';
+import { APP_CONFIG } from '../../shared/app.config';
+import { User } from './../model/user.model';
 
 @Injectable()
-
-export class FeaturedPlaylistsService {
+export class UserService {
+  userId = '';
 
   constructor(private http: HttpClientService) {};
 
@@ -20,10 +20,18 @@ export class FeaturedPlaylistsService {
    * params:
    * description: get all Featured Playlists
    */
-  getFeaturedPlaylists() : Observable<Playlist[]> {
+  getProfile() : Observable<User> {
       return this.http
-              .get(APP_CONFIG.apiMainUrl + '/browse/featured-playlists')
-              .map((res:Response) => res.json().playlists.items)
+              .get(APP_CONFIG.apiMainUrl + '/me')
+              .map((res:Response) => res.json())
               .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   setUserId(id: string): void {
+     this.userId = id;
+   }
+
+   getUserId(): String {
+     return this.userId;
    }
 }

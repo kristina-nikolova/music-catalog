@@ -34,7 +34,8 @@
       "convert-string": "npm:convert-string/convert-string.js",
       "buffer": "npm:buffer/index.js",
       "ieee754": "npm:ieee754/index.js",
-      "isarray": "npm:isarray/index.js"
+      "isarray": "npm:isarray/index.js",
+      "css": 'npm:systemjs-plugin-css/css.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -48,6 +49,9 @@
       'angular2-oauth2': { 
         defaultExtension: 'js'
       }
+    },
+    meta: {
+      '*.css': { loader: 'css' }
     }
   });
 })(this);

@@ -9,9 +9,9 @@ import { Playlist } from './../shared/model/playlist.model';
     <h2>Featured Playlists</h2>
     <ul>
       <li *ngFor="let playlist of playlists"
-          class="playlist__list-item">
+          class="left">
         <playlist [playlistCover]="playlist.images[0].url"
-                           [playlistName]="playlist.name" ></playlist>
+                  [playlistName]="playlist.name" ></playlist>
       </li>
     </ul>
   `,

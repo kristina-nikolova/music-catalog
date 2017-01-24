@@ -1,7 +1,7 @@
 export class Playlist {
     constructor(
-        public id: String,
-        public name: String,
+        public id: string,
+        public name: string,
         public images: Object[]
         ){}
 }

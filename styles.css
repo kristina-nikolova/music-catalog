@@ -1,7 +1,5 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
+html, body {
+  margin: 0;
 }
 
 ul {
@@ -10,16 +8,42 @@ ul {
   list-style-type: none;
 }
 
-/*move to external file*/
-.playlist__list-item {
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.left {
   float: left;
 }
 
-.playlist {
-  margin: 10px;
+header,
+footer {
+  width: 100%;
+  padding: 10px;
+  background: #141414;
+  color: #fff;
+  box-sizing: border-box;
 }
 
-.palylist__image {
-  width: 300px;
-  height: 300px;
+content {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+nav a {
+  margin: 10px 10px 10px 0;
 }

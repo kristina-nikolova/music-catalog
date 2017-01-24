@@ -9,9 +9,10 @@ import { Playlist } from './../shared/model/playlist.model';
     <h2>My playlists</h2>
     <ul>
       <li *ngFor="let playlist of playlists"
-          class="playlist__list-item">
+          class="left">
         <playlist [playlistCover]="playlist.images[0].url"
-                           [playlistName]="playlist.name" ></playlist>
+                  [playlistName]="playlist.name"
+                  [routerLink]="['/catalog/my-playlists', playlist.id]" ></playlist>
       </li>
     </ul>
   `
@@ -31,7 +32,7 @@ export class MyPlaylistsComponent implements OnInit {
         .subscribe(
             (data) => {
               this.playlists = data;
-              console.log(this.playlists);
+              console.log('my playlist: ' + this.playlists);
             }, //Bind to view
             (err) => {
                 console.log(err);
