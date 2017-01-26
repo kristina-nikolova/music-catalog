@@ -22,12 +22,8 @@ export class HomeComponent implements OnInit {
             (data) => {
               this.user = data;
               this.userService.myId = data.id;
-              console.log('user: ');
-              console.log(data);
-              }, //Bind to view
-              (err) => {
-                  console.log(err);
-              }
+              },
+              (err) => { console.log(err); }
         );
   }
 }

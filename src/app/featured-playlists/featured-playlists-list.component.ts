@@ -21,13 +21,8 @@ export class FeaturedPlaylistsListComponent implements OnInit {
   loadFeaturedPlaylists() {
     this.featuredPlaylistsService.getFeaturedPlaylists()
         .subscribe(
-            (data) => {
-              this.playlists = data;
-              console.log(this.playlists);
-            },
-            (err) => {
-                console.log(err);
-            }
+            (data) => { this.playlists = data; },
+            (err) => { console.log(err); }
          );
   }
 

@@ -20,14 +20,8 @@ export class MyPlaylistsComponent implements OnInit {
   loadMyPlaylists() {
     this.myPlaylistsService.getMyPlaylists()
         .subscribe(
-            (data) => {
-              this.playlists = data;
-              console.log('my playlist: ');
-              console.log(this.playlists);
-            }, //Bind to view
-            (err) => {
-                console.log(err);
-            }
+            (data) => { this.playlists = data; },
+            (err) => { console.log(err); }
          );
   }
 }

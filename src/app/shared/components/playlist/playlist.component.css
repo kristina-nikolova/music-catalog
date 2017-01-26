@@ -15,9 +15,13 @@
   background: url(./assets/lock.png);
 }
 
+.playlist__name {
+  color: #fff;
+}
+
 .palylist__image {
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
 }
 
 .card {

@@ -26,20 +26,15 @@ const routes: Routes = [
         component: FeaturedPlaylistsListComponent
       },
       { 
-        path: 'featured-playlists/:id', 
-        component: PlaylistDetailsComponent,
-      },
-      { 
         path: 'my-playlists', 
         component: MyPlaylistsComponent
       },
       { 
         path: 'my-playlists/:id', 
-        component: PlaylistDetailsComponent,
+        component: PlaylistDetailsComponent
       }
     ]
-  },
-  //{ path: '**', component: AppComponent }
+  }
 ];
 
 @NgModule({

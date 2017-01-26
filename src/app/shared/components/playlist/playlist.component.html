@@ -1,13 +1,13 @@
 <div class="playlist card" [class.private]="!playlist.public">
   <div *ngIf="!canFollow" 
-       [routerLink]="[link, playlist.id]"
+       [routerLink]="[link, playlist.id, {user: playlist.owner.id}]"
        class="cursor-pointer">
     <img [src]="playlist.images[0].url" alt="playlist cover" class="palylist__image" />
     <div class="playlist__name">{{ playlist.name }}</div>
   </div>  
   <div *ngIf="canFollow">
     <img [src]="playlist.images[0].url" alt="playlist cover" class="palylist__image" />
-    <div>{{ playlist.name }}</div>
+    <div class="playlist__name">{{ playlist.name }}</div>
     <div class="overlay">
       <div class="overlay__content v-h-center center">
         <app-follow-button [name]="'Follow'"

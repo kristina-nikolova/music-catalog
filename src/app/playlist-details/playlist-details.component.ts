@@ -13,23 +13,21 @@ import { MyPlaylistsService } from './../my-playlists/my-playlists.service';
 
 export class PlaylistDetailsComponent implements OnInit {
   playlist: Playlist;
+  playlistId: string;
+  userId: string;
   
   constructor(private route: ActivatedRoute,
-              private myPlaylistsService: MyPlaylistsService) {}
+              private myPlaylistsService: MyPlaylistsService) {
+      this.playlistId = route.snapshot.params['id'];
+      this.userId = route.snapshot.params['user'];
+  }
 
   ngOnInit() {
     //TODO: make it work on reload page
-    this.route.params
-      .switchMap((params: Params) => this.myPlaylistsService.getMyPlaylistById(params['id']))
+    this.myPlaylistsService.getMyPlaylistById(this.playlistId, this.userId)
       .subscribe(
-        (data) => {
-              this.playlist = data;
-              console.log('playlist details: ');
-              console.log(this.playlist);
-              }, //Bind to view
-              (err) => {
-                  console.log(err);
-              }
+        (data) => { this.playlist = data; },
+        (err) => { console.log(err); }
       );
   }
 

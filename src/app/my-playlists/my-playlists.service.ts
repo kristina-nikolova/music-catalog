@@ -31,12 +31,13 @@ export class MyPlaylistsService {
 
    /**
    * name: getMyPlaylistById
-   * params:{Number} id
-   * description: get any of My Playlists by id
+   * params:{string} playlistId
+   * params:{string} userId
+   * description: get playlist details
    */
-    getMyPlaylistById(id: number): Observable<Playlist> {
+    getMyPlaylistById(playlistId: string, userId: string): Observable<Playlist> {
       return this.http
-              .get(APP_CONFIG.apiMainUrl + '/users/' + this.userService.myId + '/playlists/' + id)
+              .get(APP_CONFIG.apiMainUrl + '/users/' + userId + '/playlists/' + playlistId)
               .map((res:Response) => res.json())
               .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
