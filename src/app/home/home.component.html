@@ -1,0 +1,15 @@
+<header class="header--secondary">
+<userbox [user]="user"
+         class="right"></userbox>
+<nav>
+  <a routerLink='/catalog/featured-playlists' 
+      routerLinkActive="active">
+      Featured Playlists
+  </a>
+  <a routerLink='/catalog/my-playlists' 
+      routerLinkActive="active">
+      My Playlists
+  </a>
+</nav>
+</header>  
+<router-outlet></router-outlet>

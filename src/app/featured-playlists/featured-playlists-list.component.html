@@ -1,0 +1,5 @@
+<app-playlists-list [title]="'Featured Playlists'"
+                    [playlists]="playlists"
+                    [canFollowPlaylistItem]="true"
+                    (onPlaylistListFollowButtonClicked)="followPlaylist($event)"
+                    (onPlaylistListUnfollowButtonClicked)="unfollowPlaylist($event)"></app-playlists-list>

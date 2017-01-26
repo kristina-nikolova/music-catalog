@@ -1,0 +1,11 @@
+.user__photo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.user__name {
+    vertical-align: middle;
+    margin-right: 10px;
+}

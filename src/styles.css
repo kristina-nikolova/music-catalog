@@ -1,0 +1,95 @@
+html, body {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+/* Helpers */
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.block {
+  display: block;
+}
+
+.center {
+  text-align: center;
+}
+
+.v-h-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.m-10 {
+  margin-top: 10px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.button {
+    background: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 5%;
+    cursor: pointer;
+    border: 1px solid #82FF23;
+    background: #2EBD59;
+    color: #fff;
+}
+
+/* make component and move to it */
+.header--secondary {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  box-sizing: border-box;
+  border-top: 1px solid #82FF23;
+  height: 50px;
+  padding: 0 10px;
+  line-height: 50px;
+}
+
+.header--secondary nav a {
+  margin: 10px 10px 10px 0;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.header--secondary nav a.active {
+  color: #82FF23;
+}
