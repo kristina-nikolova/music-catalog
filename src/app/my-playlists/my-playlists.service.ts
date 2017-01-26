@@ -33,7 +33,7 @@ export class MyPlaylistsService {
    * name: getMyPlaylistById
    * params:{string} playlistId
    * params:{string} userId
-   * description: get playlist details
+   * description: get playlist details  
    */
     getMyPlaylistById(playlistId: string, userId: string): Observable<Playlist> {
       return this.http
