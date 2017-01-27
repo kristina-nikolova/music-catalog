@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MyPlaylistsService } from './my-playlists.service';
-import { Playlist } from './../shared/model/playlist.model';
+import { PlaylistTile } from './../shared/model/playlist-tile.model';
 
 @Component({
   providers: [MyPlaylistsService],
-  templateUrl: './my-playlists-list.component.html'
+  templateUrl: './my-playlists.component.html'
 })
 
 export class MyPlaylistsComponent implements OnInit {
-  playlists: Playlist[];
+  playlists: PlaylistTile[];
+  isDataLoading: boolean;
   
   constructor(private myPlaylistsService: MyPlaylistsService) {}
 
@@ -18,9 +19,13 @@ export class MyPlaylistsComponent implements OnInit {
   }
 
   loadMyPlaylists() {
+    this.isDataLoading = true;
     this.myPlaylistsService.getMyPlaylists()
         .subscribe(
-            (data) => { this.playlists = data; },
+            (data) => { 
+              this.playlists = data;
+              this.isDataLoading = false;
+            },
             (err) => { console.log(err); }
          );
   }

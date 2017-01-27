@@ -16,13 +16,15 @@ import { APP_CONFIG } from './shared/app.config';
 import { AppComponent }  from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/homе.component';
-import { FeaturedPlaylistsListComponent } from './featured-playlists/featured-playlists-list.component';
+import { FeaturedPlaylistsComponent } from './featured-playlists/featured-playlists.component';
 import { PlaylistComponent } from './shared/components/playlist/playlist.component';
 import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
 import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 import { UserboxComponent } from './shared/components/userbox/userbox.component';
 import { FollowButtonComponent } from './shared/components/follow-button/follow-button.component';
 import { PlaylistsListComponent } from './shared/components/playlists-list/playlists-list.component';
+import { SpinnerComponent } from './shared/components/spinner/spinner.component';
+import { TrackComponent } from './shared/components/track/track.component';
 
 @NgModule({
   imports:      [ 
@@ -34,13 +36,15 @@ import { PlaylistsListComponent } from './shared/components/playlists-list/playl
     AppComponent,
     LoginComponent,
     HomeComponent,
-    FeaturedPlaylistsListComponent,
+    FeaturedPlaylistsComponent,
     PlaylistComponent,
     MyPlaylistsComponent,
     PlaylistDetailsComponent,
     UserboxComponent,
     FollowButtonComponent,
-    PlaylistsListComponent
+    PlaylistsListComponent,
+    SpinnerComponent,
+    TrackComponent
   ],
   providers: [
     { provide: MAIN_CONFIG, useValue: APP_CONFIG },

@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 import { UserService } from './../shared/services/user.service';
 import { HttpClientService } from './../shared/services/http-client.service';
 import { APP_CONFIG } from './../shared/app.config';
+import { PlaylistTile } from './../shared/model/playlist-tile.model';
 import { Playlist } from './../shared/model/playlist.model';
 
 @Injectable()
@@ -22,7 +23,7 @@ export class MyPlaylistsService {
    * params:
    * description: get all Featured Playlists
    */
-  getMyPlaylists() : Observable<Playlist[]> {
+  getMyPlaylists() : Observable<PlaylistTile[]> {
       return this.http
               .get(APP_CONFIG.apiMainUrl + '/me/playlists')
               .map((res:Response) => res.json().items)
@@ -38,7 +39,7 @@ export class MyPlaylistsService {
     getMyPlaylistById(playlistId: string, userId: string): Observable<Playlist> {
       return this.http
               .get(APP_CONFIG.apiMainUrl + '/users/' + userId + '/playlists/' + playlistId)
-              .map((res:Response) => res.json())
+              .map((res:Response) => new Playlist(res.json()))
               .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 }

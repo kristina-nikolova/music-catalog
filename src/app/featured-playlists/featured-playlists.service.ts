@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 
 import { HttpClientService } from './../shared/services/http-client.service';
 import { APP_CONFIG } from './../shared/app.config';
-import { Playlist } from './../shared/model/playlist.model';
+import { PlaylistTile } from './../shared/model/playlist-tile.model';
 
 @Injectable()
 
@@ -20,7 +20,7 @@ export class FeaturedPlaylistsService {
    * params:
    * description: get all Featured Playlists
    */
-  getFeaturedPlaylists() : Observable<Playlist[]> {
+  getFeaturedPlaylists() : Observable<PlaylistTile[]> {
       return this.http
               .get(APP_CONFIG.apiMainUrl + '/browse/featured-playlists')
               .map((res:Response) => res.json().playlists.items)
@@ -33,7 +33,7 @@ export class FeaturedPlaylistsService {
    * params: {String} playlistId
    * description: user can follow a plalist
    */
-  followFeaturedPlaylists(ownerId, playlistId) : Observable<Playlist[]> {
+  followFeaturedPlaylists(ownerId, playlistId) : Observable<PlaylistTile[]> {
       return this.http
               .put(APP_CONFIG.apiMainUrl + '/users/' + ownerId + '/playlists/' + playlistId + '/followers', { "public": true })
               .map((res:Response) => res)
@@ -46,7 +46,7 @@ export class FeaturedPlaylistsService {
    * params: {String} playlistId
    * description: user can follow a plalist
    */
-  unfollowFeaturedPlaylists(ownerId, playlistId) : Observable<Playlist[]> {
+  unfollowFeaturedPlaylists(ownerId, playlistId) : Observable<PlaylistTile[]> {
       return this.http
               .delete(APP_CONFIG.apiMainUrl + '/users/' + ownerId + '/playlists/' + playlistId + '/followers')
               .map((res:Response) => res)

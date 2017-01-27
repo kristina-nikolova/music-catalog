@@ -1,7 +1,11 @@
 export class User {
-    constructor(
-        public id: string, 
-        public display_name: string,
-        public images: Object[]
-        ){}
+    id: string;
+    display_name: string;
+    images: Object[];
+    
+    constructor(user: any){
+        this.id = user.id;
+        this.display_name = user.display_name;
+        this.images = user.images;
+    }
 }

@@ -1,8 +1,14 @@
-<h2>Playlist Details</h2>
-<div>
-    <img [src]="playlist?.images[0].url" alt="playlist cover" />
-    <div>name: {{playlist?.name}}</div>
-    <div *ngFor="let track of playlist?.tracks.items">
-      {{track.track.name}}
+<app-spinner [isRunning]="isDataLoading"></app-spinner>
+<h2>{{playlist?.name}}</h2>
+<div class="flex flex-row">
+    <div class="mr-10">
+      <img [src]="playlist?.images[0].url" alt="playlist cover" />
+      <div>created by: {{playlist?.owner.id}}</div>
+      <div>followers: {{playlist?.followers.total}}</div>
+    </div>
+    <div class="playlist__tracks">
+      <div *ngFor="let track of playlist?.tracks.items">
+        <app-track [track]="track.track"></app-track>
+      </div>
     </div>
 </div>

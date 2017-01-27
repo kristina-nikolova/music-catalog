@@ -1,0 +1,25 @@
+.header--secondary {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  box-sizing: border-box;
+  border-top: 1px solid #2EBD59;
+  height: 50px;
+  padding: 0 10px;
+  line-height: 50px;
+}
+
+.header--secondary nav a {
+  margin: 10px 10px 10px 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.header--secondary nav a.active {
+  color: #2EBD59;
+}
+
+.content {
+  padding: 10px 10px 40px;
+}
+

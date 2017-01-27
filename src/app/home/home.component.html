@@ -1,3 +1,4 @@
+<app-spinner [isRunning]="isDataLoading"></app-spinner>
 <header class="header--secondary">
 <userbox [user]="user"
          class="right"></userbox>
@@ -11,5 +12,7 @@
       My Playlists
   </a>
 </nav>
-</header>  
-<router-outlet></router-outlet>
+</header>
+<content class="content">
+    <router-outlet></router-outlet>
+</content>

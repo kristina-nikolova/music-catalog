@@ -15,6 +15,7 @@ export class PlaylistDetailsComponent implements OnInit {
   playlist: Playlist;
   playlistId: string;
   userId: string;
+  isDataLoading: boolean;
   
   constructor(private route: ActivatedRoute,
               private myPlaylistsService: MyPlaylistsService) {
@@ -24,9 +25,13 @@ export class PlaylistDetailsComponent implements OnInit {
 
   ngOnInit() {
     //TODO: make it work on reload page
+    this.isDataLoading = true;
     this.myPlaylistsService.getMyPlaylistById(this.playlistId, this.userId)
       .subscribe(
-        (data) => { this.playlist = data; },
+        (data) => { 
+          this.playlist = data;
+          this.isDataLoading = false;
+        },
         (err) => { console.log(err); }
       );
   }

@@ -23,7 +23,7 @@ export class UserService {
   getProfile() : Observable<User> {
       return this.http
               .get(APP_CONFIG.apiMainUrl + '/me')
-              .map((res:Response) => res.json())
+              .map((res:Response) => new User(res.json()))
               .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
    }
 }

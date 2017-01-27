@@ -1,4 +1,4 @@
-import { Playlist } from './../../model/playlist.model';
+import { PlaylistTile } from './../../model/playlist-tile.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -9,9 +9,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PlaylistsListComponent implements OnInit {
 
   @Input() title: string;
-  @Input() playlists: Playlist[];
+  @Input() playlists: PlaylistTile[];
   @Input() canFollowPlaylistItem: Boolean;
   @Input() playlistLink: string;
+  @Input() isFolowing: Boolean;
   @Output() onPlaylistListFollowButtonClicked: EventEmitter<Object> = new EventEmitter<Object>();
   @Output() onPlaylistListUnfollowButtonClicked: EventEmitter<Object> = new EventEmitter<Object>();
 

@@ -12,6 +12,7 @@ export class PlaylistComponent {
   @Input() playlist: Playlist;
   @Input() canFollow: Boolean;
   @Input() link: String;
+  @Input() isFolowing: Boolean;
   @Output() onPlaylistFollowButtonClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output() onPlaylistUnFollowButtonClicked: EventEmitter<string> = new EventEmitter<string>();
 
