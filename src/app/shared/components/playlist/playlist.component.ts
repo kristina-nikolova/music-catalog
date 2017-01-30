@@ -1,15 +1,15 @@
-import { Playlist } from './../../model/playlist.model';
+import { PlaylistTile } from './../../model/playlist-tile.model';
 import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'playlist',
   templateUrl: './playlist.component.html',
-  styleUrls: ['./playlist.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./playlist.component.css']
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class PlaylistComponent {
-  @Input() playlist: Playlist;
+  @Input() playlist: PlaylistTile;
   @Input() canFollow: Boolean;
   @Input() link: String;
   @Input() isFolowing: Boolean;

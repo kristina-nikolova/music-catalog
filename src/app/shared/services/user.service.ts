@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { HttpClientService } from './http-client.service';
+import { HttpInterceptorService } from './http-interceptor.service';
 import { APP_CONFIG } from '../../shared/app.config';
 import { User } from './../model/user.model';
 
@@ -13,7 +13,7 @@ import { User } from './../model/user.model';
 export class UserService {
   myId = '';
 
-  constructor(private http: HttpClientService) {};
+  constructor(private http: HttpInterceptorService) {};
 
   /**
    * name: getFeaturedPlaylists

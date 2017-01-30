@@ -1,5 +1,5 @@
 import { OnInit, Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from '../shared/services/user.service';
 
@@ -15,19 +15,14 @@ export class HomeComponent implements OnInit {
   isDataLoading: boolean;
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private userService: UserService ) {
     router.navigateByUrl('/catalog/featured-playlists');
+    this.isDataLoading = true;
  }
   ngOnInit() {
-    this.isDataLoading = true;
-    this.userService.getProfile()
-          .subscribe(
-            (data) => {
-              this.user = data;
-              this.userService.myId = data.id;
-              this.isDataLoading = false;
-              },
-              (err) => { console.log(err); }
-        );
+    this.user = this.route.snapshot.data['homeResolver'];
+    this.userService.myId = this.user.id;
+    this.isDataLoading = false;
   }
 }

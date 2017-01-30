@@ -16,10 +16,12 @@
         </div>
         <app-follow-button [name]="'Follow'"
                           (onClicked)='onPlaylistFollowButtonClick()'
-                          class="block mb-10" ></app-follow-button>
+                          class="block mb-10"
+                          *ngIf="!playlist.followed"></app-follow-button>
         <app-follow-button [name]="'Unfollow'"
                           (onClicked)='onPlaylistUnFollowButtonClick()'
-                          class="block mb-10" ></app-follow-button>
+                          class="block mb-10"
+                          *ngIf="playlist.followed"></app-follow-button>
       </div>                          
     </div>
   </div>  

@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { UserService } from './../shared/services/user.service';
-import { HttpClientService } from './../shared/services/http-client.service';
+import { HttpInterceptorService } from './../shared/services/http-interceptor.service';
 import { APP_CONFIG } from './../shared/app.config';
 import { PlaylistTile } from './../shared/model/playlist-tile.model';
 import { Playlist } from './../shared/model/playlist.model';
@@ -15,7 +15,7 @@ import { Playlist } from './../shared/model/playlist.model';
 
 export class MyPlaylistsService {
 
-  constructor(private http: HttpClientService,
+  constructor(private http: HttpInterceptorService,
               private userService: UserService) {};
 
   /**

@@ -1,14 +1,15 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { OpaqueToken } from '@angular/core';
-import { HttpModule }    from '@angular/http';
+import { Http, HttpModule }    from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
 import { OAuthService } from 'angular2-oauth2/oauth-service';
 import { AuthClientService } from './shared/services/auth.service';
-import { HttpClientService } from './shared/services/http-client.service';
+import { HttpInterceptorService } from './shared/services/http-interceptor.service';
 import { UserService } from './shared/services/user.service';
+import { HomeResolver } from './home/homе-resolver.service';
 
 export let MAIN_CONFIG = new OpaqueToken('app.config');
 
@@ -47,11 +48,18 @@ import { TrackComponent } from './shared/components/track/track.component';
     TrackComponent
   ],
   providers: [
-    { provide: MAIN_CONFIG, useValue: APP_CONFIG },
+    { 
+      provide: MAIN_CONFIG, 
+      useValue: APP_CONFIG },
+    { 
+      provide: Http, 
+      useClass: HttpInterceptorService
+    },
+    HttpInterceptorService,
     OAuthService,
-    HttpClientService,
     AuthClientService,
-    UserService
+    UserService,
+    HomeResolver
   ],
   bootstrap:    [ AppComponent ]
 })

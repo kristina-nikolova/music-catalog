@@ -6,8 +6,8 @@
               [canFollow]="canFollowPlaylistItem" 
               [link]="playlistLink" 
               [isFolowing]="isFolowing" 
-              (onPlaylistFollowButtonClicked)="onPlaylistListFollowButtonClick(playlist.owner.id, playlist.id)"
-              (onPlaylistUnFollowButtonClicked)="onPlaylistListUnfollowButtonClick(playlist.owner.id, playlist.id)">
+              (onPlaylistFollowButtonClicked)="onPlaylistListFollowButtonClick(playlist.owner['id'], playlist.id)"
+              (onPlaylistUnFollowButtonClicked)="onPlaylistListUnfollowButtonClick(playlist.owner['id'], playlist.id)">
     </playlist>
   </li>
 </ul>

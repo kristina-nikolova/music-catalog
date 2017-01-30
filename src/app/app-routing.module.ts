@@ -6,6 +6,7 @@ import { HomeComponent } from './home/homе.component';
 import { FeaturedPlaylistsComponent } from './featured-playlists/featured-playlists.component';
 import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
 import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
+import { HomeResolver } from './home/homе-resolver.service';
 
 const routes: Routes = [
   { 
@@ -20,6 +21,9 @@ const routes: Routes = [
   { 
     path: 'catalog', 
     component: HomeComponent,
+    resolve: {
+      homeResolver: HomeResolver
+    },
     children: [
       { 
         path: 'featured-playlists', 

@@ -22,14 +22,23 @@ export class FeaturedPlaylistsComponent implements OnInit {
 
   loadFeaturedPlaylists() {
     this.isDataLoading = true;
+
     this.featuredPlaylistsService.getFeaturedPlaylists()
-        .subscribe(
-            (data) => { 
-              this.playlists = data;
-              this.isDataLoading = false;
-            },
-            (err) => { console.log(err); }
-         );
+      .flatMap(data => {
+        this.playlists = data;
+        this.isDataLoading = false;
+        return this.playlists;
+      })
+      .subscribe(data => {
+        let _data = data;
+        this.featuredPlaylistsService.isPlaylistFollowingByUser(data.owner['id'], data.id).subscribe(
+          (res) => {
+            //_data = {..._data, followed: true};
+            _data["followed"] = res[0];
+          },
+          (err) => { console.log(err); }
+        );
+      });
   }
 
   followPlaylist(data) {
@@ -55,16 +64,4 @@ export class FeaturedPlaylistsComponent implements OnInit {
       (err) => { console.log(err); }
     );
   }
-
-  // isPlaylistFollowingByUser(ownerId, playlistId) {
-  //   this.featuredPlaylistsService.isPlaylistFollowingByUser(ownerId, playlistId)
-  //       .subscribe(
-  //           (data) => {
-  //             console.log(data);
-  //           },
-  //           (err) => {
-  //               console.log(err);
-  //           }
-  //        );
-  // }
 }
