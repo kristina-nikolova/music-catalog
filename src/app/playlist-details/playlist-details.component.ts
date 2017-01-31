@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -24,11 +24,10 @@ export class PlaylistDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    //TODO: make it work on reload page
     this.isDataLoading = true;
     this.myPlaylistsService.getMyPlaylistById(this.playlistId, this.userId)
       .subscribe(
-        (data) => { 
+        (data) => {
           this.playlist = data;
           this.isDataLoading = false;
         },

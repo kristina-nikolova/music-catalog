@@ -18,7 +18,7 @@ import { AppComponent }  from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/homе.component';
 import { FeaturedPlaylistsComponent } from './featured-playlists/featured-playlists.component';
-import { PlaylistComponent } from './shared/components/playlist/playlist.component';
+import { PlaylistTileComponent } from './shared/components/playlist-tile/playlist-tile.component';
 import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
 import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 import { UserboxComponent } from './shared/components/userbox/userbox.component';
@@ -26,6 +26,8 @@ import { FollowButtonComponent } from './shared/components/follow-button/follow-
 import { PlaylistsListComponent } from './shared/components/playlists-list/playlists-list.component';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { TrackComponent } from './shared/components/track/track.component';
+import { PlaylistComponent } from './shared/components/playlist/playlist.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   imports:      [ 
@@ -38,14 +40,16 @@ import { TrackComponent } from './shared/components/track/track.component';
     LoginComponent,
     HomeComponent,
     FeaturedPlaylistsComponent,
-    PlaylistComponent,
+    PlaylistTileComponent,
     MyPlaylistsComponent,
     PlaylistDetailsComponent,
     UserboxComponent,
     FollowButtonComponent,
     PlaylistsListComponent,
     SpinnerComponent,
-    TrackComponent
+    TrackComponent,
+    PlaylistComponent,
+    HeaderComponent
   ],
   providers: [
     { 

@@ -1,7 +1,22 @@
-<div>
-  <iframe [src]="transformURL()" 
-          width="300" 
-          height="80" 
-          frameborder="0" 
-          allowtransparency="true"></iframe>
+<div class="track flex">
+  <div class="track__image">
+    <img [src]="track.album.images[0].url" alt="track cover" />
+  </div>     
+  <div class="track__info">
+    <div class="track__name bold">{{track.name}}</div>
+    <div class="track__album">Album: {{track.album.name}}</div>
+    <div class="track__artist">Artist: {{track.artists[0].name}}</div>
+  </div>
+  <div class="track__buttons">
+    <button type="button" 
+            (click)="playTrack(trackIframe)"
+            *ngIf="trackUri == undefined"
+            class="v-align-middle">play</button>
+    <iframe #trackIframe 
+            class="v-align-middle"
+            width="80" 
+            height="80" 
+            frameborder="0" 
+            allowtransparency="true"></iframe>
+  </div>
 </div>

@@ -2,12 +2,12 @@
 <ul>
   <li *ngFor="let playlist of playlists"
       class="left">
-    <playlist [playlist]="playlist" 
+    <app-playlist-tile [playlist]="playlist" 
               [canFollow]="canFollowPlaylistItem" 
               [link]="playlistLink" 
               [isFolowing]="isFolowing" 
               (onPlaylistFollowButtonClicked)="onPlaylistListFollowButtonClick(playlist.owner['id'], playlist.id)"
               (onPlaylistUnFollowButtonClicked)="onPlaylistListUnfollowButtonClick(playlist.owner['id'], playlist.id)">
-    </playlist>
+    </app-playlist-tile>
   </li>
 </ul>

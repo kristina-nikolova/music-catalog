@@ -6,7 +6,7 @@ export class Playlist {
     tracks: Object;
     followers: Object;
     
-    constructor(playlistTile: any){
+    constructor(playlistTile: any) {
         this.id = playlistTile.id;
         this.name = playlistTile.name;
         this.images = playlistTile.images;

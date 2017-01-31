@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'userbox',
+  selector: 'app-userbox',
   templateUrl: './userbox.component.html',
   styleUrls: ['./userbox.component.css']
 })

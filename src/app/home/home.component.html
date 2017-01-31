@@ -1,18 +1,16 @@
 <app-spinner [isRunning]="isDataLoading"></app-spinner>
-<header class="header--secondary">
-<userbox [user]="user"
-         class="right"></userbox>
-<nav>
-  <a routerLink='/catalog/featured-playlists' 
-      routerLinkActive="active">
-      Featured Playlists
-  </a>
-  <a routerLink='/catalog/my-playlists' 
-      routerLinkActive="active">
-      My Playlists
-  </a>
-</nav>
-</header>
-<content class="content">
-    <router-outlet></router-outlet>
-</content>
+<app-header>
+    <app-userbox [user]="user"
+                 class="right"></app-userbox>
+    <nav>
+        <a routerLink='/catalog/featured-playlists' 
+            routerLinkActive="active">
+            Featured Playlists
+        </a>
+        <a routerLink='/catalog/my-playlists' 
+            routerLinkActive="active">
+            My Playlists
+        </a>
+    </nav>
+</app-header>
+<router-outlet></router-outlet>

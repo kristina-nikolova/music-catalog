@@ -1,0 +1,30 @@
+<div class="playlist" [class.private]="!playlist.public">
+
+  <div *ngIf="!canFollow" 
+       [routerLink]="[link, playlist.id, {user: playlist.owner.id}]"
+       class="cursor-pointer">
+    <img [src]="playlist.images[0].url" alt="playlist cover" class="palylist__image" />
+    <div class="playlist__name">{{ playlist.name }}</div>
+  </div> 
+
+  <div *ngIf="canFollow">
+    <img [src]="playlist.images[0].url" alt="playlist cover" class="palylist__image" />
+    <div class="playlist__name">{{ playlist.name }}</div>
+    <div class="overlay">
+      <div class="overlay__content v-h-center center">
+        <div [class.opacity-0]="!isFolowing"
+             class="success-indicator" >
+          <img src="assets/success.png" width="20" height="20" alt="success" />
+        </div>
+        <app-follow-button [name]="'Follow'"
+                          (onClicked)='onPlaylistFollowButtonClick()'
+                          class="block mb-10"
+                          *ngIf="!playlist.followed"></app-follow-button>
+        <app-follow-button [name]="'Unfollow'"
+                          (onClicked)='onPlaylistUnFollowButtonClick()'
+                          class="block mb-10"
+                          *ngIf="playlist.followed"></app-follow-button>
+      </div>                          
+    </div>
+  </div>  
+</div>

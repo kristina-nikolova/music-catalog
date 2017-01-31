@@ -12,17 +12,15 @@ import { User } from './../shared/model/user.model';
 
 export class HomeComponent implements OnInit {
   user: User;
-  isDataLoading: boolean;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private userService: UserService ) {
-    router.navigateByUrl('/catalog/featured-playlists');
-    this.isDataLoading = true;
- }
+  }
+
   ngOnInit() {
+    this.router.navigateByUrl(window.location.pathname);
     this.user = this.route.snapshot.data['homeResolver'];
     this.userService.myId = this.user.id;
-    this.isDataLoading = false;
   }
 }

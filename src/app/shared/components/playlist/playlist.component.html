@@ -1,28 +1,17 @@
-<div class="playlist" [class.private]="!playlist.public">
-  <div *ngIf="!canFollow" 
-       [routerLink]="[link, playlist.id, {user: playlist.owner.id}]"
-       class="cursor-pointer">
-    <img [src]="playlist.images[0].url" alt="playlist cover" class="palylist__image" />
-    <div class="playlist__name">{{ playlist.name }}</div>
-  </div>  
-  <div *ngIf="canFollow">
-    <img [src]="playlist.images[0].url" alt="playlist cover" class="palylist__image" />
-    <div class="playlist__name">{{ playlist.name }}</div>
-    <div class="overlay">
-      <div class="overlay__content v-h-center center">
-        <div [class.opacity-0]="!isFolowing"
-             class="success-indicator" >
-          <img src="assets/success.png" width="20" height="20" alt="success" />
+<div *ngIf="playlist">  
+  <h2>{{playlist?.name}}</h2>
+  <div class="flex flex-row">
+      <div class="playlist__info mr-10">
+        <img [src]="playlist?.images[0].url" 
+             alt="playlist cover"
+             class="playlist__cover" />
+        <div><span class="bold">Created by:</span> {{playlist?.owner['id']}}</div>
+        <div><span class="bold">Followers:</span> {{playlist?.followers['total']}}</div>
+      </div>
+      <div class="playlist__tracks">
+        <div *ngFor="let track of playlist?.tracks['items']">
+          <app-track [track]="track.track"></app-track>
         </div>
-        <app-follow-button [name]="'Follow'"
-                          (onClicked)='onPlaylistFollowButtonClick()'
-                          class="block mb-10"
-                          *ngIf="!playlist.followed"></app-follow-button>
-        <app-follow-button [name]="'Unfollow'"
-                          (onClicked)='onPlaylistUnFollowButtonClick()'
-                          class="block mb-10"
-                          *ngIf="playlist.followed"></app-follow-button>
-      </div>                          
-    </div>
-  </div>  
+      </div>
+  </div>
 </div>

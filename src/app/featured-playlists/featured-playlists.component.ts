@@ -2,18 +2,17 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { FeaturedPlaylistsService } from './featured-playlists.service';
 import { PlaylistTile } from './../shared/model/playlist-tile.model';
+import * as _ from 'lodash';
 
 @Component({
   providers: [FeaturedPlaylistsService],
   templateUrl: './featured-playlists.component.html'
 })
 
-export class FeaturedPlaylistsComponent implements OnInit {
-  
+export class FeaturedPlaylistsComponent implements OnInit { 
   playlists: PlaylistTile[];
   isDataLoading: boolean;
   isFolowing: boolean;
-  
   constructor(private featuredPlaylistsService: FeaturedPlaylistsService) {}
 
   ngOnInit() {
@@ -30,11 +29,11 @@ export class FeaturedPlaylistsComponent implements OnInit {
         return this.playlists;
       })
       .subscribe(data => {
-        let _data = data;
+        const _data = data;
         this.featuredPlaylistsService.isPlaylistFollowingByUser(data.owner['id'], data.id).subscribe(
           (res) => {
-            //_data = {..._data, followed: true};
-            _data["followed"] = res[0];
+            // _data = {..._data, followed: true};
+            _data['followed'] = res[0];
           },
           (err) => { console.log(err); }
         );
@@ -42,24 +41,41 @@ export class FeaturedPlaylistsComponent implements OnInit {
   }
 
   followPlaylist(data) {
-    var _self = this;
+    const _self = this;
+    const playlist = data;
 
-    this.featuredPlaylistsService.followFeaturedPlaylists(data.ownerId, data.playlistId).subscribe(
+    this.featuredPlaylistsService.followFeaturedPlaylists(playlist.ownerId, playlist.playlistId).subscribe(
       (data) => {
         _self.isFolowing = true;
-        setTimeout(function(){ _self.isFolowing = false; }, 1000);
+
+        setTimeout(function() {
+          _self.isFolowing = false;
+          _.forEach(_self.playlists, function(pl){
+            if (pl.id === playlist.playlistId) {
+              pl.followed = true;
+            }
+          });
+        }, 1000);
       },
       (err) => { console.log(err); }
     );
   }
 
   unfollowPlaylist(data) {
-    var _self = this;
+    const _self = this;
+    const playlist = data;
 
     this.featuredPlaylistsService.unfollowFeaturedPlaylists(data.ownerId, data.playlistId).subscribe(
-      (data) => { 
+      (data) => {
         _self.isFolowing = true;
-        setTimeout(function(){ _self.isFolowing = false; }, 1000);
+        setTimeout(function() {
+          _self.isFolowing = false;
+          _.forEach(_self.playlists, function(pl){
+            if (pl.id === playlist.playlistId) {
+              pl.followed = false;
+            }
+          });
+        }, 1000);
       },
       (err) => { console.log(err); }
     );

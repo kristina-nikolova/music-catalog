@@ -1,26 +1,17 @@
-import { PlaylistTile } from './../../model/playlist-tile.model';
-import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { Playlist } from './../../model/playlist.model';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'playlist',
+  selector: 'app-playlist',
   templateUrl: './playlist.component.html',
   styleUrls: ['./playlist.component.css']
-  //changeDetection: ChangeDetectionStrategy.OnPush
 })
+export class PlaylistComponent implements OnInit {
+  @Input() playlist: Playlist;
 
-export class PlaylistComponent {
-  @Input() playlist: PlaylistTile;
-  @Input() canFollow: Boolean;
-  @Input() link: String;
-  @Input() isFolowing: Boolean;
-  @Output() onPlaylistFollowButtonClicked: EventEmitter<string> = new EventEmitter<string>();
-  @Output() onPlaylistUnFollowButtonClicked: EventEmitter<string> = new EventEmitter<string>();
+  constructor() { }
 
-  onPlaylistFollowButtonClick() {
-    this.onPlaylistFollowButtonClicked.emit();
+  ngOnInit() {
   }
 
-  onPlaylistUnFollowButtonClick() {
-    this.onPlaylistUnFollowButtonClicked.emit();
-  }
 }

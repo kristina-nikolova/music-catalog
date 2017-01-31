@@ -1,0 +1,37 @@
+.track {
+    background: #000;
+    color: #fff;
+    margin-bottom: 2px;
+    align-items: center;
+    border: 2px solid transparent;
+}
+
+.track:hover {
+    border: 2px solid #2EBD59;
+}
+
+.track__image {
+    margin: 0 10px;
+}
+
+.track__image img {
+    width: 50px;
+    height: 50px;
+}
+
+.track__info {
+    width: 60%;
+}
+
+.track__name {
+    color: #2EBD59;
+}
+
+.track__album,
+.track__artist {
+    font-size: 12px;
+}
+
+.track__buttons {
+    margin: 0 10px;
+}
