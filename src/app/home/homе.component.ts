@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     if (window.location.pathname === '/catalog') {
-      this.router.navigateByUrl('/catalog/featured-playlists');
+      this.router.navigateByUrl('/catalog/recommended');
     } else {
       this.router.navigateByUrl(window.location.pathname);
     }

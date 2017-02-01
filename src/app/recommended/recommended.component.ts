@@ -1,16 +1,17 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { FeaturedPlaylistsService } from './featured-playlists.service';
+import { FeaturedPlaylistsService } from './recommended.service';
 import { PlaylistTile } from './../shared/model/playlist-tile.model';
 import * as _ from 'lodash';
 
 @Component({
   providers: [FeaturedPlaylistsService],
-  templateUrl: './featured-playlists.component.html'
+  templateUrl: './recommended.component.html'
 })
 
 export class FeaturedPlaylistsComponent implements OnInit { 
   playlists: PlaylistTile[];
+  albums: PlaylistTile[];
   isDataLoading: boolean;
   isFolowing: boolean;
   constructor(private featuredPlaylistsService: FeaturedPlaylistsService) {}
@@ -38,6 +39,13 @@ export class FeaturedPlaylistsComponent implements OnInit {
           (err) => { console.log(err); }
         );
       });
+
+      this.featuredPlaylistsService.getNewReleasedAlbums()
+        .subscribe(data => {
+            this.albums = data;
+          },
+          (err) => { console.log(err); }
+        );
   }
 
   followPlaylist(data) {

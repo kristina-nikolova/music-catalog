@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/homе.component';
-import { FeaturedPlaylistsComponent } from './featured-playlists/featured-playlists.component';
+import { FeaturedPlaylistsComponent } from './recommended/recommended.component';
 import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
 import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 import { HomeResolver } from './home/homе-resolver.service';
@@ -26,7 +26,7 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'featured-playlists',
+        path: 'recommended',
         component: FeaturedPlaylistsComponent
       },
       {

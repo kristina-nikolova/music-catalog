@@ -1,4 +1,6 @@
-<div class="playlist" [class.private]="!playlist.public">
+<div class="playlist" 
+     [class.private]="!playlist.public"
+     [@scale]="'in'">
 
   <div *ngIf="!canFollow" 
        [routerLink]="[link, playlist.id, {user: playlist.owner.id}]"

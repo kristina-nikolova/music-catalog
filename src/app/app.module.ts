@@ -17,8 +17,8 @@ import { UserboxComponent } from './shared/components/userbox/userbox.component'
 
 /* Feature Modules */
 import { SharedModule } from './shared/shared.module';
-import { FeaturedPlaylistsModule } from './featured-playlists/featured-playlists.module';
-import { FeaturedPlaylistsRoutingModule } from './featured-playlists/featured-playlists-routing.module';
+import { FeaturedPlaylistsModule } from './recommended/recommended.module';
+import { FeaturedPlaylistsRoutingModule } from './recommended/recommended-routing.module';
 import { MyPlaylistsModule } from './my-playlists/my-playlists.module';
 import { MyPlaylistsRoutingModule } from './my-playlists/my-playlists-routing.module';
 

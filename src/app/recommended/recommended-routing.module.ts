@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { FeaturedPlaylistsComponent } from './featured-playlists.component';
+import { FeaturedPlaylistsComponent } from './recommended.component';
 
 const routes: Routes = [
     {
-      path: 'catalog/featured-playlists',
+      path: 'catalog/recommended',
       component: FeaturedPlaylistsComponent
     }
 ];

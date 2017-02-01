@@ -22,11 +22,22 @@ export class FeaturedPlaylistsService {
    * params:
    * description: get all Featured Playlists
    */
-  getFeaturedPlaylists() : Observable<PlaylistTile[]> {
+  getFeaturedPlaylists(): Observable<PlaylistTile[]> {
       return this.http
-              .get(APP_CONFIG.apiMainUrl + '/browse/featured-playlists')
-              .map((res:Response) => res.json().playlists.items)
-              .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+              .get(APP_CONFIG.apiMainUrl + '/browse/featured-playlists?limit=7')
+              .map((res: Response) => res.json().playlists.items)
+              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  /**
+   * name: getNewReleasedAlbums
+   * description: get recommended tracks
+   */
+  getNewReleasedAlbums(): Observable<PlaylistTile[]> {
+      return this.http
+              .get(APP_CONFIG.apiMainUrl + '/browse/new-releases?limit=7')
+              .map((res: Response) => res.json().albums.items)
+              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
    /**
@@ -38,8 +49,8 @@ export class FeaturedPlaylistsService {
   followFeaturedPlaylists(ownerId: string, playlistId: string) : Observable<PlaylistTile[]> {
       return this.http
               .put(APP_CONFIG.apiMainUrl + '/users/' + ownerId + '/playlists/' + playlistId + '/followers')
-              .map((res:Response) => res)
-              .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+              .map((res: Response) => res)
+              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
    /**
@@ -51,8 +62,8 @@ export class FeaturedPlaylistsService {
   unfollowFeaturedPlaylists(ownerId: string, playlistId: string) : Observable<PlaylistTile[]> {
       return this.http
               .delete(APP_CONFIG.apiMainUrl + '/users/' + ownerId + '/playlists/' + playlistId + '/followers')
-              .map((res:Response) => res)
-              .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+              .map((res: Response) => res)
+              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
    /**
@@ -64,7 +75,7 @@ export class FeaturedPlaylistsService {
    isPlaylistFollowingByUser(ownerId: any, playlistId: string) : Observable<PlaylistTile[]> {
       return this.http
               .get(APP_CONFIG.apiMainUrl + '/users/' + ownerId + '/playlists/' + playlistId + '/followers/contains?ids=' + this.userService.myId)
-              .map((res:Response) => res.json())
-              .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+              .map((res: Response) => res.json())
+              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 }

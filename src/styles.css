@@ -82,6 +82,10 @@ h1 {
   font-weight: bold;
 }
 
+.overflow {
+  overflow: hidden;
+}
+
 /* elements */
 .button {
     background: none;

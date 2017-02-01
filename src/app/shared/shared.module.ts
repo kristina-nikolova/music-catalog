@@ -7,7 +7,7 @@ export let MAIN_CONFIG = new OpaqueToken('app.config');
 
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PlaylistTileComponent } from './components/playlist-tile/playlist-tile.component';
-import { PlaylistsListComponent } from './components/playlists-list/playlists-list.component';
+import { CatalogListComponent } from './components/catalog-list/catalog-list.component';
 import { FollowButtonComponent } from './components/follow-button/follow-button.component';
 
 @NgModule({
@@ -17,7 +17,7 @@ import { FollowButtonComponent } from './components/follow-button/follow-button.
   ],
   declarations: [
     SpinnerComponent,
-    PlaylistsListComponent,
+    CatalogListComponent,
     PlaylistTileComponent,
     FollowButtonComponent
   ],
@@ -31,7 +31,7 @@ import { FollowButtonComponent } from './components/follow-button/follow-button.
     RouterModule,
     CommonModule,
     SpinnerComponent,
-    PlaylistsListComponent,
+    CatalogListComponent,
     PlaylistTileComponent,
     FollowButtonComponent
   ]
