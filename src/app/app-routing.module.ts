@@ -1,4 +1,4 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
@@ -9,32 +9,32 @@ import { PlaylistDetailsComponent } from './playlist-details/playlist-details.co
 import { HomeResolver } from './home/homе-resolver.service';
 
 const routes: Routes = [
-  { 
-    path: '', 
-    redirectTo: '/login', 
-    pathMatch: 'full' 
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
   },
   {
-    path: 'login', 
-    component: LoginComponent 
+    path: 'login',
+    component: LoginComponent
   },
-  { 
-    path: 'catalog', 
+  {
+    path: 'catalog',
     component: HomeComponent,
     resolve: {
       homeResolver: HomeResolver
     },
     children: [
-      { 
-        path: 'featured-playlists', 
+      {
+        path: 'featured-playlists',
         component: FeaturedPlaylistsComponent
       },
-      { 
-        path: 'my-playlists', 
+      {
+        path: 'my-playlists',
         component: MyPlaylistsComponent
       },
-      { 
-        path: 'my-playlists/:id', 
+      {
+        path: 'my-playlists/:id',
         component: PlaylistDetailsComponent
       }
     ]

@@ -19,7 +19,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.navigateByUrl(window.location.pathname);
+    if (window.location.pathname === '/catalog') {
+      this.router.navigateByUrl('/catalog/featured-playlists');
+    } else {
+      this.router.navigateByUrl(window.location.pathname);
+    }
     this.user = this.route.snapshot.data['homeResolver'];
     this.userService.myId = this.user.id;
   }
