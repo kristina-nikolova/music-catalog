@@ -1,6 +1,7 @@
 <div class="track flex">
   <div class="track__image mlr-10">
-    <img [src]="track.album.images[0].url" alt="track cover" />
+  <!--set default image-->
+    <img [src]="track.album.images[0]?.url" alt="track cover" />
   </div>     
   <div class="track__info mlr-10">
     <div class="track__name bold">{{track.name}}</div>
