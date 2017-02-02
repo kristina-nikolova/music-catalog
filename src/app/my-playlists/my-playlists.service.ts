@@ -23,11 +23,11 @@ export class MyPlaylistsService {
    * params:
    * description: get all Featured Playlists
    */
-  getMyPlaylists() : Observable<PlaylistTile[]> {
+  getMyPlaylists(): Observable<PlaylistTile[]> {
       return this.http
               .get(APP_CONFIG.apiMainUrl + '/me/playlists')
-              .map((res:Response) => res.json().items)
-              .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+              .map((res: Response) => res.json().items)
+              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
    /**
@@ -39,7 +39,7 @@ export class MyPlaylistsService {
     getMyPlaylistById(playlistId: string, userId: string): Observable<Playlist> {
       return this.http
               .get(APP_CONFIG.apiMainUrl + '/users/' + userId + '/playlists/' + playlistId)
-              .map((res:Response) => new Playlist(res.json()))
-              .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+              .map((res: Response) => new Playlist(res.json()))
+              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 }

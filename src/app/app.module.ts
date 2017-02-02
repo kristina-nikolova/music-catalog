@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Http, HttpModule } from '@angular/http';
+import { LocalStorageModule } from 'angular-2-local-storage';
 
 /* App Root */
 import { OAuthService } from 'angular2-oauth2/oauth-service';
@@ -18,17 +19,21 @@ import { UserboxComponent } from './home/components/userbox/userbox.component';
 /* Feature Modules */
 import { SharedModule } from './shared/shared.module';
 import { RecommendedModule } from './recommended/recommended.module';
-import { RecommendedRoutingModule } from './recommended/recommended-routing.module';
 import { MyPlaylistsModule } from './my-playlists/my-playlists.module';
-import { MyPlaylistsRoutingModule } from './my-playlists/my-playlists-routing.module';
+import { MyTopModule } from './my-top/my-top.module';
 
 /* Routing Module */
 import { AppRoutingModule } from './app-routing.module';
+// import { RecommendedRoutingModule } from './recommended/recommended-routing.module';
+// import { MyPlaylistsRoutingModule } from './my-playlists/my-playlists-routing.module';
 
 @NgModule({
   imports:      [
     BrowserModule,
     HttpModule,
+    LocalStorageModule.withConfig({
+        storageType: 'localStorage'
+    }),
 
     AppRoutingModule,
     // MyPlaylistsRoutingModule,
@@ -36,6 +41,7 @@ import { AppRoutingModule } from './app-routing.module';
 
     RecommendedModule,
     MyPlaylistsModule,
+    MyTopModule,
     SharedModule
   ],
   declarations: [

@@ -2,11 +2,11 @@ import { PlaylistTile } from './../../model/playlist-tile.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-catalog-list',
-  templateUrl: './catalog-list.component.html',
-  styleUrls: ['./catalog-list.component.css']
+  selector: 'app-tiles-list',
+  templateUrl: './tiles-list.component.html',
+  styleUrls: ['./tiles-list.component.css']
 })
-export class CatalogListComponent implements OnInit {
+export class TilesListComponent implements OnInit {
 
   @Input() title: string;
   @Input() playlists: PlaylistTile[];

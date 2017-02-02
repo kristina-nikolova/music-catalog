@@ -11,18 +11,18 @@ import { PlaylistTile } from './../shared/model/playlist-tile.model';
 export class MyPlaylistsComponent implements OnInit {
   playlists: PlaylistTile[];
   isDataLoading: boolean;
-  
+
   constructor(private myPlaylistsService: MyPlaylistsService) {}
 
   ngOnInit() {
-    this.loadMyPlaylists()
+    this.loadMyPlaylists();
   }
 
   loadMyPlaylists() {
     this.isDataLoading = true;
     this.myPlaylistsService.getMyPlaylists()
         .subscribe(
-            (data) => { 
+            (data) => {
               this.playlists = data;
               this.isDataLoading = false;
             },

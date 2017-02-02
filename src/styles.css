@@ -13,10 +13,6 @@ ul {
   list-style-type: none;
 }
 
-h1 {
-  font-size: 20px;
-}
-
 h2 {
     color: #2EBD59;
     text-align: center;
@@ -43,6 +39,10 @@ h2 {
 
 .flex-column {
   flex-direction: column;
+}
+
+.flex-h-center {
+  justify-content: center;
 }
 
 .block {
@@ -72,7 +72,7 @@ h2 {
   float: right;
 }
 
-.m-10 {
+.mt-10 {
   margin-top: 10px;
 }
 
@@ -86,6 +86,10 @@ h2 {
 
 .mr-10 {
   margin-right: 10px;
+}
+
+.mlr-10 {
+    margin: 0 10px;
 }
 
 .cursor-pointer {

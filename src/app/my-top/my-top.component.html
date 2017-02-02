@@ -1,0 +1,15 @@
+<app-spinner [isRunning]="isDataLoading"></app-spinner>
+<div class="content">
+  <div *ngIf="topTracks">  
+    <h2>My top tracks</h2>
+    <app-mood-message text="'Happy'"
+                      icon="assets/moods/happy.png"></app-mood-message>
+    <div class="flex flex-row flex-h-center">
+        <div class="playlist__tracks">
+          <div *ngFor="let track of topTracks">
+            <app-track [track]="track"></app-track>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

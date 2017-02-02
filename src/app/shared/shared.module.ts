@@ -7,8 +7,9 @@ export let MAIN_CONFIG = new OpaqueToken('app.config');
 
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PlaylistTileComponent } from './components/playlist-tile/playlist-tile.component';
-import { CatalogListComponent } from './components/catalog-list/catalog-list.component';
+import { TilesListComponent } from './components/tiles-list/tiles-list.component';
 import { FollowButtonComponent } from './components/follow-button/follow-button.component';
+import { TrackComponent } from './components/track/track.component';
 
 @NgModule({
   imports: [
@@ -17,9 +18,10 @@ import { FollowButtonComponent } from './components/follow-button/follow-button.
   ],
   declarations: [
     SpinnerComponent,
-    CatalogListComponent,
+    TilesListComponent,
     PlaylistTileComponent,
-    FollowButtonComponent
+    FollowButtonComponent,
+    TrackComponent
   ],
   providers: [
     {
@@ -31,9 +33,10 @@ import { FollowButtonComponent } from './components/follow-button/follow-button.
     RouterModule,
     CommonModule,
     SpinnerComponent,
-    CatalogListComponent,
+    TilesListComponent,
     PlaylistTileComponent,
-    FollowButtonComponent
+    FollowButtonComponent,
+    TrackComponent
   ]
 })
 export class SharedModule { }
