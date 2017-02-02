@@ -1,12 +1,12 @@
 <div *ngIf="playlist">  
   <h2>{{playlist?.name}}</h2>
   <div class="flex flex-row">
-      <div class="playlist__info mr-10">
+      <div class="playlist__info">
         <img [src]="playlist?.images[0].url" 
              alt="playlist cover"
-             class="playlist__cover" />
-        <div><span class="bold">Created by:</span> {{playlist?.owner['id']}}</div>
-        <div><span class="bold">Followers:</span> {{playlist?.followers['total']}}</div>
+             class="playlist__cover mb-20" />
+        <div class="mb-10"><span class="bold">Created by:</span> {{playlist?.owner['id']}}</div>
+        <div class="mb-10"><span class="bold">Followers:</span> {{playlist?.followers['total']}}</div>
       </div>
       <div class="playlist__tracks">
         <div *ngFor="let track of playlist?.tracks['items']">

@@ -1,9 +1,0 @@
-.playlist__cover {
-    max-width: 300px;
-    max-height: 300px;
-}
-
-.playlist__tracks {
-    height: 500px;
-    overflow: auto;
-}

@@ -1,20 +1,20 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { FeaturedPlaylistsService } from './recommended.service';
+import { RecommendedService } from './recommended.service';
 import { PlaylistTile } from './../shared/model/playlist-tile.model';
 import * as _ from 'lodash';
 
 @Component({
-  providers: [FeaturedPlaylistsService],
+  providers: [RecommendedService],
   templateUrl: './recommended.component.html'
 })
 
-export class FeaturedPlaylistsComponent implements OnInit { 
+export class RecommendedComponent implements OnInit {
   playlists: PlaylistTile[];
-  albums: PlaylistTile[];
+  // albums: PlaylistTile[];
   isDataLoading: boolean;
   isFolowing: boolean;
-  constructor(private featuredPlaylistsService: FeaturedPlaylistsService) {}
+  constructor(private recommendedService: RecommendedService) {}
 
   ngOnInit() {
     this.loadFeaturedPlaylists();
@@ -23,7 +23,7 @@ export class FeaturedPlaylistsComponent implements OnInit {
   loadFeaturedPlaylists() {
     this.isDataLoading = true;
 
-    this.featuredPlaylistsService.getFeaturedPlaylists()
+    this.recommendedService.getFeaturedPlaylists()
       .flatMap(data => {
         this.playlists = data;
         this.isDataLoading = false;
@@ -31,7 +31,7 @@ export class FeaturedPlaylistsComponent implements OnInit {
       })
       .subscribe(data => {
         const _data = data;
-        this.featuredPlaylistsService.isPlaylistFollowingByUser(data.owner['id'], data.id).subscribe(
+        this.recommendedService.isPlaylistFollowingByUser(data.owner['id'], data.id).subscribe(
           (res) => {
             // _data = {..._data, followed: true};
             _data['followed'] = res[0];
@@ -40,19 +40,19 @@ export class FeaturedPlaylistsComponent implements OnInit {
         );
       });
 
-      this.featuredPlaylistsService.getNewReleasedAlbums()
-        .subscribe(data => {
-            this.albums = data;
-          },
-          (err) => { console.log(err); }
-        );
+      // this.recommendedService.getNewReleasedAlbums()
+      //   .subscribe(data => {
+      //       this.albums = data;
+      //     },
+      //     (err) => { console.log(err); }
+      //   );
   }
 
   followPlaylist(data) {
     const _self = this;
     const playlist = data;
 
-    this.featuredPlaylistsService.followFeaturedPlaylists(playlist.ownerId, playlist.playlistId).subscribe(
+    this.recommendedService.followFeaturedPlaylists(playlist.ownerId, playlist.playlistId).subscribe(
       (data) => {
         _self.isFolowing = true;
 
@@ -73,7 +73,7 @@ export class FeaturedPlaylistsComponent implements OnInit {
     const _self = this;
     const playlist = data;
 
-    this.featuredPlaylistsService.unfollowFeaturedPlaylists(data.ownerId, data.playlistId).subscribe(
+    this.recommendedService.unfollowFeaturedPlaylists(data.ownerId, data.playlistId).subscribe(
       (data) => {
         _self.isFolowing = true;
         setTimeout(function() {

@@ -12,13 +12,13 @@ import { HomeResolver } from './home/homе-resolver.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/homе.component';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { UserboxComponent } from './shared/components/userbox/userbox.component';
+import { HeaderComponent } from './home/components/header/header.component';
+import { UserboxComponent } from './home/components/userbox/userbox.component';
 
 /* Feature Modules */
 import { SharedModule } from './shared/shared.module';
-import { FeaturedPlaylistsModule } from './recommended/recommended.module';
-import { FeaturedPlaylistsRoutingModule } from './recommended/recommended-routing.module';
+import { RecommendedModule } from './recommended/recommended.module';
+import { RecommendedRoutingModule } from './recommended/recommended-routing.module';
 import { MyPlaylistsModule } from './my-playlists/my-playlists.module';
 import { MyPlaylistsRoutingModule } from './my-playlists/my-playlists-routing.module';
 
@@ -32,9 +32,9 @@ import { AppRoutingModule } from './app-routing.module';
 
     AppRoutingModule,
     // MyPlaylistsRoutingModule,
-    // FeaturedPlaylistsRoutingModule,
-    
-    FeaturedPlaylistsModule,
+    // RecommendedRoutingModule,
+
+    RecommendedModule,
     MyPlaylistsModule,
     SharedModule
   ],

@@ -12,7 +12,7 @@ import { UserService } from './../shared/services/user.service';
 
 @Injectable()
 
-export class FeaturedPlaylistsService {
+export class RecommendedService {
 
   constructor(private http: HttpInterceptorService,
              private userService: UserService) {};
@@ -24,7 +24,7 @@ export class FeaturedPlaylistsService {
    */
   getFeaturedPlaylists(): Observable<PlaylistTile[]> {
       return this.http
-              .get(APP_CONFIG.apiMainUrl + '/browse/featured-playlists?limit=7')
+              .get(APP_CONFIG.apiMainUrl + '/browse/featured-playlists')
               .map((res: Response) => res.json().playlists.items)
               .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -33,12 +33,12 @@ export class FeaturedPlaylistsService {
    * name: getNewReleasedAlbums
    * description: get recommended tracks
    */
-  getNewReleasedAlbums(): Observable<PlaylistTile[]> {
-      return this.http
-              .get(APP_CONFIG.apiMainUrl + '/browse/new-releases?limit=7')
-              .map((res: Response) => res.json().albums.items)
-              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-  }
+//   getNewReleasedAlbums(): Observable<PlaylistTile[]> {
+//       return this.http
+//               .get(APP_CONFIG.apiMainUrl + '/browse/new-releases?limit=7')
+//               .map((res: Response) => res.json().albums.items)
+//               .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+//   }
 
    /**
    * name: followFeaturedPlaylists

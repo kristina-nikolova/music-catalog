@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
 
-import { FeaturedPlaylistsService } from './recommended.service';
-import { FeaturedPlaylistsComponent } from './recommended.component';
+import { RecommendedService } from './recommended.service';
+import { RecommendedComponent } from './recommended.component';
 
 @NgModule({
   imports: [
@@ -11,11 +11,11 @@ import { FeaturedPlaylistsComponent } from './recommended.component';
     SharedModule
   ],
   declarations: [
-    FeaturedPlaylistsComponent
+    RecommendedComponent
   ],
-  exports: [ FeaturedPlaylistsComponent ],
+  exports: [ RecommendedComponent ],
   providers: [
-    FeaturedPlaylistsService
+    RecommendedService
   ]
 })
-export class FeaturedPlaylistsModule { }
+export class RecommendedModule { }
