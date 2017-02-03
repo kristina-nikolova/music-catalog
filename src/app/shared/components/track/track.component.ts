@@ -1,11 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, trigger, state, style, transition, animate } from '@angular/core';
 
 import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-track',
   templateUrl: './track.component.html',
-  styleUrls: ['./track.component.css']
+  styleUrls: ['./track.component.css'],
+  animations: [
+    trigger('scale', [
+      state('in', style({transform: 'scale(1)'})),
+      transition('void => *', [
+        style({transform: 'scale(0)'}),
+        animate(200)
+      ]),
+      transition('* => void', [
+        animate(200, style({transform: 'scale(1)'}))
+      ])
+    ])
+  ]
 })
 
 export class TrackComponent implements OnInit {

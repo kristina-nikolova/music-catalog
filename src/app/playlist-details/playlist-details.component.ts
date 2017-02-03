@@ -16,7 +16,7 @@ export class PlaylistDetailsComponent implements OnInit {
   playlistId: string;
   userId: string;
   isDataLoading: boolean;
-  
+
   constructor(private route: ActivatedRoute,
               private myPlaylistsService: MyPlaylistsService) {
       this.playlistId = route.snapshot.params['id'];
@@ -29,6 +29,14 @@ export class PlaylistDetailsComponent implements OnInit {
       .subscribe(
         (data) => {
           this.playlist = data;
+
+          this.myPlaylistsService.getMyPlaylistCreator(data.owner['id']).subscribe(
+            (res) => {
+              this.playlist.owner['name'] = res.display_name;
+            },
+            (err) => { console.log(err); }
+          );
+
           this.isDataLoading = false;
         },
         (err) => { console.log(err); }

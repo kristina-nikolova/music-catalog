@@ -10,6 +10,7 @@ import { HttpInterceptorService } from './../shared/services/http-interceptor.se
 import { APP_CONFIG } from './../shared/app.config';
 import { PlaylistTile } from './../shared/model/playlist-tile.model';
 import { Playlist } from './../shared/model/playlist.model';
+import { User } from './../shared/model/user.model';
 
 @Injectable()
 
@@ -40,6 +41,19 @@ export class MyPlaylistsService {
       return this.http
               .get(APP_CONFIG.apiMainUrl + '/users/' + userId + '/playlists/' + playlistId)
               .map((res: Response) => new Playlist(res.json()))
+              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    /**
+   * name: getMyPlaylistById
+   * params:{string} playlistId
+   * params:{string} userId
+   * description: get playlist details  
+   */
+    getMyPlaylistCreator(userId: string): Observable<User> {
+      return this.http
+              .get(APP_CONFIG.apiMainUrl + '/users/' + userId)
+              .map((res: Response) => new User(res.json()))
               .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 }

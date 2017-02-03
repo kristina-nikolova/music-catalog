@@ -25,9 +25,9 @@ export class MyTopComponent implements OnInit {
 
   loadMyTopTracks() {
     const _self = this;
-    
+
     this.topTracksIds = this.localStorageService.keys();
-    
+
     if (this.topTracksIds.length) {
       this.isDataLoading = true;
 
@@ -45,10 +45,10 @@ export class MyTopComponent implements OnInit {
   }
 
   getMood() {
-    let moods = [];
+    const moods = [];
 
     for ( let i = 0, len = this.localStorageService.length(); i < len; ++i ) {
-      let value = this.localStorageService.get( this.localStorageService.keys()[i] );
+      const value = this.localStorageService.get( this.localStorageService.keys()[i] );
       moods.push(value['mood']);
     }
 
@@ -56,19 +56,17 @@ export class MyTopComponent implements OnInit {
   }
 
   getHighlyOccuredElement(array) {
-    if(array.length == 0)
-        return null;
-    let modeMap = {};
+    if (array.length === 0) { return null; }
+    const modeMap = {};
     let maxEl = array[0], maxCount = 1;
-    for(let i = 0; i < array.length; i++)
-    {
-        let el = array[i];
-        if(modeMap[el] == null)
-            modeMap[el] = 1;
-        else
-            modeMap[el]++;  
-        if(modeMap[el] > maxCount)
-        {
+    for (let i = 0; i < array.length; i++) {
+        const el = array[i];
+        if (modeMap[el] == null) {
+          modeMap[el] = 1;
+        }  else {
+          modeMap[el]++;
+        }
+        if (modeMap[el] > maxCount) {
             maxEl = el;
             maxCount = modeMap[el];
         }
