@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Http, HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { LocalStorageModule } from 'angular-2-local-storage';
 
 /* App Root */
@@ -30,7 +31,8 @@ import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   imports:      [
     BrowserModule,
-    HttpModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     LocalStorageModule.withConfig({
         storageType: 'localStorage'
     }),
@@ -53,10 +55,10 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   providers: [
     {
-      provide: Http,
-      useClass: HttpInterceptorService
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
     },
-    HttpInterceptorService,
     OAuthService,
     AuthClientService,
     UserService,

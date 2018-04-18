@@ -1,9 +1,9 @@
-import { NgModule, OpaqueToken } from '@angular/core';
+import { NgModule, InjectionToken } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { APP_CONFIG } from './app.config';
-export let MAIN_CONFIG = new OpaqueToken('app.config');
+export let MAIN_CONFIG = new InjectionToken('app.config');
 
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PlaylistTileComponent } from './components/playlist-tile/playlist-tile.component';

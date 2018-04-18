@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { HttpInterceptorService } from './http-interceptor.service';
 import { APP_CONFIG } from '../../shared/app.config';
 import { User } from './../model/user.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UserService {
   myId = '';
 
-  constructor(private http: HttpInterceptorService) {};
+  constructor(private _http: HttpClient) {};
 
   /**
    * name: getFeaturedPlaylists
    * params:
    * description: get all Featured Playlists
    */
-  getProfile() : Observable<User> {
-      return this.http
+  getProfile(): Observable<User> {
+      return this._http
               .get(APP_CONFIG.apiMainUrl + '/me')
-              .map((res:Response) => new User(res.json()))
-              .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+              .map((res) => new User(res))
+              .catch((error: any) => Observable.throw(error.error || 'Server error'));
    }
 }

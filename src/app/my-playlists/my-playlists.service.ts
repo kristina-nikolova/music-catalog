@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
+import { HttpResponse, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { UserService } from './../shared/services/user.service';
-import { HttpInterceptorService } from './../shared/services/http-interceptor.service';
 import { APP_CONFIG } from './../shared/app.config';
 import { PlaylistTile } from './../shared/model/playlist-tile.model';
 import { Playlist } from './../shared/model/playlist.model';
@@ -16,7 +15,7 @@ import { User } from './../shared/model/user.model';
 
 export class MyPlaylistsService {
 
-  constructor(private http: HttpInterceptorService,
+  constructor(private _http: HttpClient,
               private userService: UserService) {};
 
   /**
@@ -25,10 +24,10 @@ export class MyPlaylistsService {
    * description: get all Featured Playlists
    */
   getMyPlaylists(): Observable<PlaylistTile[]> {
-      return this.http
+      return this._http
               .get(APP_CONFIG.apiMainUrl + '/me/playlists')
-              .map((res: Response) => res.json().items)
-              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+              .map((res: any) => res.items)
+              .catch((error: any) => Observable.throw(error.error || 'Server error'));
    }
 
    /**
@@ -38,10 +37,10 @@ export class MyPlaylistsService {
    * description: get playlist details  
    */
     getMyPlaylistById(playlistId: string, userId: string): Observable<Playlist> {
-      return this.http
+      return this._http
               .get(APP_CONFIG.apiMainUrl + '/users/' + userId + '/playlists/' + playlistId)
-              .map((res: Response) => new Playlist(res.json()))
-              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+              .map((res) => new Playlist(res))
+              .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
     /**
@@ -51,9 +50,9 @@ export class MyPlaylistsService {
    * description: get playlist details  
    */
     getMyPlaylistCreator(userId: string): Observable<User> {
-      return this.http
+      return this._http
               .get(APP_CONFIG.apiMainUrl + '/users/' + userId)
-              .map((res: Response) => new User(res.json()))
-              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+              .map((res) => new User(res))
+              .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 }
