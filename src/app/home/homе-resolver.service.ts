@@ -9,9 +9,9 @@ import { UserService } from '../shared/services/user.service';
 @Injectable()
 export class HomeResolver implements Resolve<User> {
   
-  constructor(private userService: UserService) {}
+  constructor(private _userService: UserService) {}
   
   resolve(route: ActivatedRouteSnapshot): Observable<User> {
-    return this.userService.getProfile();
+    return this._userService.getProfile();
   }
 }

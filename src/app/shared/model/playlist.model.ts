@@ -1,7 +1,7 @@
 export class Playlist {
     id: string;
     name: string;
-    images: Object[];
+    images: Array<Object>;
     owner: Object;
     tracks: Object;
     followers: Object;

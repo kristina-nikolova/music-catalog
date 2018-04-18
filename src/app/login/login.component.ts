@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 })
 
 export class LoginComponent {
-  constructor(private oAuthService: OAuthService) {}
+  constructor(private _oAuthService: OAuthService) {}
     
   public login() {
-      this.oAuthService.initImplicitFlow();
+      this._oAuthService.initImplicitFlow();
   }
 }

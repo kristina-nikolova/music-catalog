@@ -1,18 +1,16 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-follow-button',
   templateUrl: './follow-button.component.html',
-  styleUrls: ['./follow-button.component.css']
+  styleUrls: ['./follow-button.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FollowButtonComponent implements OnInit {
+export class FollowButtonComponent {
   @Input() name: string;
   @Output() onClicked: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   onClick() {
     this.onClicked.emit('Click from nested component');

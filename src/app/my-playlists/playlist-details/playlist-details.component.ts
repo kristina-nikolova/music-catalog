@@ -2,9 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
-
-import { Playlist } from './../shared/model/playlist.model';
-import { MyPlaylistsService } from './../my-playlists/my-playlists.service';
+import { MyPlaylistsService } from '../my-playlists.service';
+import { Playlist } from '../../shared/model/playlist.model';
 
 @Component({
   providers: [MyPlaylistsService],
@@ -17,20 +16,20 @@ export class PlaylistDetailsComponent implements OnInit {
   userId: string;
   isDataLoading: boolean;
 
-  constructor(private route: ActivatedRoute,
-              private myPlaylistsService: MyPlaylistsService) {
-      this.playlistId = route.snapshot.params['id'];
-      this.userId = route.snapshot.params['user'];
+  constructor(private _route: ActivatedRoute,
+              private _myPlaylistsService: MyPlaylistsService) {
+      this.playlistId = _route.snapshot.params['id'];
+      this.userId = _route.snapshot.params['user'];
   }
 
   ngOnInit() {
     this.isDataLoading = true;
-    this.myPlaylistsService.getMyPlaylistById(this.playlistId, this.userId)
+    this._myPlaylistsService.getMyPlaylistById(this.playlistId, this.userId)
       .subscribe(
         (data) => {
           this.playlist = data;
 
-          this.myPlaylistsService.getMyPlaylistCreator(data.owner['id']).subscribe(
+          this._myPlaylistsService.getMyPlaylistCreator(data.owner['id']).subscribe(
             (res) => {
               this.playlist.owner['name'] = res.display_name;
             },

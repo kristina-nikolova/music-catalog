@@ -1,7 +1,7 @@
 export class User {
     id: string;
     display_name: string;
-    images: Object[];
+    images: Array<Object>;
     
     constructor(user: any){
         this.id = user.id;

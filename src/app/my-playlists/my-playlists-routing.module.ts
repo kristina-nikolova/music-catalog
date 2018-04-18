@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PlaylistDetailsComponent } from './../playlist-details/playlist-details.component';
 import { MyPlaylistsComponent } from './my-playlists.component';
+import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 
 const routes: Routes = [
     {
-      path: 'catalog/my-playlists',
+      path: '',
       component: MyPlaylistsComponent
     },
     {
-      path: 'catalog/my-playlists/:id',
+      path: ':id',
       component: PlaylistDetailsComponent
     }
 ];

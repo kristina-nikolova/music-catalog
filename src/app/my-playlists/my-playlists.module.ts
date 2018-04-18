@@ -4,8 +4,8 @@ import { SharedModule } from './../shared/shared.module';
 
 import { MyPlaylistsService } from './my-playlists.service';
 import { MyPlaylistsComponent } from './my-playlists.component';
-import { PlaylistComponent } from './../playlist-details/components/playlist/playlist.component';
-import { PlaylistDetailsComponent } from './../playlist-details/playlist-details.component';
+import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 @NgModule({
   imports: [

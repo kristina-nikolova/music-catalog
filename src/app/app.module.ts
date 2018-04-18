@@ -14,8 +14,6 @@ import { HomeResolver } from './home/homе-resolver.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/homе.component';
-import { HeaderComponent } from './home/components/header/header.component';
-import { UserboxComponent } from './home/components/userbox/userbox.component';
 
 /* Feature Modules */
 import { SharedModule } from './shared/shared.module';
@@ -25,8 +23,8 @@ import { MyTopModule } from './my-top/my-top.module';
 
 /* Routing Module */
 import { AppRoutingModule } from './app-routing.module';
-// import { RecommendedRoutingModule } from './recommended/recommended-routing.module';
-// import { MyPlaylistsRoutingModule } from './my-playlists/my-playlists-routing.module';
+import { UserboxComponent } from './home/userbox/userbox.component';
+import { HeaderComponent } from './home/header/header.component';
 
 @NgModule({
   imports:      [
@@ -38,8 +36,6 @@ import { AppRoutingModule } from './app-routing.module';
     }),
 
     AppRoutingModule,
-    // MyPlaylistsRoutingModule,
-    // RecommendedRoutingModule,
 
     RecommendedModule,
     MyPlaylistsModule,

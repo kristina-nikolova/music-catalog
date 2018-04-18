@@ -6,8 +6,8 @@ import { HomeComponent } from './home/homе.component';
 import { HomeResolver } from './home/homе-resolver.service';
 import { RecommendedComponent } from './recommended/recommended.component';
 import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
-import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 import { MyTopComponent } from './my-top/my-top.component';
+import { PlaylistDetailsComponent } from './my-playlists/playlist-details/playlist-details.component';
 
 const routes: Routes = [
   {
@@ -27,22 +27,24 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'recommended',
-        component: RecommendedComponent
-      },
-      {
-        path: 'my-playlists',
-        component: MyPlaylistsComponent
-      },
-      {
-        path: 'my-playlists/:id',
-        component: PlaylistDetailsComponent
-      },
-      {
         path: 'my-top',
         component: MyTopComponent
       }
     ]
+  },
+  {
+    path: 'recommended',
+    loadChildren: './recommended/recommended.module#RecommendedModule',
+    data: {
+      preloadAfter: ['/catalog']
+    }
+  },
+  {
+    path: 'my-playlists',
+    loadChildren: './my-playlists/my-playlists.module#MyPlaylistsModule',
+    data: {
+      preloadAfter: ['/catalog']
+    }
   }
 ];
 

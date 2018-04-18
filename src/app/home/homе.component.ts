@@ -13,18 +13,18 @@ import { User } from './../shared/model/user.model';
 export class HomeComponent implements OnInit {
   user: User;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private userService: UserService ) {
+  constructor(private _router: Router,
+              private _route: ActivatedRoute,
+              private _userService: UserService ) {
   }
 
   ngOnInit() {
     if (window.location.pathname === '/catalog') {
-      this.router.navigateByUrl('/catalog/recommended');
+      this._router.navigateByUrl('/catalog/recommended');
     } else {
-      this.router.navigateByUrl(window.location.pathname);
+      this._router.navigateByUrl(window.location.pathname);
     }
-    this.user = this.route.snapshot.data['homeResolver'];
-    this.userService.myId = this.user.id;
+    this.user = this._route.snapshot.data['homeResolver'];
+    this._userService.myId = this.user.id;
   }
 }

@@ -2,7 +2,7 @@ export class Track {
     id: string;
     name: string;
     album: Object;
-    artists: Object[];
+    artists: Array<Object>;
 
     constructor(track: any) {
         this.id = track.id;
