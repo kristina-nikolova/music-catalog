@@ -8,6 +8,9 @@ import { RecommendedComponent } from './recommended/recommended.component';
 import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
 import { MyTopComponent } from './my-top/my-top.component';
 import { PlaylistDetailsComponent } from './my-playlists/playlist-details/playlist-details.component';
+import { RecommendedModule } from './recommended/recommended.module';
+import { MyPlaylistsModule } from './my-playlists/my-playlists.module';
+import { MyTopModule } from './my-top/my-top.module';
 
 const routes: Routes = [
   {
@@ -27,24 +30,20 @@ const routes: Routes = [
     },
     children: [
       {
+        path: 'recommended',
+        // loadChildren: './recommended/recommended.module#RecommendedModule',
+        loadChildren: () => RecommendedModule
+      },
+      {
+        path: 'my-playlists',
+        loadChildren: () => MyPlaylistsModule
+        // loadChildren: './my-playlists/my-playlists.module#MyPlaylistsModule'
+      },
+      {
         path: 'my-top',
-        component: MyTopComponent
+        loadChildren: () => MyTopModule
       }
     ]
-  },
-  {
-    path: 'recommended',
-    loadChildren: './recommended/recommended.module#RecommendedModule',
-    data: {
-      preloadAfter: ['/catalog']
-    }
-  },
-  {
-    path: 'my-playlists',
-    loadChildren: './my-playlists/my-playlists.module#MyPlaylistsModule',
-    data: {
-      preloadAfter: ['/catalog']
-    }
   }
 ];
 

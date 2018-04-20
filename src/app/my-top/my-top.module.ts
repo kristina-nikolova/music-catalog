@@ -4,11 +4,13 @@ import { SharedModule } from './../shared/shared.module';
 
 import { MyTopComponent } from './my-top.component';
 import { MoodMessageComponent } from './mood-message/mood-message.component';
+import { MyTopRoutingModule } from './my-top-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    MyTopRoutingModule
   ],
   declarations: [
     MyTopComponent,

@@ -1,12 +1,13 @@
 import { PlaylistTile } from './../../model/playlist-tile.model';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-tiles-list',
   templateUrl: './tiles-list.component.html',
-  styleUrls: ['./tiles-list.component.css']
+  styleUrls: ['./tiles-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TilesListComponent implements OnInit {
+export class TilesListComponent {
 
   @Input() title: string;
   @Input() playlists: PlaylistTile[];
@@ -17,8 +18,6 @@ export class TilesListComponent implements OnInit {
   @Output() onPlaylistListUnfollowButtonClicked: EventEmitter<Object> = new EventEmitter<Object>();
 
   constructor() { }
-
-  ngOnInit() { }
 
   onPlaylistListFollowButtonClick(ownerId, playlistId) {
     this.onPlaylistListFollowButtonClicked.emit({

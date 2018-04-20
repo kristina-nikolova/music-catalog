@@ -12,7 +12,7 @@ export class MyPlaylistsComponent implements OnInit {
   playlists: PlaylistTile[];
   isDataLoading: boolean;
 
-  constructor(private myPlaylistsService: MyPlaylistsService) {}
+  constructor(private _myPlaylistsService: MyPlaylistsService) {}
 
   ngOnInit() {
     this.loadMyPlaylists();
@@ -20,7 +20,7 @@ export class MyPlaylistsComponent implements OnInit {
 
   loadMyPlaylists() {
     this.isDataLoading = true;
-    this.myPlaylistsService.getMyPlaylists()
+    this._myPlaylistsService.getMyPlaylists()
         .subscribe(
             (data) => {
               this.playlists = data;

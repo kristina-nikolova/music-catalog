@@ -10,11 +10,11 @@ import * as _ from 'lodash';
 })
 
 export class RecommendedComponent implements OnInit {
-  playlists: PlaylistTile[];
+  playlists: Array<PlaylistTile>;
   // albums: PlaylistTile[];
   isDataLoading: boolean;
   isFolowing: boolean;
-  constructor(private recommendedService: RecommendedService) {}
+  constructor(private _recommendedService: RecommendedService) {}
 
   ngOnInit() {
     this.loadFeaturedPlaylists();
@@ -23,7 +23,7 @@ export class RecommendedComponent implements OnInit {
   loadFeaturedPlaylists() {
     this.isDataLoading = true;
 
-    this.recommendedService.getFeaturedPlaylists()
+    this._recommendedService.getFeaturedPlaylists()
       .flatMap(data => {
         this.playlists = data;
         this.isDataLoading = false;
@@ -31,7 +31,7 @@ export class RecommendedComponent implements OnInit {
       })
       .subscribe(data => {
         const _data = data;
-        this.recommendedService.isPlaylistFollowingByUser(data.owner['id'], data.id).subscribe(
+        this._recommendedService.isPlaylistFollowingByUser(data.owner['id'], data.id).subscribe(
           (res) => {
             // _data = {..._data, followed: true};
             _data['followed'] = res[0];
@@ -40,7 +40,7 @@ export class RecommendedComponent implements OnInit {
         );
       });
 
-      // this.recommendedService.getNewReleasedAlbums()
+      // this._recommendedService.getNewReleasedAlbums()
       //   .subscribe(data => {
       //       this.albums = data;
       //     },
@@ -52,7 +52,7 @@ export class RecommendedComponent implements OnInit {
     const _self = this;
     const playlist = data;
 
-    this.recommendedService.followFeaturedPlaylists(playlist.ownerId, playlist.playlistId).subscribe(
+    this._recommendedService.followFeaturedPlaylists(playlist.ownerId, playlist.playlistId).subscribe(
       (data) => {
         _self.isFolowing = true;
 
@@ -73,7 +73,7 @@ export class RecommendedComponent implements OnInit {
     const _self = this;
     const playlist = data;
 
-    this.recommendedService.unfollowFeaturedPlaylists(data.ownerId, data.playlistId).subscribe(
+    this._recommendedService.unfollowFeaturedPlaylists(data.ownerId, data.playlistId).subscribe(
       (data) => {
         _self.isFolowing = true;
         setTimeout(function() {

@@ -34,12 +34,7 @@ import { HeaderComponent } from './home/header/header.component';
     LocalStorageModule.withConfig({
         storageType: 'localStorage'
     }),
-
     AppRoutingModule,
-
-    RecommendedModule,
-    MyPlaylistsModule,
-    MyTopModule,
     SharedModule
   ],
   declarations: [

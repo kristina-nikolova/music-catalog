@@ -6,11 +6,13 @@ import { MyPlaylistsService } from './my-playlists.service';
 import { MyPlaylistsComponent } from './my-playlists.component';
 import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 import { PlaylistComponent } from './playlist/playlist.component';
+import { MyPlaylistsRoutingModule } from './my-playlists-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    MyPlaylistsRoutingModule
   ],
   declarations: [
     MyPlaylistsComponent,

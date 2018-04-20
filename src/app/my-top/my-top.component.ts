@@ -10,13 +10,13 @@ import { MyTopService } from './my-top.service';
   providers: [ MyTopService ]
 })
 export class MyTopComponent implements OnInit {
-  topTracksIds: Object[];
+  topTracksIds: Array<Object>;
   isDataLoading: boolean;
   currentMood: string;
   topTracks = [];
 
-  constructor(private myTopService: MyTopService,
-              private localStorageService: LocalStorageService) { }
+  constructor(private _myTopService: MyTopService,
+              private _localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     this.getMood();
@@ -26,13 +26,13 @@ export class MyTopComponent implements OnInit {
   loadMyTopTracks() {
     const _self = this;
 
-    this.topTracksIds = this.localStorageService.keys();
+    this.topTracksIds = this._localStorageService.keys();
 
     if (this.topTracksIds.length) {
       this.isDataLoading = true;
 
       this.topTracksIds.forEach(function(id) {
-        _self.myTopService.getTrackById(id)
+        _self._myTopService.getTrackById(id)
             .subscribe(
                 (data) => {
                   _self.topTracks.push(data);
@@ -47,8 +47,8 @@ export class MyTopComponent implements OnInit {
   getMood() {
     const moods = [];
 
-    for ( let i = 0, len = this.localStorageService.length(); i < len; ++i ) {
-      const value = this.localStorageService.get( this.localStorageService.keys()[i] );
+    for ( let i = 0, len = this._localStorageService.length(); i < len; ++i ) {
+      const value = this._localStorageService.get( this._localStorageService.keys()[i] );
       moods.push(value['mood']);
     }
 

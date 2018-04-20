@@ -11,18 +11,20 @@ import { TilesListComponent } from './components/tiles-list/tiles-list.component
 import { FollowButtonComponent } from './components/follow-button/follow-button.component';
 import { TrackComponent } from './components/track/track.component';
 
+const components = [
+  SpinnerComponent,
+  TilesListComponent,
+  PlaylistTileComponent,
+  FollowButtonComponent,
+  TrackComponent
+];
+
 @NgModule({
   imports: [
     RouterModule,
     CommonModule
   ],
-  declarations: [
-    SpinnerComponent,
-    TilesListComponent,
-    PlaylistTileComponent,
-    FollowButtonComponent,
-    TrackComponent
-  ],
+  declarations: components,
   providers: [
     {
       provide: MAIN_CONFIG,
@@ -30,13 +32,9 @@ import { TrackComponent } from './components/track/track.component';
     },
   ],
   exports: [
+    ...components,
     RouterModule,
-    CommonModule,
-    SpinnerComponent,
-    TilesListComponent,
-    PlaylistTileComponent,
-    FollowButtonComponent,
-    TrackComponent
+    CommonModule
   ]
 })
 export class SharedModule { }
