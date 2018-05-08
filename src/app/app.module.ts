@@ -10,6 +10,7 @@ import { AuthClientService } from './shared/services/auth.service';
 import { HttpInterceptorService } from './shared/services/http-interceptor.service';
 import { UserService } from './shared/services/user.service';
 import { HomeResolver } from './home/homе-resolver.service';
+import { MoodService } from './shared/services/mood.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -53,6 +54,7 @@ import { HeaderComponent } from './home/header/header.component';
     OAuthService,
     AuthClientService,
     UserService,
+    MoodService,
     HomeResolver
   ],
   bootstrap: [ AppComponent ]

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, trigger, state, style, transition, animate } from '@angular/core';
 
 import { LocalStorageService } from 'angular-2-local-storage';
+import { MoodService } from '../../services/mood.service';
 
 @Component({
   selector: 'app-track',
@@ -25,7 +26,10 @@ export class TrackComponent implements OnInit {
   trackUri: any;
   playsConter: number;
 
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(
+    private localStorageService: LocalStorageService,
+    private _moodService: MoodService
+  ) { }
 
   ngOnInit() {
     this.playsConter = this.localStorageService.get(this.track.id) ?
@@ -40,6 +44,14 @@ export class TrackComponent implements OnInit {
       plays: this.playsConter + 1,
       mood: 'happy'
     });
+
+    const mood = {
+      plays: this.playsConter + 1,
+      mood: 'happy'
+    }
+    this._moodService.setMoodByTrackId(this.track.id, mood).subscribe((data) => {
+      debugger
+    })
 
     this.playsConter = this.localStorageService.get(this.track.id)['plays'];
 
