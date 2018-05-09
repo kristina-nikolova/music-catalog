@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { MyPlaylistsService } from './my-playlists.service';
 import { PlaylistTile } from './../shared/model/playlist-tile.model';
+import { MoodService } from './../shared/services/mood.service';
 
 @Component({
   providers: [MyPlaylistsService],
@@ -12,10 +13,14 @@ export class MyPlaylistsComponent implements OnInit {
   playlists: PlaylistTile[];
   isDataLoading: boolean;
 
-  constructor(private _myPlaylistsService: MyPlaylistsService) {}
+  constructor(private _myPlaylistsService: MyPlaylistsService, private _moodService: MoodService) {}
 
   ngOnInit() {
     this.loadMyPlaylists();
+
+    this._moodService.getMoods().subscribe((data) => {
+      debugger
+    })
   }
 
   loadMyPlaylists() {
