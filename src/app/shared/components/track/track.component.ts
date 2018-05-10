@@ -46,12 +46,13 @@ export class TrackComponent implements OnInit {
     });
 
     const mood = {
+      trackId: this.track.id,
       plays: this.playsConter + 1,
       mood: 'happy'
     }
-    this._moodService.setMoodByTrackId(this.track.id, mood).subscribe((data) => {
+    this._moodService.setMood(mood).subscribe((data) => {
       debugger
-    })
+    });
 
     this.playsConter = this.localStorageService.get(this.track.id)['plays'];
 

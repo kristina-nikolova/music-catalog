@@ -17,9 +17,9 @@ export class MoodService {
   //   return this._http.get<any>('http://localhost:3000/api/moods' + trackId);
   // }
 
-  setMoodByTrackId(trackId: string, mood: any): Observable<any> {
-    return this._http.post<any>('http://localhost:3000/api/moods/' + trackId, mood)
-    // .map(result => result.json());
+  setMood(mood: any): Observable<any> {
+    return this._http.post<any>('http://localhost:3000/api/moods', mood)
+    .map(result => result.json());
   }
 
 }
