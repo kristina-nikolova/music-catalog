@@ -3,13 +3,9 @@ const express = require('express'),
       path = require('path');
       cors = require('cors'),
       mongoose = require("mongoose"),
-      router = express.Router(),
-      Mood = require('./models/mood.model.js');
+      router = require('./routes.js');
 
-/*
-   * MongoDB port is 27017 by default.
-   * Assuming you have created mongoDB database named "data".
-*/
+// MongoDB port is 27017 by default.
 const db = mongoose.connect("mongodb://localhost:27017/music-catalog", function(err, response){  
    if(err){ console.log( err); }  
    else{ console.log('Connected to ' + db, ' + ', response); }
@@ -36,13 +32,7 @@ function errorHandler (err, req, res, next) {
   res.render('error', { error: err });
 }
 
-/* GET ALL MOODS */
-router.get('/api/moods', function(req, res, next) {
-  Mood.find(function (err, data) {
-    if (err) return next(err);
-    res.json(data);
-  });
-});
+app.use('/',router);
 
 app.listen(3000, () => {
   console.log('Server started!');

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const MoodSchema = new mongoose.Schema({
+    _id: String,
     trackId: String,
     plays: Number,
     mood: String

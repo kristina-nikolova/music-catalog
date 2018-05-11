@@ -17,10 +17,6 @@ export class MyPlaylistsComponent implements OnInit {
 
   ngOnInit() {
     this.loadMyPlaylists();
-
-    this._moodService.getMoods().subscribe((data) => {
-      debugger
-    })
   }
 
   loadMyPlaylists() {
