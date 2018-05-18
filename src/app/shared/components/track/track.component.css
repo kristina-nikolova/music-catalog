@@ -40,7 +40,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: url(assets/play-button.png) no-repeat 0 0;
+    background: url('assets/play-button.png') no-repeat 0 0;
     border: 0;
     outline: none;
     width: 32px;

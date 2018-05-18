@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, trigger, state, style, transition, animate } from '@angular/core';
-
-// import { LocalStorageService } from 'angular-2-local-storage';
 import { MoodService } from '../../services/mood.service';
 
 @Component({
@@ -24,20 +22,16 @@ import { MoodService } from '../../services/mood.service';
 export class TrackComponent implements OnInit {
   @Input() track: any;
   trackUri: any;
-  playsConter: number;
+  playsConter = 0;
 
   constructor(
-    // private localStorageService: LocalStorageService,
     private _moodService: MoodService
   ) { }
 
   ngOnInit() {
-    // this.playsConter = this.localStorageService.get(this.track.id) ?
-    //                    this.localStorageService.get(this.track.id)['plays'] : 0;
+    //TODO: check why this not return data
     this._moodService.getMoodByTrackId(this.track.id).subscribe((data) => {
-      if (!data) {
-        this.playsConter = 0;
-      } else {
+      if (data && data.plays && data.plays > 0) {
         this.playsConter = data.plays;
       }
     });
@@ -47,30 +41,19 @@ export class TrackComponent implements OnInit {
     this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri;
     trackIframe.src = this.trackUri;
 
-    // this.localStorageService.set(this.track.id, {
-    //   plays: this.playsConter + 1,
-    //   mood: 'happy'
-    // });
-
+    //TODO: use model
+    //TODO: automaticaly generate _id
     const mood = {
-      _id: 1,
+      _id: Math.random(),
       trackId: this.track.id,
       plays: this.playsConter + 1,
       mood: 'happy'
     }
     this._moodService.setMood(mood).subscribe((data) => {
-      debugger;
+      if (data) {
+        this.playsConter = data.plays;
+      }
     });
-
-    this._moodService.getMoodByTrackId(this.track.id).subscribe((data) => {
-      this.playsConter = data.plays;
-    });
-
-    // this.playsConter = this.localStorageService.get(this.track.id)['plays'];
-    
-    // setTimeout(function(){
-    //   document.getElementById('play-button').click();
-    // }, 3000);
   }
 
 }

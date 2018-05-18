@@ -1,7 +1,7 @@
-import { LocalStorageService } from 'angular-2-local-storage';
 import { Component, OnInit } from '@angular/core';
 
 import { MyTopService } from './my-top.service';
+import { MoodService } from '../shared/services/mood.service';
 
 @Component({
   selector: 'app-my-top',
@@ -10,13 +10,15 @@ import { MyTopService } from './my-top.service';
   providers: [ MyTopService ]
 })
 export class MyTopComponent implements OnInit {
-  topTracksIds: Array<Object>;
   isDataLoading: boolean;
   currentMood: string;
   topTracks = [];
 
+  private _moods;
+
   constructor(private _myTopService: MyTopService,
-              private _localStorageService: LocalStorageService) { }
+              private _moodService: MoodService
+            ) { }
 
   ngOnInit() {
     this.getMood();
@@ -24,38 +26,38 @@ export class MyTopComponent implements OnInit {
   }
 
   loadMyTopTracks() {
-    const _self = this;
 
-    this.topTracksIds = this._localStorageService.keys();
+    this._moodService.getMoods().subscribe((data) => {
+      console.log(data);
 
-    if (this.topTracksIds.length) {
-      this.isDataLoading = true;
-
-      this.topTracksIds.forEach(function(id) {
-        _self._myTopService.getTrackById(id)
+      if(data) {
+        this.isDataLoading = true;
+        this._moods = data;
+        data.forEach(mood => {
+          this._myTopService.getTrackById(mood.trackId)
             .subscribe(
                 (data) => {
-                  _self.topTracks.push(data);
-                  _self.isDataLoading = false;
+                  this.topTracks.push(data);
+                  this.isDataLoading = false;
                 },
                 (err) => { console.log(err); }
             );
-      });
-    }
+        });
+      }
+    });
   }
 
   getMood() {
-    const moods = [];
+    let moodsName = [];
 
-    for ( let i = 0, len = this._localStorageService.length(); i < len; ++i ) {
-      const value = this._localStorageService.get( this._localStorageService.keys()[i] );
-      moods.push(value['mood']);
-    }
+    this._moods.forEach(mood => {
+      moodsName = mood.mood;
+    });
 
-    this.currentMood = this.getHighlyOccuredElement(moods);
+    this.currentMood = this._getHighlyOccuredElement(moodsName);
   }
 
-  getHighlyOccuredElement(array) {
+  private _getHighlyOccuredElement(array) {
     if (array.length === 0) { return null; }
     const modeMap = {};
     let maxEl = array[0], maxCount = 1;

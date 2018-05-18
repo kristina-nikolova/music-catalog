@@ -11,11 +11,17 @@ router.get('/api/moods', function(req, res, next) {
 });
 
 /* GET SINGLE MOOD BY TRACK ID */
+//req.params.trackId
 router.get('/api/moods/:trackId', function(req, res, next) {
-  Mood.findById(req.params.trackId, function (err, data) {
+  Mood
+  .find({trackId: '60UX2FCIaGvc2QL9KZAEXo'},  function (err, data) {
     if (err) return next(err);
     res.json(data);
   });
+  // .findById('0.7593463279379926',  function (err, data) {
+  //   if (err) return next(err);
+  //   res.json(data);
+  // });
 });
 
 /* SAVE MOOD */
@@ -26,7 +32,7 @@ router.post('/api/moods', function(req, res, next) {
   });
 });
 
-// /* UPDATE BOOK */
+// /* UPDATE MOOD */
 // router.put('/:id', function(req, res, next) {
 //   Book.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
 //     if (err) return next(err);
@@ -34,7 +40,7 @@ router.post('/api/moods', function(req, res, next) {
 //   });
 // });
 
-// /* DELETE BOOK */
+// /* DELETE MOOD */
 // router.delete('/:id', function(req, res, next) {
 //   Book.findByIdAndRemove(req.params.id, req.body, function (err, post) {
 //     if (err) return next(err);
