@@ -41,10 +41,8 @@ export class TrackComponent implements OnInit {
     this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri;
     trackIframe.src = this.trackUri;
 
-    //TODO: use model
-    //TODO: automaticaly generate _id
+    //TODO: use models
     const mood = {
-      _id: Math.random(),
       trackId: this.track.id,
       plays: this.playsConter + 1,
       mood: 'happy'

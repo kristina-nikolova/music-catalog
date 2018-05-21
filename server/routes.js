@@ -14,7 +14,7 @@ router.get('/api/moods', function(req, res, next) {
 //req.params.trackId
 router.get('/api/moods/:trackId', function(req, res, next) {
   Mood
-  .find({trackId: '60UX2FCIaGvc2QL9KZAEXo'},  function (err, data) {
+  .find({trackId: req.params.trackId},  function (err, data) {
     if (err) return next(err);
     res.json(data);
   });
