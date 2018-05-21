@@ -21,4 +21,8 @@ export class MoodService {
     return this._http.post<any>('http://localhost:3000/api/moods', mood);
   }
 
+  updateMood(trackId: String, mood: any): Observable<any> {
+    return this._http.put<any>('http://localhost:3000/api/moods/' + trackId, mood);
+  }
+
 }

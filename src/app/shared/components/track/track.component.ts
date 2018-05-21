@@ -22,7 +22,9 @@ import { MoodService } from '../../services/mood.service';
 export class TrackComponent implements OnInit {
   @Input() track: any;
   trackUri: any;
-  playsConter = 0;
+  trackPlaysConter = 0;
+
+  private _playedTracksIds = [];
 
   constructor(
     private _moodService: MoodService
@@ -30,8 +32,9 @@ export class TrackComponent implements OnInit {
 
   ngOnInit() {
     this._moodService.getMoodByTrackId(this.track.id).subscribe((data) => {
-      if (data && data[0] && data[0].plays && data[0].plays > 0) {
-        this.playsConter = data[0].plays;
+      if (data && data[0] && data[0].plays > 0) {
+        this._playedTracksIds.push(data[0].trackId);
+        this.trackPlaysConter = data[0].plays;
       }
     });
   }
@@ -43,14 +46,26 @@ export class TrackComponent implements OnInit {
     //TODO: use models
     const mood = {
       trackId: this.track.id,
-      plays: this.playsConter + 1,
+      plays: this.trackPlaysConter + 1,
       mood: 'happy'
     }
-    this._moodService.setMood(mood).subscribe((data) => {
-      if (data) {
-        this.playsConter = data.plays;
-      }
-    });
+
+    if (this._playedTracksIds.indexOf(this.track.id) === -1) {
+      // Create mood
+      this._moodService.setMood(mood).subscribe((data) => {
+        if (data) {
+          this.trackPlaysConter = data.plays;
+        }
+      });
+    } else {
+      // Update mood
+      this._moodService.updateMood(this.track.id, mood).subscribe((data) => {
+        if (data) {
+          this.trackPlaysConter = data.plays;
+        }
+      });
+    }
+    
   }
 
 }
