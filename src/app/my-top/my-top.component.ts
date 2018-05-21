@@ -21,18 +21,15 @@ export class MyTopComponent implements OnInit {
             ) { }
 
   ngOnInit() {
-    this.getMood();
-    this.loadMyTopTracks();
+    this._loadMyTopTracks();
   }
 
-  loadMyTopTracks() {
+  private _loadMyTopTracks() {
 
     this._moodService.getMoods().subscribe((data) => {
-      console.log(data);
-
       if(data) {
         this.isDataLoading = true;
-        this._moods = data;
+        this._getCurrentMood(data);
         data.forEach(mood => {
           this._myTopService.getTrackById(mood.trackId)
             .subscribe(
@@ -47,11 +44,11 @@ export class MyTopComponent implements OnInit {
     });
   }
 
-  getMood() {
+  private _getCurrentMood(moods) {
     let moodsName = [];
 
-    this._moods.forEach(mood => {
-      moodsName = mood.mood;
+    moods.forEach(mood => {
+      moodsName.push(mood.mood);
     });
 
     this.currentMood = this._getHighlyOccuredElement(moodsName);

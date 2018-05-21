@@ -29,10 +29,9 @@ export class TrackComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //TODO: check why this not return data
     this._moodService.getMoodByTrackId(this.track.id).subscribe((data) => {
-      if (data && data.plays && data.plays > 0) {
-        this.playsConter = data.plays;
+      if (data && data[0] && data[0].plays && data[0].plays > 0) {
+        this.playsConter = data[0].plays;
       }
     });
   }
