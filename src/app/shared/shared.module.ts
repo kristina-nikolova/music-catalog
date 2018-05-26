@@ -10,13 +10,15 @@ import { PlaylistTileComponent } from './components/playlist-tile/playlist-tile.
 import { TilesListComponent } from './components/tiles-list/tiles-list.component';
 import { FollowButtonComponent } from './components/follow-button/follow-button.component';
 import { TrackComponent } from './components/track/track.component';
+import { MoodWindowComponent } from './components/mood-window/mood-window.component';
 
 const components = [
   SpinnerComponent,
   TilesListComponent,
   PlaylistTileComponent,
   FollowButtonComponent,
-  TrackComponent
+  TrackComponent,
+  MoodWindowComponent
 ];
 
 @NgModule({

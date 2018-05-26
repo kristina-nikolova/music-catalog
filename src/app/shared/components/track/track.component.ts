@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, trigger, state, style, transition, animate } from '@angular/core';
 import { MoodService } from '../../services/mood.service';
+import { TrackMood } from 'app/shared/model/track-mood.model';
 
 @Component({
   selector: 'app-track',
@@ -23,6 +24,8 @@ export class TrackComponent implements OnInit {
   @Input() track: any;
   trackUri: any;
   trackPlaysConter = 0;
+  showAllMoods = false;
+  selectedMood = 'happy';
 
   private _playedTracksIds = [];
 
@@ -35,6 +38,7 @@ export class TrackComponent implements OnInit {
       if (data && data[0] && data[0].plays > 0) {
         this._playedTracksIds.push(data[0].trackId);
         this.trackPlaysConter = data[0].plays;
+        this.selectedMood = data[0].mood;
       }
     });
   }
@@ -43,12 +47,11 @@ export class TrackComponent implements OnInit {
     this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri;
     trackIframe.src = this.trackUri;
 
-    //TODO: use models
-    const mood = {
+    const mood = new TrackMood({
       trackId: this.track.id,
       plays: this.trackPlaysConter + 1,
-      mood: 'happy'
-    }
+      mood: this.selectedMood
+    });
 
     if (this._playedTracksIds.indexOf(this.track.id) === -1) {
       // Create mood
@@ -66,6 +69,11 @@ export class TrackComponent implements OnInit {
       });
     }
     
+  }
+
+  selectMood(mood) {
+    this.selectedMood = mood;
+    this.showAllMoods = false;
   }
 
 }
