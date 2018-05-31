@@ -11,7 +11,7 @@
   </div>
   <div class="track__mood mlr-10" title="">
     <img class="v-align-middle" [src]="'assets/moods/' + selectedMood + '.png'" alt="" title="mood" (click)="showAllMoods = !showAllMoods"/>
-    <app-mood-window [isVisible]="showAllMoods" (moodIsSelected)="selectMood($event)"></app-mood-window>
+    <app-mood-window [isVisible]="showAllMoods" (moodIsSelected)="selectMood($event)" *ngIf="isMoodWindowShown"></app-mood-window>
   </div>
   <div class="track__listening mlr-10" title="plays count">
     <span class="v-align-middle track__plays-counter">{{trackPlaysConter}} plays</span>

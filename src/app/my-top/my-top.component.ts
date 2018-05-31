@@ -45,13 +45,24 @@ export class MyTopComponent implements OnInit {
   }
 
   private _getCurrentMood(moods) {
-    let moodsName = [];
 
-    moods.forEach(mood => {
-      moodsName.push(mood.mood);
+    let moodsNames = [];
+
+    const mostPlayed = moods.reduce(function(prev, current) {
+        return (prev.plays > current.plays) ? prev : current
     });
 
-    this.currentMood = this._getHighlyOccuredElement(moodsName);
+    this.currentMood = mostPlayed.mood;
+
+    moods.forEach((mood, i) => {
+      if(moods[i].plays === mostPlayed.plays) {
+        moodsNames.push(mood.mood);
+      } 
+    });
+
+    if(moodsNames) {
+      this.currentMood = this._getHighlyOccuredElement(moodsNames);
+    }
   }
 
   private _getHighlyOccuredElement(array) {

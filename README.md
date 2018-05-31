@@ -33,3 +33,7 @@ To get more help on the `angular-cli` use `ng help` or go check out the [Angular
 ## Start mongo 
 
 Run `mongod --dbpath /Users/nikolova/music-catalog/data`
+
+## Star node and enable debbuging
+
+Run `node ---inspect server.js`

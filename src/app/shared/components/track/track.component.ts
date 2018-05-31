@@ -22,6 +22,7 @@ import { TrackMood } from 'app/shared/model/track-mood.model';
 
 export class TrackComponent implements OnInit {
   @Input() track: any;
+  @Input() isMoodWindowShown: boolean;
   trackUri: any;
   trackPlaysConter = 0;
   showAllMoods = false;
