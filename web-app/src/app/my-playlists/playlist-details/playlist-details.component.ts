@@ -24,6 +24,7 @@ export class PlaylistDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.isDataLoading = true;
+
     this._myPlaylistsService.getMyPlaylistById(this.playlistId, this.userId)
       .subscribe(
         (data) => {
@@ -32,11 +33,10 @@ export class PlaylistDetailsComponent implements OnInit {
           this._myPlaylistsService.getMyPlaylistCreator(data.owner['id']).subscribe(
             (res) => {
               this.playlist.owner['name'] = res.display_name;
+              this.isDataLoading = false;
             },
             (err) => { console.log(err); }
-          );
-
-          this.isDataLoading = false;
+          );       
         },
         (err) => { console.log(err); }
       );
