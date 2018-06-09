@@ -36,7 +36,7 @@ export class TrackComponent implements OnInit {
 
   ngOnInit() {
     this._moodService.getMoodByTrackId(this.track.id).subscribe((data) => {
-      if (data && data[0] && data[0].plays > 0) {
+      if (data && data[0]) {
         this._playedTracksIds.push(data[0].trackId);
         this.trackPlaysConter = data[0].plays;
         this.selectedMood = data[0].mood;
@@ -45,16 +45,26 @@ export class TrackComponent implements OnInit {
   }
 
   playTrack(trackIframe) {
-    this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri;
+    this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri + '?autoplay=1';
     trackIframe.src = this.trackUri;
 
-    // setTimeout(() => {
-    //   document.getElementById('track-frame').contentDocument.getElementById('play-button').click();      
+    // setTimeout(() => {  
+    //   // document.getElementById('track-frame').contentDocument.getElementById('play-button').click();      
     // }, 1000)
 
+    this._saveMood(true);
+  }
+
+  selectMood(mood) {
+    this.selectedMood = mood;
+    this.showAllMoods = false;
+    this._saveMood();
+  }
+
+  private _saveMood(isCountChanged?: boolean) {
     const mood = new TrackMood({
       trackId: this.track.id,
-      plays: this.trackPlaysConter + 1,
+      plays: isCountChanged ? this.trackPlaysConter + 1 : this.trackPlaysConter,
       mood: this.selectedMood
     });
 
@@ -62,23 +72,21 @@ export class TrackComponent implements OnInit {
       // Create mood
       this._moodService.setMood(mood).subscribe((data) => {
         if (data) {
-          this.trackPlaysConter = data.plays;
+          if (isCountChanged) {
+            this.trackPlaysConter = data.plays;
+          }
         }
       });
     } else {
       // Update mood
       this._moodService.updateMood(this.track.id, mood).subscribe((data) => {
         if (data) {
-          this.trackPlaysConter = data.plays;
+          if (isCountChanged) {
+            this.trackPlaysConter = data.plays;
+          }
         }
       });
     }
-    
-  }
-
-  selectMood(mood) {
-    this.selectedMood = mood;
-    this.showAllMoods = false;
   }
 
 }
