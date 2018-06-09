@@ -7,9 +7,7 @@ import 'rxjs/add/operator/catch';
 
 import { UserService } from './../shared/services/user.service';
 import { APP_CONFIG } from './../shared/app.config';
-import { PlaylistTile } from './../shared/model/playlist-tile.model';
-import { Playlist } from './../shared/model/playlist.model';
-import { User } from './../shared/model/user.model';
+import { PlaylistTile, Playlist, User } from '@shared/models';
 
 @Injectable()
 

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { APP_CONFIG } from '../../shared/app.config';
-import { User } from './../model/user.model';
-import { HttpClient } from '@angular/common/http';
+import { User } from '@shared/models';
 
 @Injectable()
 export class UserService {

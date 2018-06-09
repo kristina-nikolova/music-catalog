@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { RecommendedService } from './recommended.service';
-import { PlaylistTile } from './../shared/model/playlist-tile.model';
+import { PlaylistTile } from '@shared/models';
 import * as _ from 'lodash';
 
 @Component({

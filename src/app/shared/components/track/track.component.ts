@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, trigger, state, style, transition, animate } from '@angular/core';
-import { MoodService } from '../../services/mood.service';
-import { TrackMood } from 'app/shared/model/track-mood.model';
+import { MoodService } from '@shared/services';
+import { TrackMood } from '@shared/models';
 
 @Component({
   selector: 'app-track',
@@ -47,6 +47,10 @@ export class TrackComponent implements OnInit {
   playTrack(trackIframe) {
     this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri;
     trackIframe.src = this.trackUri;
+
+    // setTimeout(() => {
+    //   document.getElementById('track-frame').contentDocument.getElementById('play-button').click();      
+    // }, 1000)
 
     const mood = new TrackMood({
       trackId: this.track.id,

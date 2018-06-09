@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MyPlaylistsService } from './my-playlists.service';
-import { PlaylistTile } from './../shared/model/playlist-tile.model';
-import { MoodService } from './../shared/services/mood.service';
+import { PlaylistTile } from '@shared/models';
+import { MoodService } from '@shared/services';
 
 @Component({
   providers: [MyPlaylistsService],

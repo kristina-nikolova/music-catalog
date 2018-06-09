@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 import { MyPlaylistsService } from '../my-playlists.service';
-import { Playlist } from '../../shared/model/playlist.model';
+import { Playlist } from '@shared/models';
 
 @Component({
   providers: [MyPlaylistsService],

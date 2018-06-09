@@ -1,9 +1,8 @@
 import { OnInit, Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { UserService } from '../shared/services/user.service';
-
-import { User } from './../shared/model/user.model';
+import { UserService } from '@shared/services';
+import { User } from '@shared/models';
 
 @Component({
   templateUrl: './home.component.html',

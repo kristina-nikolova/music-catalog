@@ -13,6 +13,14 @@
     "target": "es5",
     "typeRoots": [
       "../node_modules/@types"
-    ]
+    ],
+    "paths": {
+      "@shared/components": ["./app/shared/components"],
+      "@shared/components/*": ["./app/shared/components/*"],
+      "@shared/models": ["./app/shared/models"],
+      "@shared/models/*": ["./app/shared/models/*"],
+      "@shared/services": ["./app/shared/services/"],
+      "@shared/services/*": ["./app/shared/services/*"]
+    }
   }
 }

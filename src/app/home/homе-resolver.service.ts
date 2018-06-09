@@ -1,10 +1,10 @@
-import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 
-import { User } from './../shared/model/user.model';
+import { Observable } from 'rxjs/Rx';
 
-import { UserService } from '../shared/services/user.service';
+import { User } from '@shared/models';
+import { UserService } from '@shared/services';
 
 @Injectable()
 export class HomeResolver implements Resolve<User> {

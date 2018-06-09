@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
 
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { APP_CONFIG } from './../shared/app.config';
-
-import { Track } from './../shared/model/track.model';
-import { HttpClient } from '@angular/common/http';
+import { Track } from '@shared/models';
 
 @Injectable()
 

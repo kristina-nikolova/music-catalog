@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Playlist } from '../../shared/model/playlist.model';
 
+import { Playlist } from '@shared/models';
 
 @Component({
   selector: 'app-playlist',

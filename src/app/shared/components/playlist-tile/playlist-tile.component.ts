@@ -1,5 +1,5 @@
-import { PlaylistTile } from './../../model/playlist-tile.model';
 import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output, trigger, state, style, transition, animate } from '@angular/core';
+import { PlaylistTile } from '@shared/models';
 
 @Component({
   selector: 'app-playlist-tile',

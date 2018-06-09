@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MyTopService } from './my-top.service';
-import { MoodService } from '../shared/services/mood.service';
+import { MoodService } from '@shared/services';
 
 @Component({
   selector: 'app-my-top',

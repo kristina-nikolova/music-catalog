@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
 
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { APP_CONFIG } from './../shared/app.config';
-import { PlaylistTile } from './../shared/model/playlist-tile.model';
-import { UserService } from './../shared/services/user.service';
-import { HttpClient } from '@angular/common/http';
+import { PlaylistTile } from '@shared/models';
+import { UserService } from '@shared/services';
 
 @Injectable()
 
