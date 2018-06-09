@@ -31,13 +31,11 @@ const routes: Routes = [
     children: [
       {
         path: 'recommended',
-        // loadChildren: './recommended/recommended.module#RecommendedModule',
         loadChildren: () => RecommendedModule
       },
       {
         path: 'my-playlists',
         loadChildren: () => MyPlaylistsModule
-        // loadChildren: './my-playlists/my-playlists.module#MyPlaylistsModule'
       },
       {
         path: 'my-top',

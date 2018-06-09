@@ -6,7 +6,7 @@ import { MoodService } from '@shared/services';
 @Component({
   selector: 'app-my-top',
   templateUrl: './my-top.component.html',
-  styleUrls: ['./my-top.component.css'],
+  styleUrls: ['./my-top.component.scss'],
   providers: [ MyTopService ]
 })
 export class MyTopComponent implements OnInit {

@@ -1,0 +1,53 @@
+.track {
+    background: #000;
+    color: #fff;
+    margin-bottom: 2px;
+    align-items: center;
+    border-radius: 5px;
+    -webkit-box-shadow: inset -11px -4px 30px -6px rgba(26,25,26,1);
+    -moz-box-shadow: inset -11px -4px 30px -6px rgba(26,25,26,1);
+    box-shadow: inset -11px -4px 30px -6px rgba(26,25,26,1);
+
+    &:hover {
+        background: #2b2e2c;
+    }
+    
+    &__image img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    &__info {
+        width: 75%;
+    }
+    
+    &__name {
+        color: #2EBD59;
+    }
+    
+    &__album,
+    &__artist {
+        font-size: 12px;
+    }
+    
+    &__buttons {
+        position: relative;
+    }
+    
+    &__play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: url('assets/play-button.png') no-repeat 0 0;
+        border: 0;
+        outline: none;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+    }
+    
+    &__plays-counter {
+        color: #2EBD59;
+    }
+}

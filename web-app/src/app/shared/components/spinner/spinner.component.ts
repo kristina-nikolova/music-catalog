@@ -3,7 +3,7 @@ import { Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy } from '@a
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.css'],
+  styleUrls: ['./spinner.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

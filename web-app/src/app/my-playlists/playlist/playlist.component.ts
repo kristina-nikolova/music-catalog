@@ -5,7 +5,7 @@ import { Playlist } from '@shared/models';
 @Component({
   selector: 'app-playlist',
   templateUrl: './playlist.component.html',
-  styleUrls: ['./playlist.component.css']
+  styleUrls: ['./playlist.component.scss']
 })
 export class PlaylistComponent {
   @Input() playlist: Playlist;

@@ -6,6 +6,10 @@ import { MyTopComponent } from './my-top.component';
 import { MoodMessageComponent } from './mood-message/mood-message.component';
 import { MyTopRoutingModule } from './my-top-routing.module';
 
+const components = [
+  MyTopComponent
+]
+
 @NgModule({
   imports: [
     CommonModule,
@@ -13,7 +17,7 @@ import { MyTopRoutingModule } from './my-top-routing.module';
     MyTopRoutingModule
   ],
   declarations: [
-    MyTopComponent,
+    ...components,
     MoodMessageComponent
   ],
   exports: [

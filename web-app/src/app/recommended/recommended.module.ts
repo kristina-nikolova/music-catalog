@@ -6,6 +6,10 @@ import { RecommendedService } from './recommended.service';
 import { RecommendedComponent } from './recommended.component';
 import { RecommendedRoutingModule } from './recommended-routing.module';
 
+const components = [
+  RecommendedComponent
+]
+
 @NgModule({
   imports: [
     CommonModule,
@@ -13,9 +17,11 @@ import { RecommendedRoutingModule } from './recommended-routing.module';
     RecommendedRoutingModule
   ],
   declarations: [
-    RecommendedComponent
+    components
   ],
-  exports: [ RecommendedComponent ],
+  exports: [ 
+    components
+  ],
   providers: [
     RecommendedService
   ]

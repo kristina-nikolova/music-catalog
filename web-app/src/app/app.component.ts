@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthClientService } from './shared/services/auth.service';
+import { AuthClientService } from '@shared/services';
 
 @Component({
   selector: 'music-catalog',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit  {
 

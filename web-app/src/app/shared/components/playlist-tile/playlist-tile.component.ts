@@ -4,7 +4,7 @@ import { PlaylistTile } from '@shared/models';
 @Component({
   selector: 'app-playlist-tile',
   templateUrl: './playlist-tile.component.html',
-  styleUrls: ['./playlist-tile.component.css'],
+  styleUrls: ['./playlist-tile.component.scss'],
   animations: [
     trigger('scale', [
       state('in', style({transform: 'scale(1)'})),

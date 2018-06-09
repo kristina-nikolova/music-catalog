@@ -3,7 +3,7 @@ import { Component, OnInit, Output, EventEmitter, Input, ChangeDetectionStrategy
 @Component({
   selector: 'app-follow-button',
   templateUrl: './follow-button.component.html',
-  styleUrls: ['./follow-button.component.css'],
+  styleUrls: ['./follow-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FollowButtonComponent {

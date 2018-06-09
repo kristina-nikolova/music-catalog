@@ -3,7 +3,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-mood-window',
   templateUrl: './mood-window.component.html',
-  styleUrls: ['./mood-window.component.css']
+  styleUrls: ['./mood-window.component.scss']
 })
 
 export class MoodWindowComponent implements OnInit {

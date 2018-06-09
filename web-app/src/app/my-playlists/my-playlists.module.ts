@@ -8,6 +8,11 @@ import { PlaylistDetailsComponent } from './playlist-details/playlist-details.co
 import { PlaylistComponent } from './playlist/playlist.component';
 import { MyPlaylistsRoutingModule } from './my-playlists-routing.module';
 
+const components = [
+  MyPlaylistsComponent,
+  PlaylistDetailsComponent
+]
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,13 +20,11 @@ import { MyPlaylistsRoutingModule } from './my-playlists-routing.module';
     MyPlaylistsRoutingModule
   ],
   declarations: [
-    MyPlaylistsComponent,
-    PlaylistDetailsComponent,
+    ...components,
     PlaylistComponent
   ],
   exports: [
-    MyPlaylistsComponent,
-    PlaylistDetailsComponent
+    components
   ],
   providers: [ MyPlaylistsService ]
 })

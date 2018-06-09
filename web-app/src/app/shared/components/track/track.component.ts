@@ -5,7 +5,7 @@ import { TrackMood } from '@shared/models';
 @Component({
   selector: 'app-track',
   templateUrl: './track.component.html',
-  styleUrls: ['./track.component.css'],
+  styleUrls: ['./track.component.scss'],
   animations: [
     trigger('scale', [
       state('in', style({transform: 'scale(1)'})),

@@ -1,6 +1,6 @@
 <div *ngIf="playlist">  
   <h2>{{playlist?.name}}</h2>
-  <div class="flex flex-row">
+  <div class="playlist flex flex-row">
       <div class="playlist__info">
         <img [src]="playlist?.images[0].url" 
              alt="playlist cover"
@@ -12,7 +12,7 @@
           <span class="bold">Followers:</span> {{playlist?.followers['total']}}
         </div>
         <div class="mb-10" *ngIf="playlist?.description">
-          <span class="bold">Description:</span> {{playlist?.description}}
+          <span class="bold">Description:</span> <span [innerHTML]="playlist?.description"></span>
         </div>
       </div>
       <div class="playlist__tracks">

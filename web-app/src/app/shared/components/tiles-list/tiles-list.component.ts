@@ -4,7 +4,7 @@ import { PlaylistTile } from '@shared/models';
 @Component({
   selector: 'app-tiles-list',
   templateUrl: './tiles-list.component.html',
-  styleUrls: ['./tiles-list.component.css'],
+  styleUrls: ['./tiles-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TilesListComponent {
