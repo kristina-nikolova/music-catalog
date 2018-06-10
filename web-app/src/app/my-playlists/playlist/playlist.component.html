@@ -17,7 +17,11 @@
       </div>
       <div class="playlist__tracks">
         <div *ngFor="let track of playlist?.tracks['items']">
-          <app-track [track]="track.track" isMoodWindowShown="true"></app-track>
+          <app-track 
+            [track]="track.track"
+            [playedTracksAndTracksWithMood]="playedTracksAndTracksWithMood"
+            isMoodEditable="true">
+          </app-track>
         </div>
       </div>
   </div>

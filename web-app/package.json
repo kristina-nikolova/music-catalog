@@ -5,10 +5,9 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve && node \"server/server.js\"",
+    "start": "ng serve",
     "lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json --type-check && tslint \"e2e/**/*.ts\" --project e2e/tsconfig.json --type-check",
     "test": "ng test",
-    "server": "node \"server/server.js\"",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor"
   },
@@ -22,12 +21,8 @@
     "@angular/platform-browser": "^5.2.10",
     "@angular/platform-browser-dynamic": "^5.2.10",
     "@angular/router": "^5.2.10",
-    "body-parser": "^1.18.2",
     "core-js": "^2.4.1",
-    "cors": "^2.8.4",
-    "express": "^4.16.3",
     "lodash": "^4.17.5",
-    "mongoose": "^5.0.17",
     "rxjs": "^5.5.10",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.8.26"

@@ -3,7 +3,7 @@ export class Playlist {
     name: string;
     images: Array<Object>;
     owner: Object;
-    tracks: Object;
+    tracks: any;
     followers: Object;
     description: string;
 

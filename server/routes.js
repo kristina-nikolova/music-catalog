@@ -10,6 +10,16 @@ router.get('/api/moods', function(req, res, next) {
   });
 });
 
+/* GET PLAYED MOODS OR TRACKS WITH MOOD */
+router.get('/api/played-tracks-with-mood', function(req, res, next) {
+  TrackMood.find({
+    'trackId': { "$in": req.query.tracksIds.split(',') }
+}, function(err, data){
+    if (err) return next(err);
+    res.json(data);
+  });
+});
+
 /* GET SINGLE MOOD BY TRACK ID */
 router.get('/api/moods/:trackId', function(req, res, next) {
   TrackMood

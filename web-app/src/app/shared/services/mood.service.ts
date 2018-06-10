@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 import { TrackMood } from '@shared/models';
@@ -11,19 +11,28 @@ export class MoodService {
 
   constructor(private _http: HttpClient) {};
 
-  getMoods(): Observable<Array<TrackMood>> {
+  getAllTracksWithsMood(): Observable<Array<TrackMood>> {
     return this._http.get<Array<any>>('http://localhost:3000/api/moods');
   }
 
-  getMoodByTrackId(trackId: String): Observable<TrackMood> {
+  getTrackWithMoodByTrackId(trackId: String): Observable<TrackMood> {
     return this._http.get<any>('http://localhost:3000/api/moods/' + trackId);
   }
 
-  setMood(mood: TrackMood): Observable<TrackMood> {
+  getPlayedTracksAndTracksWithMood(tracksIds: Array<String>): Observable<Array<TrackMood>> {
+    let params: HttpParams = new HttpParams();
+    if (tracksIds) {
+      params = params.set('tracksIds', tracksIds.toString());
+    }
+
+    return this._http.get<any>('http://localhost:3000/api/played-tracks-with-mood', { params: params });
+  }
+
+  setTrackWithMood(mood: TrackMood): Observable<TrackMood> {
     return this._http.post<any>('http://localhost:3000/api/moods', mood);
   }
 
-  updateMood(trackId: String, mood: TrackMood): Observable<TrackMood> {
+  updateTrackWithMood(trackId: String, mood: TrackMood): Observable<TrackMood> {
     return this._http.put<any>('http://localhost:3000/api/moods/' + trackId, mood);
   }
 

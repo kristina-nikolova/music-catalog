@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, trigger, state, style, transition, animate } from '@angular/core';
 import { MoodService } from '@shared/services';
-import { TrackMood } from '@shared/models';
+import { TrackMood, Track } from '@shared/models';
 
 @Component({
   selector: 'app-track',
@@ -21,58 +21,58 @@ import { TrackMood } from '@shared/models';
 })
 
 export class TrackComponent implements OnInit {
-  @Input() track: any;
-  @Input() isMoodWindowShown: boolean;
-  @Input() hideNotPlayed: boolean;
+  @Input() track: Track;
+  @Input() playedTracksAndTracksWithMood: Array<TrackMood>;
+  @Input() isMoodEditable: boolean;
+  @Input() hideNotPlayedTracks: boolean;
   
-  trackUri: any;
-  trackPlaysConter = 0;
+  trackUri: string;
   showAllMoods = false;
+  trackPlaysConter = 0;  
   selectedMood = 'happy';
 
-  private _playedTracksIds = [];
+  private _currentPlayedTrackOrTrackWithMood: TrackMood
 
   constructor(
     private _moodService: MoodService
   ) { }
 
   ngOnInit() {
-    this._moodService.getMoodByTrackId(this.track.id).subscribe((data) => {
-      if (data && data[0]) {
-        this._playedTracksIds.push(data[0].trackId);
-        this.trackPlaysConter = data[0].plays;
-        this.selectedMood = data[0].mood;
+    // TODO: make it with observable
+    setTimeout(_ => {
+      if (this.playedTracksAndTracksWithMood && this.playedTracksAndTracksWithMood.length) {
+        this._currentPlayedTrackOrTrackWithMood = this.playedTracksAndTracksWithMood.find((track) => track.trackId ===  this.track.id);
+        if (this._currentPlayedTrackOrTrackWithMood) {
+          this.trackPlaysConter = this._currentPlayedTrackOrTrackWithMood.plays;
+          this.selectedMood = this._currentPlayedTrackOrTrackWithMood.mood;
+        }
       }
-    });
+    }, 1500)
   }
 
   playTrack(trackIframe) {
     this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri + '?autoplay=1';
     trackIframe.src = this.trackUri;
 
-    // setTimeout(() => {  
-    //   // document.getElementById('track-frame').contentDocument.getElementById('play-button').click();      
-    // }, 1000)
-
-    this._saveMood(true);
+    this._saveTrackMood(true);
   }
 
   selectMood(mood) {
     this.selectedMood = mood;
     this.showAllMoods = false;
-    this._saveMood();
+    this._saveTrackMood();
   }
 
-  private _saveMood(isCountChanged?: boolean) {
+  private _saveTrackMood(isCountChanged?: boolean) {
     const mood = new TrackMood({
       trackId: this.track.id,
       plays: isCountChanged ? this.trackPlaysConter + 1 : this.trackPlaysConter,
       mood: this.selectedMood
     });
 
-    if (this._playedTracksIds.indexOf(this.track.id) === -1) {
+    if (!this._currentPlayedTrackOrTrackWithMood) {
       // Create mood
-      this._moodService.setMood(mood).subscribe((data) => {
+      this._moodService.setTrackWithMood(mood).subscribe((data) => {
         if (data) {
           if (isCountChanged) {
             this.trackPlaysConter = data.plays;
@@ -81,7 +81,7 @@ export class TrackComponent implements OnInit {
       });
     } else {
       // Update mood
-      this._moodService.updateMood(this.track.id, mood).subscribe((data) => {
+      this._moodService.updateTrackWithMood(this.track.id, mood).subscribe((data) => {
         if (data) {
           if (isCountChanged) {
             this.trackPlaysConter = data.plays;

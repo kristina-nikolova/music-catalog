@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { MyTopService } from './my-top.service';
 import { MoodService } from '@shared/services';
+import { TrackMood } from '@shared/models';
 
 @Component({
   selector: 'app-my-top',
@@ -12,6 +13,7 @@ import { MoodService } from '@shared/services';
 export class MyTopComponent implements OnInit {
   isDataLoading: boolean;
   currentMood: string;
+  playedTracksAndTracksWithMood: Array<TrackMood>  
   topTracks = [];
 
   private _moods;
@@ -25,17 +27,21 @@ export class MyTopComponent implements OnInit {
   }
 
   private _loadMyTopTracks() {
+    this.isDataLoading = true;
 
-    this._moodService.getMoods().subscribe((data) => {
-      if(data) {
-        this.isDataLoading = true;
-        this._getCurrentMood(data);
-        data.forEach(mood => {
+    this._moodService.getAllTracksWithsMood().subscribe((tracks) => {
+      if (tracks) {
+        this.playedTracksAndTracksWithMood = tracks;
+        this._getCurrentMood(tracks);
+
+        tracks.forEach((mood, index) => {
           this._myTopService.getTrackById(mood.trackId)
             .subscribe(
-                (data) => {
-                  this.topTracks.push(data);
-                  this.isDataLoading = false;
+                (track) => {
+                  this.topTracks.push(track);
+                  if (index === tracks.length - 1) {
+                    this.isDataLoading = false;                    
+                  }
                 },
                 (err) => { console.log(err); }
             );
@@ -44,19 +50,19 @@ export class MyTopComponent implements OnInit {
     });
   }
 
-  private _getCurrentMood(moods) {
+  private _getCurrentMood(trackMoods) {
 
     let moodsNames = [];
 
-    const mostPlayed = moods.reduce(function(prev, current) {
-        return (prev.plays > current.plays) ? prev : current
+    const mostPlayed = trackMoods.reduce(function(prevTrack, currentTrack) {
+        return (prevTrack.plays > currentTrack.plays) ? prevTrack : currentTrack
     });
 
     this.currentMood = mostPlayed.mood;
 
-    moods.forEach((mood, i) => {
-      if(moods[i].plays === mostPlayed.plays) {
-        moodsNames.push(mood.mood);
+    trackMoods.forEach((track, i) => {
+      if(trackMoods[i].plays === mostPlayed.plays) {
+        moodsNames.push(track.mood);
       } 
     });
 
