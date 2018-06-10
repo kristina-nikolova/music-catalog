@@ -20,7 +20,9 @@
       "@shared/models": ["./app/shared/models"],
       "@shared/models/*": ["./app/shared/models/*"],
       "@shared/services": ["./app/shared/services/"],
-      "@shared/services/*": ["./app/shared/services/*"]
+      "@shared/services/*": ["./app/shared/services/*"],
+      "@shared/directives": ["./app/shared/directives"],
+      "@shared/directives/*": ["./app/shared/directives/*"]
     }
   }
 }

@@ -19,6 +19,7 @@
       <app-mood-window 
         [isVisible]="showAllMoods"
         (moodIsSelected)="selectMood($event)"
+        (appClickOutside)="showAllMoods = false"
         *ngIf="isMoodEditable">
       </app-mood-window>
     </div>

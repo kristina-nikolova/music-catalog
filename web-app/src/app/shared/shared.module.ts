@@ -6,6 +6,7 @@ import { APP_CONFIG } from './app.config';
 export let MAIN_CONFIG = new InjectionToken('app.config');
 
 import { SpinnerComponent, PlaylistTileComponent, TilesListComponent, FollowButtonComponent, TrackComponent, MoodWindowComponent } from '@shared/components';
+import { ClickOutsideDirective } from '@shared/directives';
 
 const components = [
   SpinnerComponent,
@@ -13,7 +14,8 @@ const components = [
   PlaylistTileComponent,
   FollowButtonComponent,
   TrackComponent,
-  MoodWindowComponent
+  MoodWindowComponent,
+  ClickOutsideDirective
 ];
 
 @NgModule({
