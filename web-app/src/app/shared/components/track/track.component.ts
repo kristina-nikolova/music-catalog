@@ -8,7 +8,7 @@ import { TrackMood } from '@shared/models';
   styleUrls: ['./track.component.scss'],
   animations: [
     trigger('scale', [
-      state('in', style({transform: 'scale(1)'})),
+      state('in', style({transform: 'none'})),
       transition('void => *', [
         style({transform: 'scale(0)'}),
         animate(200)
@@ -23,6 +23,8 @@ import { TrackMood } from '@shared/models';
 export class TrackComponent implements OnInit {
   @Input() track: any;
   @Input() isMoodWindowShown: boolean;
+  @Input() hideNotPlayed: boolean;
+  
   trackUri: any;
   trackPlaysConter = 0;
   showAllMoods = false;

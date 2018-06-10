@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { APP_CONFIG } from './app.config';
 export let MAIN_CONFIG = new InjectionToken('app.config');
 
-import { SpinnerComponent, PlaylistTileComponent, TilesListComponent, FollowButtonComponent, TrackComponent, MoodWindowComponent, IframeComponent } from '@shared/components';
+import { SpinnerComponent, PlaylistTileComponent, TilesListComponent, FollowButtonComponent, TrackComponent, MoodWindowComponent } from '@shared/components';
 
 const components = [
   SpinnerComponent,
@@ -13,8 +13,7 @@ const components = [
   PlaylistTileComponent,
   FollowButtonComponent,
   TrackComponent,
-  MoodWindowComponent,
-  IframeComponent
+  MoodWindowComponent
 ];
 
 @NgModule({

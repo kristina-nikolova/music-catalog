@@ -9,9 +9,9 @@ import { AuthClientService } from '@shared/services';
 })
 export class AppComponent implements OnInit  {
 
-  constructor(private authClientService: AuthClientService ) {}
+  constructor(private _authClientService: AuthClientService ) {}
 
   ngOnInit() {
-    this.authClientService.userAuthenticationSetup();
+    this._authClientService.userAuthenticationSetup();
   }
 }

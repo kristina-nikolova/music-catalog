@@ -1,4 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { User } from '@shared/models';
 
 @Component({
   selector: 'app-userbox',
@@ -8,5 +9,5 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 })
 
 export class UserboxComponent {
-  @Input() user: Object;
+  @Input() user: User;
 }

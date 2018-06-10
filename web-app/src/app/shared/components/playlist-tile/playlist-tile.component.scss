@@ -32,6 +32,10 @@
   &:hover .overlay {
     transform: translateX(0);
   }
+
+  img {
+    max-width: 300px;
+  }
   
 }
 

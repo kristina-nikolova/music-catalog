@@ -1,18 +1,17 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-mood-window',
   templateUrl: './mood-window.component.html',
-  styleUrls: ['./mood-window.component.scss']
+  styleUrls: ['./mood-window.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class MoodWindowComponent implements OnInit {
+export class MoodWindowComponent {
   @Input() isVisible: boolean;
   @Output() moodIsSelected: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(){}
-
-  ngOnInit() {}
 
   selectMood(mood: string) {
     this.moodIsSelected.emit(mood);

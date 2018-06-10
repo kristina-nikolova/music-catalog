@@ -134,7 +134,5 @@ h2 {
     overflow: auto;
     width: 100%;
     box-sizing: border-box;
-    -webkit-box-shadow: inset 0px 1px 155px 9px rgba(65,71,67,1);
-    -moz-box-shadow: inset 0px 1px 155px 9px rgba(65,71,67,1);
     box-shadow: inset 0px 1px 155px 9px rgba(65,71,67,1);
 }

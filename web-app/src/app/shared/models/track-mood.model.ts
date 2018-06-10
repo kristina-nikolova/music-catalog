@@ -1,6 +1,6 @@
 export class TrackMood {
     trackId: String;
-    plays: Number;
+    plays: number;
     mood: String;
     
     constructor(data: any){
