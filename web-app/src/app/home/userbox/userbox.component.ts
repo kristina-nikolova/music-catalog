@@ -7,7 +7,6 @@ import { User } from '@shared/models';
   styleUrls: ['./userbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class UserboxComponent {
   @Input() user: User;
 }

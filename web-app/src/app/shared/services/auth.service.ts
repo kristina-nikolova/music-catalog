@@ -5,21 +5,20 @@ import { APP_CONFIG } from '../../shared/app.config';
 
 @Injectable()
 export class AuthClientService {
-
-  constructor(private _oauthService: OAuthService) {};
+  constructor(private _oauthService: OAuthService) {}
 
   /**
    * name: userAuthentication
    * params:
    * description: Authentication using spotify api
    */
-  userAuthenticationSetup() : void {
-      this._oauthService.loginUrl = APP_CONFIG.apiOAuthUrl;
-      this._oauthService.redirectUri = APP_CONFIG.mainUrl + '/catalog';
-      this._oauthService.clientId = APP_CONFIG.clientId;
-      this._oauthService.scope = APP_CONFIG.apiPermissions;
-      this._oauthService.setStorage(sessionStorage);
+  userAuthenticationSetup(): void {
+    this._oauthService.loginUrl = APP_CONFIG.apiOAuthUrl;
+    this._oauthService.redirectUri = APP_CONFIG.mainUrl + '/catalog';
+    this._oauthService.clientId = APP_CONFIG.clientId;
+    this._oauthService.scope = APP_CONFIG.apiPermissions;
+    this._oauthService.setStorage(sessionStorage);
 
-      this._oauthService.tryLogin({});
-    }
+    this._oauthService.tryLogin({});
+  }
 }

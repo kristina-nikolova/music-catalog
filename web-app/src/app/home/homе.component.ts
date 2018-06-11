@@ -8,14 +8,10 @@ import { User } from '@shared/models';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-
 export class HomeComponent implements OnInit {
   user: User;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _userService: UserService ) {
-  }
+  constructor(private _router: Router, private _route: ActivatedRoute, private _userService: UserService) {}
 
   ngOnInit() {
     if (window.location.pathname === '/catalog') {

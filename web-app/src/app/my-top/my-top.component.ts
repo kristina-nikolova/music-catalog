@@ -8,19 +8,17 @@ import { TrackMood } from '@shared/models';
   selector: 'app-my-top',
   templateUrl: './my-top.component.html',
   styleUrls: ['./my-top.component.scss'],
-  providers: [ MyTopService ]
+  providers: [MyTopService]
 })
 export class MyTopComponent implements OnInit {
   isDataLoading: boolean;
   currentMood: string;
-  playedTracksAndTracksWithMood: Array<TrackMood>  
+  playedTracksAndTracksWithMood: Array<TrackMood>;
   topTracks = [];
 
   private _moods;
 
-  constructor(private _myTopService: MyTopService,
-              private _moodService: MoodService
-            ) { }
+  constructor(private _myTopService: MyTopService, private _moodService: MoodService) {}
 
   ngOnInit() {
     this._loadMyTopTracks();
@@ -35,59 +33,61 @@ export class MyTopComponent implements OnInit {
         this._getCurrentMood(tracks);
 
         tracks.forEach((mood, index) => {
-          this._myTopService.getTrackById(mood.trackId)
-            .subscribe(
-                (track) => {
-                  this.topTracks.push(track);
-                  if (index === tracks.length - 1) {
-                    this.isDataLoading = false;                    
-                  }
-                },
-                (err) => { console.log(err); }
-            );
+          this._myTopService.getTrackById(mood.trackId).subscribe(
+            (track) => {
+              this.topTracks.push(track);
+              if (index === tracks.length - 1) {
+                this.isDataLoading = false;
+              }
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
         });
       }
     });
   }
 
   private _getCurrentMood(trackMoods) {
-
     let moodsNames = [];
 
     const mostPlayed = trackMoods.reduce(function(prevTrack, currentTrack) {
-        return (prevTrack.plays > currentTrack.plays) ? prevTrack : currentTrack
+      return prevTrack.plays > currentTrack.plays ? prevTrack : currentTrack;
     });
 
     this.currentMood = mostPlayed.mood;
 
     trackMoods.forEach((track, i) => {
-      if(trackMoods[i].plays === mostPlayed.plays) {
+      if (trackMoods[i].plays === mostPlayed.plays) {
         moodsNames.push(track.mood);
-      } 
+      }
     });
 
-    if(moodsNames) {
+    if (moodsNames) {
       this.currentMood = this._getHighlyOccuredElement(moodsNames);
     }
   }
 
   private _getHighlyOccuredElement(array) {
-    if (array.length === 0) { return null; }
+    if (array.length === 0) {
+      return null;
+    }
     const modeMap = {};
-    let maxEl = array[0], maxCount = 1;
+    let maxEl = array[0],
+      maxCount = 1;
     for (let i = 0; i < array.length; i++) {
-        const el = array[i];
-        if (modeMap[el] == null) {
-          modeMap[el] = 1;
-        }  else {
-          modeMap[el]++;
-        }
-        if (modeMap[el] > maxCount) {
-            maxEl = el;
-            maxCount = modeMap[el];
-        }
+      const el = array[i];
+      if (modeMap[el] == null) {
+        modeMap[el] = 1;
+      } else {
+        modeMap[el]++;
+      }
+      if (modeMap[el] > maxCount) {
+        maxEl = el;
+        maxCount = modeMap[el];
+      }
     }
     return maxEl;
   }
-
 }

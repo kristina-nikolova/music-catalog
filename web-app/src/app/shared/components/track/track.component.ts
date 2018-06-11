@@ -8,46 +8,40 @@ import { TrackMood, Track } from '@shared/models';
   styleUrls: ['./track.component.scss'],
   animations: [
     trigger('scale', [
-      state('in', style({transform: 'none'})),
-      transition('void => *', [
-        style({transform: 'scale(0)'}),
-        animate(200)
-      ]),
-      transition('* => void', [
-        animate(200, style({transform: 'scale(1)'}))
-      ])
+      state('in', style({ transform: 'none' })),
+      transition('void => *', [style({ transform: 'scale(0)' }), animate(200)]),
+      transition('* => void', [animate(200, style({ transform: 'scale(1)' }))])
     ])
   ]
 })
-
 export class TrackComponent implements OnInit {
   @Input() track: Track;
   @Input() playedTracksAndTracksWithMood: Array<TrackMood>;
   @Input() isMoodEditable: boolean;
   @Input() hideNotPlayedTracks: boolean;
-  
+
   trackUri: string;
   showAllMoods = false;
-  trackPlaysConter = 0;  
+  trackPlaysConter = 0;
   selectedMood = 'happy';
 
-  private _currentPlayedTrackOrTrackWithMood: TrackMood
+  private _currentPlayedTrackOrTrackWithMood: TrackMood;
 
-  constructor(
-    private _moodService: MoodService
-  ) { }
+  constructor(private _moodService: MoodService) {}
 
   ngOnInit() {
     // TODO: make it with observable
-    setTimeout(_ => {
+    setTimeout((_) => {
       if (this.playedTracksAndTracksWithMood && this.playedTracksAndTracksWithMood.length) {
-        this._currentPlayedTrackOrTrackWithMood = this.playedTracksAndTracksWithMood.find((track) => track.trackId ===  this.track.id);
+        this._currentPlayedTrackOrTrackWithMood = this.playedTracksAndTracksWithMood.find(
+          (track) => track.trackId === this.track.id
+        );
         if (this._currentPlayedTrackOrTrackWithMood) {
           this.trackPlaysConter = this._currentPlayedTrackOrTrackWithMood.plays;
           this.selectedMood = this._currentPlayedTrackOrTrackWithMood.mood;
         }
       }
-    }, 1500)
+    }, 1500);
   }
 
   playTrack(trackIframe) {
@@ -90,5 +84,4 @@ export class TrackComponent implements OnInit {
       });
     }
   }
-
 }

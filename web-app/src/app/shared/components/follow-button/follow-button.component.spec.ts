@@ -11,9 +11,8 @@ describe('FollowButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FollowButtonComponent ]
-    })
-    .compileComponents();
+      declarations: [FollowButtonComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

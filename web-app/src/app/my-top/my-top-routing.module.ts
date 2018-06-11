@@ -4,18 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { MyTopComponent } from './my-top.component';
 
 const routes: Routes = [
-    {
-      path: '',
-      component: MyTopComponent
-    }
+  {
+    path: '',
+    component: MyTopComponent
+  }
 ];
 
 @NgModule({
-  imports:      [
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class MyTopRoutingModule {}

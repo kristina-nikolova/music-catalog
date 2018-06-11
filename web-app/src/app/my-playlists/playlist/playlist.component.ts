@@ -7,10 +7,9 @@ import { Playlist, TrackMood } from '@shared/models';
   templateUrl: './playlist.component.html',
   styleUrls: ['./playlist.component.scss']
 })
-export class PlaylistComponent{
+export class PlaylistComponent {
   @Input() playlist: Playlist;
-  @Input() playedTracksAndTracksWithMood: Array<TrackMood>;  
-  
-  constructor() { }
+  @Input() playedTracksAndTracksWithMood: Array<TrackMood>;
 
+  constructor() {}
 }

@@ -5,22 +5,18 @@ import { MyPlaylistsComponent } from './my-playlists.component';
 import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 
 const routes: Routes = [
-    {
-      path: '',
-      component: MyPlaylistsComponent
-    },
-    {
-      path: ':id',
-      component: PlaylistDetailsComponent
-    }
+  {
+    path: '',
+    component: MyPlaylistsComponent
+  },
+  {
+    path: ':id',
+    component: PlaylistDetailsComponent
+  }
 ];
 
 @NgModule({
-  imports:      [
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class MyPlaylistsRoutingModule {}

@@ -6,15 +6,13 @@ import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy
   styleUrls: ['./mood-window.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class MoodWindowComponent {
   @Input() isVisible: boolean;
   @Output() moodIsSelected: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(){}
+  constructor() {}
 
   selectMood(mood: string) {
     this.moodIsSelected.emit(mood);
   }
-
 }

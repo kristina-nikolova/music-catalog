@@ -8,7 +8,6 @@ import * as _ from 'lodash';
   providers: [RecommendedService],
   templateUrl: './recommended.component.html'
 })
-
 export class RecommendedComponent implements OnInit {
   playlists: Array<PlaylistTile>;
   // albums: PlaylistTile[];
@@ -23,29 +22,32 @@ export class RecommendedComponent implements OnInit {
   loadFeaturedPlaylists() {
     this.isDataLoading = true;
 
-    this._recommendedService.getFeaturedPlaylists()
-      .flatMap(data => {
+    this._recommendedService
+      .getFeaturedPlaylists()
+      .flatMap((data) => {
         this.playlists = data;
         this.isDataLoading = false;
         return this.playlists;
       })
-      .subscribe(data => {
+      .subscribe((data) => {
         const _data = data;
         this._recommendedService.isPlaylistFollowingByUser(data.owner['id'], data.id).subscribe(
           (res) => {
             // _data = {..._data, followed: true};
             _data['followed'] = res[0];
           },
-          (err) => { console.log(err); }
+          (err) => {
+            console.log(err);
+          }
         );
       });
 
-      // this._recommendedService.getNewReleasedAlbums()
-      //   .subscribe(data => {
-      //       this.albums = data;
-      //     },
-      //     (err) => { console.log(err); }
-      //   );
+    // this._recommendedService.getNewReleasedAlbums()
+    //   .subscribe(data => {
+    //       this.albums = data;
+    //     },
+    //     (err) => { console.log(err); }
+    //   );
   }
 
   followPlaylist(data) {
@@ -58,14 +60,16 @@ export class RecommendedComponent implements OnInit {
 
         setTimeout(function() {
           _self.isFolowing = false;
-          _.forEach(_self.playlists, function(pl){
+          _.forEach(_self.playlists, function(pl) {
             if (pl.id === playlist.playlistId) {
               pl.followed = true;
             }
           });
         }, 1000);
       },
-      (err) => { console.log(err); }
+      (err) => {
+        console.log(err);
+      }
     );
   }
 
@@ -78,14 +82,16 @@ export class RecommendedComponent implements OnInit {
         _self.isFolowing = true;
         setTimeout(function() {
           _self.isFolowing = false;
-          _.forEach(_self.playlists, function(pl){
+          _.forEach(_self.playlists, function(pl) {
             if (pl.id === playlist.playlistId) {
               pl.followed = false;
             }
           });
         }, 1000);
       },
-      (err) => { console.log(err); }
+      (err) => {
+        console.log(err);
+      }
     );
   }
 }

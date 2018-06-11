@@ -1,4 +1,15 @@
-import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output, trigger, state, style, transition, animate } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/core';
 import { PlaylistTile } from '@shared/models';
 
 @Component({
@@ -7,19 +18,13 @@ import { PlaylistTile } from '@shared/models';
   styleUrls: ['./playlist-tile.component.scss'],
   animations: [
     trigger('scale', [
-      state('in', style({transform: 'scale(1)'})),
-      transition('void => *', [
-        style({transform: 'scale(0)'}),
-        animate(200)
-      ]),
-      transition('* => void', [
-        animate(200, style({transform: 'scale(1)'}))
-      ])
+      state('in', style({ transform: 'scale(1)' })),
+      transition('void => *', [style({ transform: 'scale(0)' }), animate(200)]),
+      transition('* => void', [animate(200, style({ transform: 'scale(1)' }))])
     ])
   ]
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class PlaylistTileComponent {
   @Input() playlist: PlaylistTile;
   @Input() canFollow: Boolean;

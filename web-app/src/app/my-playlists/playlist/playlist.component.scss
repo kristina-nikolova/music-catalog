@@ -1,37 +1,37 @@
 .playlist {
-    display: block;
+  display: block;
 
-    &__info {
-        padding-right: 30px;
-        padding-left: 20px;
-        color: #fff;
-    }
-    
-    &__cover {
-        max-width: 300px;
-        max-height: 300px;
-    }
-    
-    &__tracks {
-        width: 100%;
-        height: 650px;
-        margin-right: 20px;
-        margin-top: 20px;
-        overflow: auto;
-    }
+  &__info {
+    padding-right: 30px;
+    padding-left: 20px;
+    color: #fff;
+  }
+
+  &__cover {
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  &__tracks {
+    width: 100%;
+    height: 650px;
+    margin-right: 20px;
+    margin-top: 20px;
+    overflow: auto;
+  }
 }
 
 @media (min-width: 48em) {
-    .playlist {
-        display: flex;
+  .playlist {
+    display: flex;
 
-        &__info {
-            margin-right: 30px;
-            border-right: 1px solid #2d613c;
-        }
-
-        &__tracks {
-            margin-top: 0;
-        }
+    &__info {
+      margin-right: 30px;
+      border-right: 1px solid #2d613c;
     }
+
+    &__tracks {
+      margin-top: 0;
+    }
+  }
 }

@@ -17,20 +17,8 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  imports:      [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    SharedModule
-  ],
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    UserboxComponent,
-    HeaderComponent
-  ],
+  imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, AppRoutingModule, SharedModule],
+  declarations: [AppComponent, LoginComponent, HomeComponent, UserboxComponent, HeaderComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -43,6 +31,6 @@ import { AppRoutingModule } from './app-routing.module';
     MoodService,
     HomeResolver
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

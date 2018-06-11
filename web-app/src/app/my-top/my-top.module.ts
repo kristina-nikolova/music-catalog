@@ -6,23 +6,12 @@ import { MyTopComponent } from './my-top.component';
 import { MoodMessageComponent } from './mood-message/mood-message.component';
 import { MyTopRoutingModule } from './my-top-routing.module';
 
-const components = [
-  MyTopComponent
-]
+const components = [MyTopComponent];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    MyTopRoutingModule
-  ],
-  declarations: [
-    ...components,
-    MoodMessageComponent
-  ],
-  exports: [
-    MyTopComponent
-  ],
-  providers: [ ]
+  imports: [CommonModule, SharedModule, MyTopRoutingModule],
+  declarations: [...components, MoodMessageComponent],
+  exports: [MyTopComponent],
+  providers: []
 })
-export class MyTopModule { }
+export class MyTopModule {}

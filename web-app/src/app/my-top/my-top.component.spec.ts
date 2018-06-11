@@ -11,9 +11,8 @@ describe('MyTopComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyTopComponent ]
-    })
-    .compileComponents();
+      declarations: [MyTopComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

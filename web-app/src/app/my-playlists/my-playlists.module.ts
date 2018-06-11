@@ -8,24 +8,12 @@ import { PlaylistDetailsComponent } from './playlist-details/playlist-details.co
 import { PlaylistComponent } from './playlist/playlist.component';
 import { MyPlaylistsRoutingModule } from './my-playlists-routing.module';
 
-const components = [
-  MyPlaylistsComponent,
-  PlaylistDetailsComponent
-]
+const components = [MyPlaylistsComponent, PlaylistDetailsComponent];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    MyPlaylistsRoutingModule
-  ],
-  declarations: [
-    ...components,
-    PlaylistComponent
-  ],
-  exports: [
-    components
-  ],
-  providers: [ MyPlaylistsService ]
+  imports: [CommonModule, SharedModule, MyPlaylistsRoutingModule],
+  declarations: [...components, PlaylistComponent],
+  exports: [components],
+  providers: [MyPlaylistsService]
 })
-export class MyPlaylistsModule { }
+export class MyPlaylistsModule {}

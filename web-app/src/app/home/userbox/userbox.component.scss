@@ -1,13 +1,13 @@
 .user {
-    &__photo {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        vertical-align: middle;
-    }
+  &__photo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    vertical-align: middle;
+  }
 
-    &__name {
-        vertical-align: middle;
-        margin-right: 10px;
-    }
+  &__name {
+    vertical-align: middle;
+    margin-right: 10px;
+  }
 }

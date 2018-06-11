@@ -11,9 +11,8 @@ describe('MoodMessageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MoodMessageComponent ]
-    })
-    .compileComponents();
+      declarations: [MoodMessageComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

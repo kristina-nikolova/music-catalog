@@ -12,7 +12,7 @@ import { User } from '@shared/models';
 export class UserService {
   myId = '';
 
-  constructor(private _http: HttpClient) {};
+  constructor(private _http: HttpClient) {}
 
   /**
    * name: getFeaturedPlaylists
@@ -20,9 +20,9 @@ export class UserService {
    * description: get all Featured Playlists
    */
   getProfile(): Observable<User> {
-      return this._http
-              .get(APP_CONFIG.apiMainUrl + '/me')
-              .map((res) => new User(res))
-              .catch((error: any) => Observable.throw(error.error || 'Server error'));
-   }
+    return this._http
+      .get(APP_CONFIG.apiMainUrl + '/me')
+      .map((res) => new User(res))
+      .catch((error: any) => Observable.throw(error.error || 'Server error'));
+  }
 }

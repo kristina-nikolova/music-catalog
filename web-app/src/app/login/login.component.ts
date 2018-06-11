@@ -5,11 +5,10 @@ import { Component } from '@angular/core';
   providers: [],
   templateUrl: './login.component.html'
 })
-
 export class LoginComponent {
   constructor(private _oAuthService: OAuthService) {}
-    
+
   public login() {
-      this._oAuthService.initImplicitFlow();
+    this._oAuthService.initImplicitFlow();
   }
 }

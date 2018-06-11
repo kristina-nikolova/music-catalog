@@ -8,8 +8,7 @@ import { TrackMood } from '@shared/models';
 
 @Injectable()
 export class MoodService {
-
-  constructor(private _http: HttpClient) {};
+  constructor(private _http: HttpClient) {}
 
   getAllTracksWithsMood(): Observable<Array<TrackMood>> {
     return this._http.get<Array<any>>('http://localhost:3000/api/moods');
@@ -35,5 +34,4 @@ export class MoodService {
   updateTrackWithMood(trackId: String, mood: TrackMood): Observable<TrackMood> {
     return this._http.put<any>('http://localhost:3000/api/moods/' + trackId, mood);
   }
-
 }

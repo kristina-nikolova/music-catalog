@@ -8,7 +8,6 @@ import { PlaylistTile } from '@shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TilesListComponent {
-
   @Input() title: string;
   @Input() playlists: PlaylistTile[];
   @Input() canFollowPlaylistItem: Boolean;
@@ -17,7 +16,7 @@ export class TilesListComponent {
   @Output() onPlaylistListFollowButtonClicked: EventEmitter<Object> = new EventEmitter<Object>();
   @Output() onPlaylistListUnfollowButtonClicked: EventEmitter<Object> = new EventEmitter<Object>();
 
-  constructor() { }
+  constructor() {}
 
   onPlaylistListFollowButtonClick(ownerId, playlistId) {
     this.onPlaylistListFollowButtonClicked.emit({

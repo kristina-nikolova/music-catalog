@@ -7,9 +7,8 @@ import { AuthClientService } from '@shared/services';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit  {
-
-  constructor(private _authClientService: AuthClientService ) {}
+export class AppComponent implements OnInit {
+  constructor(private _authClientService: AuthClientService) {}
 
   ngOnInit() {
     this._authClientService.userAuthenticationSetup();

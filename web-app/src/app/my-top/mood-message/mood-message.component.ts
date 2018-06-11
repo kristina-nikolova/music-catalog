@@ -10,9 +10,7 @@ export class MoodMessageComponent implements OnInit {
   @Input() text: String;
   @Input() icon: String;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

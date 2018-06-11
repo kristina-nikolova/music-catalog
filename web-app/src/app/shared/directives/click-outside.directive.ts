@@ -7,7 +7,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy {
   /**
    * If the component should process click event.
    * Try always handling this from parent to remove needless checks
- */
+   */
   @Output() appClickOutside = new EventEmitter();
 
   constructor(private _ngZone: NgZone, private _elementRef: ElementRef) {}

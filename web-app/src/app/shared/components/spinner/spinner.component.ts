@@ -6,7 +6,6 @@ import { Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy } from '@a
   styleUrls: ['./spinner.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
-export class SpinnerComponent {  
-    @Input() isLoading: boolean;
+export class SpinnerComponent {
+  @Input() isLoading: boolean;
 }

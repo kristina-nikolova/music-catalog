@@ -27,12 +27,12 @@ export class HttpInterceptorService implements HttpInterceptor {
         const router = this._injector.get(Router);
 
         if (errorResponse.status === 401) {
-            router.navigate(['/login']);
-            if (authToken) {
-                sessionStorage.removeItem('access_token');
-            }
+          router.navigate(['/login']);
+          if (authToken) {
+            sessionStorage.removeItem('access_token');
+          }
         }
-          return _throw(errorResponse);
+        return _throw(errorResponse);
       })
     );
   }

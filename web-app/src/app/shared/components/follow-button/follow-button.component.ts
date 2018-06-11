@@ -10,10 +10,9 @@ export class FollowButtonComponent {
   @Input() name: string;
   @Output() onClicked: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  constructor() {}
 
   onClick() {
     this.onClicked.emit('Click from nested component');
   }
-
 }

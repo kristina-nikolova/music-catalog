@@ -10,11 +10,8 @@ import { APP_CONFIG } from './../shared/app.config';
 import { PlaylistTile, Playlist, User } from '@shared/models';
 
 @Injectable()
-
 export class MyPlaylistsService {
-
-  constructor(private _http: HttpClient,
-              private userService: UserService) {};
+  constructor(private _http: HttpClient, private userService: UserService) {}
 
   /**
    * name: getFeaturedPlaylists
@@ -22,35 +19,35 @@ export class MyPlaylistsService {
    * description: get all Featured Playlists
    */
   getMyPlaylists(): Observable<PlaylistTile[]> {
-      return this._http
-              .get(APP_CONFIG.apiMainUrl + '/me/playlists')
-              .map((res: any) => res.items)
-              .catch((error: any) => Observable.throw(error.error || 'Server error'));
-   }
+    return this._http
+      .get(APP_CONFIG.apiMainUrl + '/me/playlists')
+      .map((res: any) => res.items)
+      .catch((error: any) => Observable.throw(error.error || 'Server error'));
+  }
 
-   /**
+  /**
    * name: getMyPlaylistById
    * params:{string} playlistId
    * params:{string} userId
-   * description: get playlist details  
+   * description: get playlist details
    */
-    getMyPlaylistById(playlistId: string, userId: string): Observable<Playlist> {
-      return this._http
-              .get(APP_CONFIG.apiMainUrl + '/users/' + userId + '/playlists/' + playlistId)
-              .map((res) => new Playlist(res))
-              .catch((error: any) => Observable.throw(error.error || 'Server error'));
-    }
+  getMyPlaylistById(playlistId: string, userId: string): Observable<Playlist> {
+    return this._http
+      .get(APP_CONFIG.apiMainUrl + '/users/' + userId + '/playlists/' + playlistId)
+      .map((res) => new Playlist(res))
+      .catch((error: any) => Observable.throw(error.error || 'Server error'));
+  }
 
-    /**
+  /**
    * name: getMyPlaylistById
    * params:{string} playlistId
    * params:{string} userId
-   * description: get playlist details  
+   * description: get playlist details
    */
-    getMyPlaylistCreator(userId: string): Observable<User> {
-      return this._http
-              .get(APP_CONFIG.apiMainUrl + '/users/' + userId)
-              .map((res) => new User(res))
-              .catch((error: any) => Observable.throw(error.error || 'Server error'));
-    }
+  getMyPlaylistCreator(userId: string): Observable<User> {
+    return this._http
+      .get(APP_CONFIG.apiMainUrl + '/users/' + userId)
+      .map((res) => new User(res))
+      .catch((error: any) => Observable.throw(error.error || 'Server error'));
+  }
 }

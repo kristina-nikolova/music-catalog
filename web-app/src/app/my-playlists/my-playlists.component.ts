@@ -7,7 +7,6 @@ import { PlaylistTile } from '@shared/models';
   providers: [MyPlaylistsService],
   templateUrl: './my-playlists.component.html'
 })
-
 export class MyPlaylistsComponent implements OnInit {
   playlists: PlaylistTile[];
   isDataLoading: boolean;
@@ -20,14 +19,14 @@ export class MyPlaylistsComponent implements OnInit {
 
   loadMyPlaylists() {
     this.isDataLoading = true;
-    this._myPlaylistsService.getMyPlaylists()
-        .subscribe(
-            (data) => {
-              this.playlists = data;
-              this.isDataLoading = false;
-            },
-            (err) => { console.log(err); }
-         );
+    this._myPlaylistsService.getMyPlaylists().subscribe(
+      (data) => {
+        this.playlists = data;
+        this.isDataLoading = false;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }
-
