@@ -58,10 +58,12 @@ export class TrackComponent implements OnInit {
   }
 
   private _saveTrackMood(isCountChanged?: boolean) {
+    let _today = new Date();
     const mood = new TrackMood({
       trackId: this.track.id,
       plays: isCountChanged ? this.trackPlaysConter + 1 : this.trackPlaysConter,
-      mood: this.selectedMood
+      mood: this.selectedMood,
+      date: _today.getDate() + '/' + (_today.getMonth() + 1) + '/' + _today.getFullYear()
     });
 
     if (!this._currentPlayedTrackOrTrackWithMood) {

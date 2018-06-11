@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const TrackMoodSchema = new mongoose.Schema({
-    trackId: String,
-    plays: Number,
-    mood: String
+  trackId: String,
+  plays: Number,
+  mood: String,
+  date: String
 });
 
-module.exports = mongoose.model('TrackMood', TrackMoodSchema, 'TrackMood');
+module.exports = mongoose.model("TrackMood", TrackMoodSchema, "TrackMood");

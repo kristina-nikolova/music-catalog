@@ -14,9 +14,9 @@ export class MoodService {
     return this._http.get<Array<any>>('http://localhost:3000/api/moods');
   }
 
-  getTrackWithMoodByTrackId(trackId: String): Observable<TrackMood> {
-    return this._http.get<any>('http://localhost:3000/api/moods/' + trackId);
-  }
+  // getTrackWithMoodByTrackId(trackId: String): Observable<TrackMood> {
+  //   return this._http.get<any>('http://localhost:3000/api/moods/' + trackId);
+  // }
 
   getPlayedTracksAndTracksWithMood(tracksIds: Array<String>): Observable<Array<TrackMood>> {
     let params: HttpParams = new HttpParams();
