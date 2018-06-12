@@ -1,20 +1,18 @@
 <app-spinner [isLoading]="isDataLoading"></app-spinner>
 <div class="content">
-  <div *ngIf="topTracks">  
-    <h2>My top tracks</h2>
-    <app-mood-message [text]="currentMood"
-                      icon="assets/moods/{{currentMood}}.png"
-                      *ngIf="currentMood"></app-mood-message>
+  <h2>My top tracks</h2>
+  <div *ngIf="topTracks.length; else noTracks">
+    <app-mood-message [text]="currentMood" icon="assets/moods/{{currentMood}}.png" *ngIf="currentMood"></app-mood-message>
     <div class="flex flex-row flex-h-center">
-        <div class="playlist__tracks">
-          <div *ngFor="let track of topTracks">
-            <app-track 
-              [track]="track"
-              [playedTracksAndTracksWithMood]="playedTracksAndTracksWithMood"
-              hideNotPlayedTracks="true">
-            </app-track>
-          </div>
+      <div class="playlist__tracks">
+        <div *ngFor="let track of topTracks">
+          <app-track [track]="track" [playedTracksAndTracksWithMood]="playedTracksAndTracksWithMood" hideNotPlayedTracks="true">
+          </app-track>
         </div>
+      </div>
     </div>
   </div>
+  <ng-template #noTracks>
+    <p class="no-tracks-message">You haven`t listened anything today</p>
+  </ng-template>
 </div>
