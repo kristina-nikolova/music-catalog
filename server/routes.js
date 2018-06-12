@@ -55,12 +55,9 @@ router.post("/api/tracks-with-mood", function(req, res, next) {
 
 /* UPDATE MOOD */
 router.put("/api/moods/:trackId", function(req, res, next) {
-  const mood = {
-    mood: req.body.mood
-  };
   TrackMood.findOneAndUpdate(
     { trackId: req.params.trackId },
-    { $set: mood },
+    { $set: req.body },
     { new: true },
     function(err, data) {
       if (err) return next(err);
@@ -71,12 +68,9 @@ router.put("/api/moods/:trackId", function(req, res, next) {
 
 /* UPDATE MOOD */
 router.put("/api/plays-count/:trackId", function(req, res, next) {
-  const plays = {
-    plays: req.body.plays
-  };
   TrackMood.findOneAndUpdate(
     { trackId: req.params.trackId },
-    { $set: plays },
+    { $set: req.body },
     { new: true },
     function(err, data) {
       if (err) return next(err);

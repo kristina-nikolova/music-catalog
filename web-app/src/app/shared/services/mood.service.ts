@@ -31,11 +31,17 @@ export class MoodService {
     return this._http.post<any>('http://localhost:3000/api/tracks-with-mood', mood);
   }
 
-  updateMoodByTrackId(trackId: String, track: TrackMood): Observable<TrackMood> {
-    return this._http.put<any>('http://localhost:3000/api/moods/' + trackId, track);
+  updateMoodByTrackId(trackId: String, moodName: string): Observable<TrackMood> {
+    const mood = {
+      mood: moodName
+    };
+    return this._http.put<any>('http://localhost:3000/api/moods/' + trackId, mood);
   }
 
-  updatePlaysCountByTrackId(trackId: String, track: TrackMood): Observable<TrackMood> {
-    return this._http.put<any>('http://localhost:3000/api/plays-count/' + trackId, track);
+  updatePlaysCountByTrackId(trackId: String, plays: number): Observable<TrackMood> {
+    const playsCount = {
+      plays: plays
+    };
+    return this._http.put<any>('http://localhost:3000/api/plays-count/' + trackId, playsCount);
   }
 }

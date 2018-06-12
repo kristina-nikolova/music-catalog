@@ -78,13 +78,13 @@ export class TrackComponent implements OnInit {
     } else {
       // Update mood
       if (isTrackPlayed) {
-        this._moodService.updatePlaysCountByTrackId(this.track.id, mood).subscribe((data) => {
+        this._moodService.updatePlaysCountByTrackId(this.track.id, mood.plays).subscribe((data) => {
           if (!data) return;
           this.trackPlaysConter = data.plays;
         });
       }
       if (isMoodChanged) {
-        this._moodService.updateMoodByTrackId(this.track.id, mood).subscribe();
+        this._moodService.updateMoodByTrackId(this.track.id, mood.mood).subscribe();
       }
     }
   }
