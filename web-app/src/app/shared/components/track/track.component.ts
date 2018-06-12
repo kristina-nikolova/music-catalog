@@ -41,27 +41,27 @@ export class TrackComponent implements OnInit {
           this.selectedMood = this._currentPlayedTrackOrTrackWithMood.mood;
         }
       }
-    }, 1500);
+    }, 2500);
   }
 
   playTrack(trackIframe) {
     this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri + '?autoplay=1';
     trackIframe.src = this.trackUri;
 
-    this._saveTrackMood(true);
+    this._saveTrackMood(true, false);
   }
 
   selectMood(mood) {
     this.selectedMood = mood;
     this.showAllMoods = false;
-    this._saveTrackMood();
+    this._saveTrackMood(false, true);
   }
 
-  private _saveTrackMood(isCountChanged?: boolean) {
+  private _saveTrackMood(isTrackPlayed?: boolean, isMoodChanged?: boolean) {
     let _today = new Date();
     const mood = new TrackMood({
       trackId: this.track.id,
-      plays: isCountChanged ? this.trackPlaysConter + 1 : this.trackPlaysConter,
+      plays: isTrackPlayed ? this.trackPlaysConter + 1 : this.trackPlaysConter,
       mood: this.selectedMood,
       date: _today.getDate() + '/' + (_today.getMonth() + 1) + '/' + _today.getFullYear()
     });
@@ -70,20 +70,22 @@ export class TrackComponent implements OnInit {
       // Create mood
       this._moodService.setTrackWithMood(mood).subscribe((data) => {
         if (data) {
-          if (isCountChanged) {
+          if (isTrackPlayed) {
             this.trackPlaysConter = data.plays;
           }
         }
       });
     } else {
       // Update mood
-      this._moodService.updateTrackWithMood(this.track.id, mood).subscribe((data) => {
-        if (data) {
-          if (isCountChanged) {
-            this.trackPlaysConter = data.plays;
-          }
-        }
-      });
+      if (isTrackPlayed) {
+        this._moodService.updatePlaysCountByTrackId(this.track.id, mood).subscribe((data) => {
+          if (!data) return;
+          this.trackPlaysConter = data.plays;
+        });
+      }
+      if (isMoodChanged) {
+        this._moodService.updateMoodByTrackId(this.track.id, mood).subscribe();
+      }
     }
   }
 }

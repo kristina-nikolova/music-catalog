@@ -11,7 +11,7 @@ export class MoodService {
   constructor(private _http: HttpClient) {}
 
   getAllTracksWithsMood(): Observable<Array<TrackMood>> {
-    return this._http.get<Array<any>>('http://localhost:3000/api/moods');
+    return this._http.get<Array<any>>('http://localhost:3000/api/tracks-with-mood');
   }
 
   // getTrackWithMoodByTrackId(trackId: String): Observable<TrackMood> {
@@ -28,10 +28,14 @@ export class MoodService {
   }
 
   setTrackWithMood(mood: TrackMood): Observable<TrackMood> {
-    return this._http.post<any>('http://localhost:3000/api/moods', mood);
+    return this._http.post<any>('http://localhost:3000/api/tracks-with-mood', mood);
   }
 
-  updateTrackWithMood(trackId: String, mood: TrackMood): Observable<TrackMood> {
-    return this._http.put<any>('http://localhost:3000/api/moods/' + trackId, mood);
+  updateMoodByTrackId(trackId: String, track: TrackMood): Observable<TrackMood> {
+    return this._http.put<any>('http://localhost:3000/api/moods/' + trackId, track);
+  }
+
+  updatePlaysCountByTrackId(trackId: String, track: TrackMood): Observable<TrackMood> {
+    return this._http.put<any>('http://localhost:3000/api/plays-count/' + trackId, track);
   }
 }

@@ -28,7 +28,9 @@ export class MyTopComponent implements OnInit {
     this.isDataLoading = true;
 
     this._moodService.getAllTracksWithsMood().subscribe((tracks) => {
-      if (tracks) {
+      if (!tracks.length) {
+        this.isDataLoading = false;
+      } else {
         this.playedTracksAndTracksWithMood = tracks;
         this._getCurrentMood(tracks);
 

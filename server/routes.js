@@ -9,7 +9,7 @@ function _formatDate(date) {
 }
 
 /* GET ALL MOODS */
-router.get("/api/moods", function(req, res, next) {
+router.get("/api/tracks-with-mood", function(req, res, next) {
   let _today = new Date();
   TrackMood.find(
     {
@@ -45,19 +45,38 @@ router.get("/api/played-tracks-with-mood", function(req, res, next) {
 //   });
 // });
 
-/* SAVE MOOD */
-router.post("/api/moods", function(req, res, next) {
+/* SAVE TRACK MOOD */
+router.post("/api/tracks-with-mood", function(req, res, next) {
   TrackMood.create(req.body, function(err, data) {
     if (err) return next(err);
     res.json(data);
   });
 });
 
-// /* UPDATE MOOD */
+/* UPDATE MOOD */
 router.put("/api/moods/:trackId", function(req, res, next) {
+  const mood = {
+    mood: req.body.mood
+  };
   TrackMood.findOneAndUpdate(
     { trackId: req.params.trackId },
-    req.body,
+    { $set: mood },
+    { new: true },
+    function(err, data) {
+      if (err) return next(err);
+      res.json(data);
+    }
+  );
+});
+
+/* UPDATE MOOD */
+router.put("/api/plays-count/:trackId", function(req, res, next) {
+  const plays = {
+    plays: req.body.plays
+  };
+  TrackMood.findOneAndUpdate(
+    { trackId: req.params.trackId },
+    { $set: plays },
     { new: true },
     function(err, data) {
       if (err) return next(err);
