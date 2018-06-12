@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Playlist, TrackMood } from '@shared/models';
+import { Playlist } from '@shared/models';
 
 @Component({
   selector: 'app-playlist',
@@ -9,7 +9,6 @@ import { Playlist, TrackMood } from '@shared/models';
 })
 export class PlaylistComponent {
   @Input() playlist: Playlist;
-  @Input() playedTracksAndTracksWithMood: Array<TrackMood>;
 
   constructor() {}
 }

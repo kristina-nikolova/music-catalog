@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, trigger, state, style, transition, animate } from '@angular/core';
-import { MoodService } from '@shared/services';
+import { TracksWithMoodService } from '@shared/services';
 import { TrackMood, Track } from '@shared/models';
 
 @Component({
@@ -16,7 +16,6 @@ import { TrackMood, Track } from '@shared/models';
 })
 export class TrackComponent implements OnInit {
   @Input() track: Track;
-  @Input() playedTracksAndTracksWithMood: Array<TrackMood>;
   @Input() isMoodEditable: boolean;
   @Input() hideNotPlayedTracks: boolean;
 
@@ -27,33 +26,31 @@ export class TrackComponent implements OnInit {
 
   private _currentPlayedTrackOrTrackWithMood: TrackMood;
 
-  constructor(private _moodService: MoodService) {}
+  constructor(private _moodService: TracksWithMoodService) {}
 
   ngOnInit() {
-    // TODO: make it with observable
-    setTimeout((_) => {
-      if (this.playedTracksAndTracksWithMood && this.playedTracksAndTracksWithMood.length) {
-        this._currentPlayedTrackOrTrackWithMood = this.playedTracksAndTracksWithMood.find(
-          (track) => track.trackId === this.track.id
-        );
+    this._moodService.playedTracksAndTracksWithMood$.subscribe((tracks) => {
+      if (tracks && tracks.length) {
+        this._currentPlayedTrackOrTrackWithMood = tracks.find((track) => track.trackId === this.track.id);
         if (this._currentPlayedTrackOrTrackWithMood) {
           this.trackPlaysConter = this._currentPlayedTrackOrTrackWithMood.plays;
           this.selectedMood = this._currentPlayedTrackOrTrackWithMood.mood;
         }
       }
-    }, 2500);
+    });
   }
 
   playTrack(trackIframe) {
     this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri + '?autoplay=1';
     trackIframe.src = this.trackUri;
-
+    // TODO: update this._moodService.playedTracksAndTracksWithMood$
     this._saveTrackMood(true, false);
   }
 
   selectMood(mood) {
     this.selectedMood = mood;
     this.showAllMoods = false;
+    // TODO: update this._moodService.playedTracksAndTracksWithMood$
     this._saveTrackMood(false, true);
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
@@ -7,7 +7,9 @@ import 'rxjs/add/operator/map';
 import { TrackMood } from '@shared/models';
 
 @Injectable()
-export class MoodService {
+export class TracksWithMoodService {
+  playedTracksAndTracksWithMood$: BehaviorSubject<Array<TrackMood>> = new BehaviorSubject<Array<TrackMood>>(null);
+
   constructor(private _http: HttpClient) {}
 
   getAllTracksWithsMood(): Observable<Array<TrackMood>> {

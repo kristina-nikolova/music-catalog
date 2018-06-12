@@ -6,7 +6,7 @@
     <div class="flex flex-row flex-h-center">
       <div class="playlist__tracks">
         <div *ngFor="let track of topTracks">
-          <app-track [track]="track" [playedTracksAndTracksWithMood]="playedTracksAndTracksWithMood" hideNotPlayedTracks="true">
+          <app-track [track]="track" hideNotPlayedTracks="true">
           </app-track>
         </div>
       </div>

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MyTopService } from './my-top.service';
-import { MoodService } from '@shared/services';
-import { TrackMood } from '@shared/models';
+import { TracksWithMoodService } from '@shared/services';
 
 @Component({
   selector: 'app-my-top',
@@ -13,12 +12,11 @@ import { TrackMood } from '@shared/models';
 export class MyTopComponent implements OnInit {
   isDataLoading: boolean;
   currentMood: string;
-  playedTracksAndTracksWithMood: Array<TrackMood>;
   topTracks = [];
 
   private _moods;
 
-  constructor(private _myTopService: MyTopService, private _moodService: MoodService) {}
+  constructor(private _myTopService: MyTopService, private _moodService: TracksWithMoodService) {}
 
   ngOnInit() {
     this._loadMyTopTracks();
@@ -31,7 +29,7 @@ export class MyTopComponent implements OnInit {
       if (!tracks.length) {
         this.isDataLoading = false;
       } else {
-        this.playedTracksAndTracksWithMood = tracks;
+        this._moodService.playedTracksAndTracksWithMood$.next(tracks);
         this._getCurrentMood(tracks);
 
         tracks.forEach((mood, index) => {

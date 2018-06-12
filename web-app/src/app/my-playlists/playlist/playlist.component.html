@@ -1,28 +1,24 @@
-<div *ngIf="playlist">  
+<div *ngIf="playlist">
   <h2>{{playlist?.name}}</h2>
   <div class="playlist flex flex-row">
-      <div class="playlist__info">
-        <img [src]="playlist?.images[0].url" 
-             alt="playlist cover"
-             class="playlist__cover mb-20" />
-        <div class="mb-10">
-          <span class="bold">Created by:</span> {{playlist?.owner['name']}}
-        </div>
-        <div class="mb-10">
-          <span class="bold">Followers:</span> {{playlist?.followers['total']}}
-        </div>
-        <div class="mb-10" *ngIf="playlist?.description">
-          <span class="bold">Description:</span> <span [innerHTML]="playlist?.description"></span>
-        </div>
+    <div class="playlist__info">
+      <img [src]="playlist?.images[0].url" alt="playlist cover" class="playlist__cover mb-20" />
+      <div class="mb-10">
+        <span class="bold">Created by:</span> {{playlist?.owner['name']}}
       </div>
-      <div class="playlist__tracks">
-        <div *ngFor="let track of playlist?.tracks['items']">
-          <app-track 
-            [track]="track.track"
-            [playedTracksAndTracksWithMood]="playedTracksAndTracksWithMood"
-            isMoodEditable="true">
-          </app-track>
-        </div>
+      <div class="mb-10">
+        <span class="bold">Followers:</span> {{playlist?.followers['total']}}
       </div>
+      <div class="mb-10" *ngIf="playlist?.description">
+        <span class="bold">Description:</span>
+        <span [innerHTML]="playlist?.description"></span>
+      </div>
+    </div>
+    <div class="playlist__tracks">
+      <div *ngFor="let track of playlist?.tracks['items']">
+        <app-track [track]="track.track" isMoodEditable="true">
+        </app-track>
+      </div>
+    </div>
   </div>
 </div>
