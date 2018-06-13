@@ -4,7 +4,15 @@ const express = require("express"),
 
 function _formatDate(date) {
   return (
-    date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+    date.getMonth() +
+    1 +
+    "/" +
+    date.getDate() +
+    "/" +
+    date
+      .getFullYear()
+      .toString()
+      .substr(-2)
   );
 }
 
