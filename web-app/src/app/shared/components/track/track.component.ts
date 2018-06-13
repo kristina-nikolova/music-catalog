@@ -43,14 +43,12 @@ export class TrackComponent implements OnInit {
   playTrack(trackIframe) {
     this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri + '?autoplay=1';
     trackIframe.src = this.trackUri;
-    // TODO: update this._moodService.playedTracksAndTracksWithMood$
     this._saveTrackMood(true, false);
   }
 
   selectMood(mood) {
     this.selectedMood = mood;
     this.showAllMoods = false;
-    // TODO: update this._moodService.playedTracksAndTracksWithMood$
     this._saveTrackMood(false, true);
   }
 
@@ -64,25 +62,42 @@ export class TrackComponent implements OnInit {
     });
 
     if (!this._currentPlayedTrackOrTrackWithMood) {
-      // Create mood
       this._moodService.setTrackWithMood(mood).subscribe((data) => {
         if (data) {
-          if (isTrackPlayed) {
-            this.trackPlaysConter = data.plays;
-          }
+          if (!data) return;
+          this._updatePlayedTracksAndTracksWithMood(data);
         }
       });
     } else {
-      // Update mood
       if (isTrackPlayed) {
         this._moodService.updatePlaysCountByTrackId(this.track.id, mood.plays).subscribe((data) => {
           if (!data) return;
-          this.trackPlaysConter = data.plays;
+          this._updatePlayedTracksAndTracksWithMood(data);
         });
       }
       if (isMoodChanged) {
-        this._moodService.updateMoodByTrackId(this.track.id, mood.mood).subscribe();
+        this._moodService.updateMoodByTrackId(this.track.id, mood.mood).subscribe((data) => {
+          if (!data) return;
+          this._updatePlayedTracksAndTracksWithMood(data);
+        });
       }
     }
+  }
+
+  private _updatePlayedTracksAndTracksWithMood(newTrack) {
+    let _currentPlayedTracksAndTracksWithMood = this._moodService.playedTracksAndTracksWithMood$.getValue();
+
+    let _findedTrack = _currentPlayedTracksAndTracksWithMood.find((tracks) => tracks.trackId === newTrack.trackId);
+    if (_findedTrack) {
+      _currentPlayedTracksAndTracksWithMood.map((tracks) => {
+        if (tracks.trackId === newTrack.trackId) {
+          tracks.plays = newTrack.plays;
+          tracks.mood = newTrack.mood;
+        }
+      });
+    } else {
+      _currentPlayedTracksAndTracksWithMood = _currentPlayedTracksAndTracksWithMood.concat(newTrack);
+    }
+    this._moodService.playedTracksAndTracksWithMood$.next(_currentPlayedTracksAndTracksWithMood);
   }
 }

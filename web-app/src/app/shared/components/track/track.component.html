@@ -1,25 +1,18 @@
-
 <ng-container *ngIf="!hideNotPlayedTracks || (hideNotPlayedTracks && trackPlaysConter !== 0)">
-  <div class="track flex"
-      [@scale]="'in'">
+  <div class="track flex" [@scale]="'in'">
     <div class="track__image mlr-10">
-    <!--TODO: set default image-->
+      <!--TODO: set default image-->
       <img [src]="track.album.images[0]?.url" alt="track cover" />
-    </div>     
+    </div>
     <div class="track__info mlr-10">
       <div class="track__name bold">{{track.name}}</div>
       <div class="track__album">Album: {{track.album.name}}</div>
       <div class="track__artist">Artist: {{track.artists[0].name}}</div>
     </div>
     <div class="track__mood mlr-10" title="">
-      <img class="v-align-middle cursor-pointer"
-          [src]="'assets/moods/' + selectedMood + '.png'" 
-          alt="" title="mood" 
-          (click)="showAllMoods = !showAllMoods"/>
-      <app-mood-window 
-        [isVisible]="showAllMoods"
-        (moodIsSelected)="selectMood($event)"
-        (appClickOutside)="showAllMoods = false"
+      <img class="v-align-middle cursor-pointer" [src]="'assets/moods/' + selectedMood + '.png'" alt="" title="mood" (click)="showAllMoods = !showAllMoods"
+      />
+      <app-mood-window [isVisible]="showAllMoods" (moodIsSelected)="selectMood($event)" (appClickOutside)="showAllMoods = false"
         *ngIf="isMoodEditable">
       </app-mood-window>
     </div>
@@ -28,17 +21,8 @@
       <img class="v-align-middle" src="assets/speaker.png" alt="" />
     </div>
     <div class="track__buttons mlr-10">
-      <button type="button" 
-              (click)="playTrack(trackIframe)"
-              *ngIf="trackUri == undefined"
-              class="track__play-button"
-              title="play"></button>
-      <iframe #trackIframe 
-              width="80" 
-              height="80" 
-              frameborder="0" 
-              allowtransparency="true"
-              id="track-frame"></iframe>
+      <button type="button" (click)="playTrack(trackIframe)" *ngIf="trackUri == undefined" class="track__play-button" title="play"></button>
+      <iframe #trackIframe width="80" height="80" frameborder="0" allowtransparency="true"></iframe>
     </div>
   </div>
 </ng-container>
