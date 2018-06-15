@@ -21,7 +21,7 @@
       <img class="v-align-middle" src="assets/speaker.png" alt="" />
     </div>
     <div class="track__buttons mlr-10">
-      <button type="button" (click)="playTrack(trackIframe)" *ngIf="trackUri == undefined" class="track__play-button" title="play"></button>
+      <button type="button" (click)="playTrack(trackIframe)" *ngIf="!trackUri" class="track__play-button" title="play"></button>
       <iframe #trackIframe width="80" height="80" frameborder="0" allowtransparency="true"></iframe>
     </div>
   </div>

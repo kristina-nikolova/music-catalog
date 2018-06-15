@@ -43,7 +43,7 @@ export class TrackComponent implements OnInit {
   }
 
   playTrack(trackIframe) {
-    this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri + '?autoplay=1';
+    this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri;
     trackIframe.src = this.trackUri;
     this._saveTrackMood(true, false);
   }
