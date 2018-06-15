@@ -25,6 +25,7 @@ export class TrackComponent implements OnInit {
   showAllMoods = false;
   trackPlaysConter = 0;
   selectedMood = 'happy';
+  showPlayButton = true;
 
   private _currentPlayedTrackOrTrackWithMood: TrackMood;
 
@@ -43,8 +44,9 @@ export class TrackComponent implements OnInit {
   }
 
   playTrack(trackIframe) {
-    this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri;
-    trackIframe.src = this.trackUri;
+    // this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri;
+    // trackIframe.src = this.trackUri;
+    this.showPlayButton = false;
     this._saveTrackMood(true, false);
   }
 

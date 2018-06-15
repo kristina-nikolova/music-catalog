@@ -4,6 +4,7 @@ export class Track {
   album: Object;
   artists: Array<Object>;
   uri: string;
+  duration_ms: number;
 
   constructor(track: any) {
     this.id = track.id;
@@ -11,5 +12,6 @@ export class Track {
     this.album = track.album;
     this.artists = track.artists;
     this.uri = this.uri;
+    this.duration_ms = this.duration_ms;
   }
 }

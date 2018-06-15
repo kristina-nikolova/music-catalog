@@ -21,8 +21,12 @@
       <img class="v-align-middle" src="assets/speaker.png" alt="" />
     </div>
     <div class="track__buttons mlr-10">
-      <button type="button" (click)="playTrack(trackIframe)" *ngIf="!trackUri" class="track__play-button" title="play"></button>
-      <iframe #trackIframe width="80" height="80" frameborder="0" allowtransparency="true"></iframe>
+      <button type="button" (click)="playTrack(trackIframe)" *ngIf="showPlayButton; else trackIframe" class="track__play-button"
+        title="play"></button>
+      <!-- <iframe #trackIframe width="80" height="80" frameborder="0" allowtransparency="true"></iframe> -->
+      <ng-template #trackIframe>
+        <app-iframe [url]="'https://embed.spotify.com/?uri=' + track.uri" [trackDurationInMs]="track.duration_ms" (onClicked)="showPlayButton = $event"></app-iframe>
+      </ng-template>
     </div>
   </div>
 </ng-container>

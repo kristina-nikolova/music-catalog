@@ -11,9 +11,11 @@ import {
   TilesListComponent,
   FollowButtonComponent,
   TrackComponent,
-  MoodWindowComponent
+  MoodWindowComponent,
+  IframeComponent
 } from '@shared/components';
 import { ClickOutsideDirective } from '@shared/directives';
+import { SafePipe } from './pipes/safe.pipe';
 
 const components = [
   SpinnerComponent,
@@ -22,12 +24,13 @@ const components = [
   FollowButtonComponent,
   TrackComponent,
   MoodWindowComponent,
-  ClickOutsideDirective
+  ClickOutsideDirective,
+  IframeComponent
 ];
 
 @NgModule({
   imports: [RouterModule, CommonModule],
-  declarations: components,
+  declarations: [...components, SafePipe],
   providers: [
     {
       provide: MAIN_CONFIG,
