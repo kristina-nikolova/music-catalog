@@ -1,0 +1,7 @@
+:host {
+  display: block;
+
+  .click-disabled {
+    pointer-events: none;
+  }
+}

@@ -1,4 +1,13 @@
-import { Component, ChangeDetectionStrategy, Output, Input, HostListener, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Output,
+  Input,
+  HostListener,
+  EventEmitter,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 
 @Component({
   selector: 'app-iframe',
@@ -10,13 +19,16 @@ export class IframeComponent {
   @Input() url: string;
   @Input() trackDurationInMs: number = 30;
   @Output() onClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @ViewChild('trackIframe') trackIframe: ElementRef;
+
+  isClickedDisabled = true;
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
-    debugger;
+    this.isClickedDisabled = false;
+    this.trackIframe.nativeElement.click();
     // setTimeout(() => {
     //   this.onClicked.emit(true);
     // }, this.trackDurationInMs);
-    this.onClicked.emit(true);
   }
 }
