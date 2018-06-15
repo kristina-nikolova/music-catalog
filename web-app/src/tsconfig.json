@@ -11,9 +11,7 @@
     "outDir": "../dist/out-tsc",
     "sourceMap": true,
     "target": "es5",
-    "typeRoots": [
-      "../node_modules/@types"
-    ],
+    "typeRoots": ["../node_modules/@types"],
     "paths": {
       "@shared/components": ["./app/shared/components"],
       "@shared/components/*": ["./app/shared/components/*"],

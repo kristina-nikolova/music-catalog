@@ -4,7 +4,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { OAuthService } from 'angular2-oauth2/oauth-service';
-import { AuthClientService, HttpInterceptorService, UserService, TracksWithMoodService } from '@shared/services';
+import {
+  AuthClientService,
+  HttpInterceptorService,
+  UserService,
+  TracksWithMoodService,
+  PlayerService
+} from '@shared/services';
 import { HomeResolver } from './home/homе-resolver.service';
 
 import { AppComponent } from './app.component';
@@ -29,7 +35,8 @@ import { AppRoutingModule } from './app-routing.module';
     AuthClientService,
     UserService,
     TracksWithMoodService,
-    HomeResolver
+    HomeResolver,
+    PlayerService
   ],
   bootstrap: [AppComponent]
 })

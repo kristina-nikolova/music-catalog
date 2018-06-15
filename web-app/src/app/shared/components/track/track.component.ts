@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, trigger, state, style, transition, animate } from '@angular/core';
-import { TracksWithMoodService } from '@shared/services';
+import { TracksWithMoodService, PlayerService } from '@shared/services';
 import { TrackMood, Track } from '@shared/models';
 import { DatePipe } from '@angular/common';
 
@@ -21,15 +21,17 @@ export class TrackComponent implements OnInit {
   @Input() isMoodEditable: boolean;
   @Input() hideNotPlayedTracks: boolean;
 
-  trackUri: string;
   showAllMoods = false;
   trackPlaysConter = 0;
   selectedMood = 'happy';
-  showPlayButton = true;
 
   private _currentPlayedTrackOrTrackWithMood: TrackMood;
 
-  constructor(private _moodService: TracksWithMoodService, private _datePipe: DatePipe) {}
+  constructor(
+    private _moodService: TracksWithMoodService,
+    private _datePipe: DatePipe,
+    private _playerService: PlayerService
+  ) {}
 
   ngOnInit() {
     this._moodService.playedTracksAndTracksWithMood$.subscribe((tracks) => {
@@ -43,11 +45,14 @@ export class TrackComponent implements OnInit {
     });
   }
 
-  playTrack(trackIframe) {
-    // this.trackUri = 'https://embed.spotify.com/?uri=' + this.track.uri;
-    // trackIframe.src = this.trackUri;
-    this.showPlayButton = false;
+  playTrack() {
     this._saveTrackMood(true, false);
+
+    this._playerService.playTrack({
+      playerInstance: this._playerService.playerInstance,
+      spotify_uri: this.track.uri,
+      device_id: this._playerService.device_id
+    });
   }
 
   selectMood(mood) {
