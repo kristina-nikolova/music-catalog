@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 import { MyPlaylistsService } from '../my-playlists.service';
-import { Playlist, TrackMood } from '@shared/models';
+import { Playlist } from '@shared/models';
 import { TracksWithMoodService, PlayerService } from '@shared/services';
 
 @Component({

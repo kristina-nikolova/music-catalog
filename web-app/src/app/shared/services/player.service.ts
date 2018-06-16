@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/map';
@@ -10,9 +10,9 @@ import { APP_CONFIG } from '../../shared/app.config';
 @Injectable()
 export class PlayerService {
   player;
-  playerInstance: any;
   token = sessionStorage.getItem('access_token');
   device_id: string;
+  playerState$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(private _http: HttpClient) {}
 
@@ -40,24 +40,20 @@ export class PlayerService {
         }
       });
 
-      // Playback status updates
       this.player.addListener('player_state_changed', (state) => {
         console.log(state);
+        this.playerState$.next(state);
       });
 
-      // Ready
       this.player.addListener('ready', ({ device_id }) => {
         console.log('Ready with Device ID', device_id);
         this.device_id = device_id;
-        this.playerInstance = new Spotify.Player({ name: 'Music Catalog' });
       });
 
-      // Not Ready
       this.player.addListener('not_ready', ({ device_id }) => {
         console.log('Device ID has gone offline', device_id);
       });
 
-      // Connect to the player!
       this.player.connect();
     };
   }

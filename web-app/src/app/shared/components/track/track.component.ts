@@ -1,7 +1,19 @@
-import { Component, OnInit, Input, trigger, state, style, transition, animate } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  ChangeDetectorRef,
+  OnDestroy
+} from '@angular/core';
 import { TracksWithMoodService, PlayerService } from '@shared/services';
 import { TrackMood, Track } from '@shared/models';
 import { DatePipe } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-track',
@@ -16,7 +28,7 @@ import { DatePipe } from '@angular/common';
   ],
   providers: [DatePipe]
 })
-export class TrackComponent implements OnInit {
+export class TrackComponent implements OnInit, OnDestroy {
   @Input() track: Track;
   @Input() isMoodEditable: boolean;
   @Input() hideNotPlayedTracks: boolean;
@@ -29,11 +41,13 @@ export class TrackComponent implements OnInit {
   isTrackSelected = false;
 
   private _currentPlayedTrackOrTrackWithMood: TrackMood;
+  private _playerStateSubscription: Subscription;
 
   constructor(
     private _moodService: TracksWithMoodService,
     private _datePipe: DatePipe,
-    private _playerService: PlayerService
+    private _playerService: PlayerService,
+    private _cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -45,19 +59,16 @@ export class TrackComponent implements OnInit {
           this.selectedMood = this._currentPlayedTrackOrTrackWithMood.mood;
         }
       }
-    });
 
-    // Reset play button when track finished
-    // this._playerService.player.addListener(
-    //   'player_state_changed',
-    //   ({ position, duration, track_window: { current_track } }) => {
-    //     debugger;
-    //     if (position === duration) {
-    //       this.isTrackPaused = false;
-    //       this.isTrackPlayed = false;
-    //     }
-    //   }
-    // );
+      // Reset track when it finished
+      this._playerStateSubscription = this._playerService.playerState$.subscribe((state) => {
+        if (!state) return;
+        if (state.track_window.current_track.id === this.track.id && state.position === 0 && state.paused) {
+          this.deselectTrack();
+          this._cd.detectChanges();
+        }
+      });
+    });
   }
 
   playTrack() {
@@ -67,7 +78,7 @@ export class TrackComponent implements OnInit {
 
     this._playerService
       .playTrack({
-        playerInstance: this._playerService.playerInstance,
+        playerInstance: this._playerService.player,
         spotify_uri: this.track.uri,
         device_id: this._playerService.device_id
       })
@@ -77,7 +88,7 @@ export class TrackComponent implements OnInit {
   pauseTrack() {
     this._playerService
       .pauseTrack({
-        playerInstance: this._playerService.playerInstance,
+        playerInstance: this._playerService.player,
         device_id: this._playerService.device_id
       })
       .subscribe(() => {
@@ -89,7 +100,7 @@ export class TrackComponent implements OnInit {
   resumeTrack() {
     this._playerService
       .resumeTrack({
-        playerInstance: this._playerService.playerInstance,
+        playerInstance: this._playerService.player,
         device_id: this._playerService.device_id
       })
       .subscribe(() => {
@@ -159,5 +170,9 @@ export class TrackComponent implements OnInit {
       _currentPlayedTracksAndTracksWithMood = _currentPlayedTracksAndTracksWithMood.concat(newTrack);
     }
     this._moodService.playedTracksAndTracksWithMood$.next(_currentPlayedTracksAndTracksWithMood);
+  }
+
+  ngOnDestroy() {
+    this._playerStateSubscription.unsubscribe();
   }
 }
