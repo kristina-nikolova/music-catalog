@@ -7,6 +7,10 @@
   border-radius: 5px;
   box-shadow: inset -11px -4px 30px -6px rgba(26, 25, 26, 1);
 
+  &--selected {
+    border: 1px solid #2ebd59;
+  }
+
   &:hover {
     background: #2b2e2c;
   }
@@ -29,13 +33,22 @@
     font-size: 12px;
   }
 
+  &__buttons {
+    button {
+      border: 0;
+      outline: none;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+    }
+  }
+
   &__play-button {
     background: url('assets/play-button.png') no-repeat 0 0;
-    border: 0;
-    outline: none;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
+  }
+
+  &__pause-button {
+    background: url('assets/pause-button.png') no-repeat 0 0;
   }
 
   &__plays-counter {

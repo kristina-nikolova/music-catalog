@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthClientService } from '@shared/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'music-catalog',
@@ -8,9 +9,12 @@ import { AuthClientService } from '@shared/services';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private _authClientService: AuthClientService) {}
+  constructor(private _authClientService: AuthClientService, private _router: Router) {}
 
   ngOnInit() {
     this._authClientService.userAuthenticationSetup();
+    if (window.location.hash.startsWith('#access_token')) {
+      this._router.navigate(['/catalog/recommended']);
+    }
   }
 }

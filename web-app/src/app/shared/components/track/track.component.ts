@@ -24,6 +24,9 @@ export class TrackComponent implements OnInit {
   showAllMoods = false;
   trackPlaysConter = 0;
   selectedMood = 'happy';
+  isTrackPlayed = false;
+  isTrackPaused = false;
+  isTrackSelected = false;
 
   private _currentPlayedTrackOrTrackWithMood: TrackMood;
 
@@ -43,10 +46,24 @@ export class TrackComponent implements OnInit {
         }
       }
     });
+
+    // Reset play button when track finished
+    // this._playerService.player.addListener(
+    //   'player_state_changed',
+    //   ({ position, duration, track_window: { current_track } }) => {
+    //     debugger;
+    //     if (position === duration) {
+    //       this.isTrackPaused = false;
+    //       this.isTrackPlayed = false;
+    //     }
+    //   }
+    // );
   }
 
   playTrack() {
-    this._saveTrackMood(true, false);
+    this.isTrackPlayed = true;
+    this.isTrackSelected = true;
+    this._saveTrackInfo(true, false);
 
     this._playerService.playTrack({
       playerInstance: this._playerService.playerInstance,
@@ -55,13 +72,41 @@ export class TrackComponent implements OnInit {
     });
   }
 
+  pauseTrack() {
+    this._playerService.pauseTrack({
+      playerInstance: this._playerService.playerInstance,
+      device_id: this._playerService.device_id
+    });
+    this._playerService.player.pause().then(() => {
+      this.isTrackPaused = true;
+      this.isTrackPlayed = false;
+    });
+  }
+
+  resumeTrack() {
+    this._playerService.resumeTrack({
+      playerInstance: this._playerService.playerInstance,
+      device_id: this._playerService.device_id
+    });
+    this._playerService.player.resume().then(() => {
+      this.isTrackPlayed = true;
+      this.isTrackPaused = false;
+    });
+  }
+
+  deselectTrack() {
+    this.isTrackSelected = false;
+    this.isTrackPlayed = false;
+    this.isTrackPaused = false;
+  }
+
   selectMood(mood) {
     this.selectedMood = mood;
     this.showAllMoods = false;
-    this._saveTrackMood(false, true);
+    this._saveTrackInfo(false, true);
   }
 
-  private _saveTrackMood(isTrackPlayed?: boolean, isMoodChanged?: boolean) {
+  private _saveTrackInfo(isTrackPlayed?: boolean, isMoodChanged?: boolean) {
     const now = Date.now();
     const formattedDate = this._datePipe.transform(now, 'shortDate');
 

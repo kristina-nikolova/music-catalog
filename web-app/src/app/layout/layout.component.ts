@@ -1,5 +1,5 @@
 import { OnInit, Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { UserService, PlayerService } from '@shared/services';
 import { User } from '@shared/models';
@@ -12,14 +12,12 @@ export class LayoutComponent implements OnInit {
   user: User;
 
   constructor(
-    private _router: Router,
     private _route: ActivatedRoute,
     private _userService: UserService,
     private _playerService: PlayerService
   ) {}
 
   ngOnInit() {
-    this._router.navigate(['/catalog/recommended']);
     this.user = this._route.snapshot.data['layoutResolver'];
     this._userService.myId = this.user.id;
     this._playerService.startPlayer();

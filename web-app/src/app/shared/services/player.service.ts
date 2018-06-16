@@ -27,6 +27,26 @@ export class PlayerService {
     });
   };
 
+  resumeTrack = ({ playerInstance, device_id }) => {
+    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token}`
+      }
+    });
+  };
+
+  pauseTrack = ({ playerInstance, device_id }) => {
+    fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${device_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token}`
+      }
+    });
+  };
+
   startPlayer() {
     window.onSpotifyWebPlaybackSDKReady = () => {
       this.player = new Spotify.Player({
@@ -34,20 +54,6 @@ export class PlayerService {
         getOAuthToken: (cb) => {
           cb(this.token);
         }
-      });
-
-      // Error handling
-      this.player.addListener('initialization_error', ({ message }) => {
-        console.error(message);
-      });
-      this.player.addListener('authentication_error', ({ message }) => {
-        console.error(message);
-      });
-      this.player.addListener('account_error', ({ message }) => {
-        console.error(message);
-      });
-      this.player.addListener('playback_error', ({ message }) => {
-        console.error(message);
       });
 
       // Playback status updates

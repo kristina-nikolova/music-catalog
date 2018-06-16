@@ -1,5 +1,5 @@
 <ng-container *ngIf="!hideNotPlayedTracks || (hideNotPlayedTracks && trackPlaysConter !== 0)">
-  <div class="track flex" [@scale]="'in'">
+  <div class="track flex" [@scale]="'in'" (appClickOutside)="deselectTrack()" [ngClass]="{'track--selected': isTrackSelected}">
     <div class="track__image mlr-10">
       <!--TODO: set default image-->
       <img [src]="track.album.images[0]?.url" alt="track cover" />
@@ -21,7 +21,9 @@
       <img class="v-align-middle" src="assets/speaker.png" alt="" />
     </div>
     <div class="track__buttons mlr-10">
-      <button type="button" (click)="playTrack()" class="track__play-button" title="play"></button>
+      <button *ngIf="!isTrackPlayed" type="button" (click)="!isTrackPaused ? playTrack() : resumeTrack()" class="track__play-button"
+        title="play"></button>
+      <button *ngIf="isTrackPlayed" type="button" (click)="pauseTrack()" class="track__pause-button" title="pause"></button>
     </div>
   </div>
 </ng-container>
