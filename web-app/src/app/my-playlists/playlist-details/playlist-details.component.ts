@@ -31,8 +31,6 @@ export class PlaylistDetailsComponent implements OnInit {
   ngOnInit() {
     this.isDataLoading = true;
 
-    this._playerService.startPlayer();
-
     this._myPlaylistsService.getMyPlaylistById(this.playlistId, this.userId).subscribe(
       (data) => {
         this.isDataLoading = false;

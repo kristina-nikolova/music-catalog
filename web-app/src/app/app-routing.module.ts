@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/homе.component';
-import { HomeResolver } from './home/homе-resolver.service';
+import { LayoutComponent } from './layout/layout.component';
+import { LayoutResolver } from './layout/layout-resolver.service';
 import { RecommendedComponent } from './recommended/recommended.component';
 import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
 import { MyTopComponent } from './my-top/my-top.component';
@@ -24,9 +24,9 @@ const routes: Routes = [
   },
   {
     path: 'catalog',
-    component: HomeComponent,
+    component: LayoutComponent,
     resolve: {
-      homeResolver: HomeResolver
+      layoutResolver: LayoutResolver
     },
     children: [
       {

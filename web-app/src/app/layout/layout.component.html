@@ -1,0 +1,16 @@
+<app-spinner [isLoading]="isDataLoading"></app-spinner>
+<app-header>
+    <app-userbox [user]="user" class="right"></app-userbox>
+    <nav>
+        <a routerLink='/catalog/recommended' routerLinkActive="active">
+            Recommended
+        </a>
+        <a routerLink='/catalog/my-playlists' routerLinkActive="active">
+            My Playlists
+        </a>
+        <a routerLink='/catalog/my-top' routerLinkActive="active">
+            My Top
+        </a>
+    </nav>
+</app-header>
+<router-outlet></router-outlet>

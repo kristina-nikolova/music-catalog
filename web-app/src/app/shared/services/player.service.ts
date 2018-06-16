@@ -60,7 +60,6 @@ export class PlayerService {
         console.log('Ready with Device ID', device_id);
         this.device_id = device_id;
         this.playerInstance = new Spotify.Player({ name: 'Music Catalog' });
-        debugger;
       });
 
       // Not Ready

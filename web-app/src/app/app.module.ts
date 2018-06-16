@@ -11,20 +11,20 @@ import {
   TracksWithMoodService,
   PlayerService
 } from '@shared/services';
-import { HomeResolver } from './home/homе-resolver.service';
+import { LayoutResolver } from './layout/layout-resolver.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/homе.component';
-import { UserboxComponent } from './home/userbox/userbox.component';
-import { HeaderComponent } from './home/header/header.component';
+import { LayoutComponent } from './layout/layout.component';
+import { UserboxComponent } from './layout/userbox/userbox.component';
+import { HeaderComponent } from './layout/header/header.component';
 
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, AppRoutingModule, SharedModule],
-  declarations: [AppComponent, LoginComponent, HomeComponent, UserboxComponent, HeaderComponent],
+  declarations: [AppComponent, LoginComponent, LayoutComponent, UserboxComponent, HeaderComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -35,7 +35,7 @@ import { AppRoutingModule } from './app-routing.module';
     AuthClientService,
     UserService,
     TracksWithMoodService,
-    HomeResolver,
+    LayoutResolver,
     PlayerService
   ],
   bootstrap: [AppComponent]
