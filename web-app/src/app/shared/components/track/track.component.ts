@@ -65,33 +65,37 @@ export class TrackComponent implements OnInit {
     this.isTrackSelected = true;
     this._saveTrackInfo(true, false);
 
-    this._playerService.playTrack({
-      playerInstance: this._playerService.playerInstance,
-      spotify_uri: this.track.uri,
-      device_id: this._playerService.device_id
-    });
+    this._playerService
+      .playTrack({
+        playerInstance: this._playerService.playerInstance,
+        spotify_uri: this.track.uri,
+        device_id: this._playerService.device_id
+      })
+      .subscribe();
   }
 
   pauseTrack() {
-    this._playerService.pauseTrack({
-      playerInstance: this._playerService.playerInstance,
-      device_id: this._playerService.device_id
-    });
-    this._playerService.player.pause().then(() => {
-      this.isTrackPaused = true;
-      this.isTrackPlayed = false;
-    });
+    this._playerService
+      .pauseTrack({
+        playerInstance: this._playerService.playerInstance,
+        device_id: this._playerService.device_id
+      })
+      .subscribe(() => {
+        this.isTrackPaused = true;
+        this.isTrackPlayed = false;
+      });
   }
 
   resumeTrack() {
-    this._playerService.resumeTrack({
-      playerInstance: this._playerService.playerInstance,
-      device_id: this._playerService.device_id
-    });
-    this._playerService.player.resume().then(() => {
-      this.isTrackPlayed = true;
-      this.isTrackPaused = false;
-    });
+    this._playerService
+      .resumeTrack({
+        playerInstance: this._playerService.playerInstance,
+        device_id: this._playerService.device_id
+      })
+      .subscribe(() => {
+        this.isTrackPlayed = true;
+        this.isTrackPaused = false;
+      });
   }
 
   deselectTrack() {

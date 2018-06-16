@@ -12,39 +12,23 @@ export class PlayerService {
   player;
   playerInstance: any;
   token = sessionStorage.getItem('access_token');
-  device_id;
+  device_id: string;
 
   constructor(private _http: HttpClient) {}
 
-  playTrack = ({ spotify_uri, playerInstance, device_id }) => {
-    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ uris: [spotify_uri] }),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`
-      }
-    });
+  playTrack = ({ spotify_uri, playerInstance, device_id }): Observable<any> => {
+    return this._http.put<any>(
+      'https://api.spotify.com/v1/me/player/play?device_id=' + device_id,
+      JSON.stringify({ uris: [spotify_uri] })
+    );
   };
 
-  resumeTrack = ({ playerInstance, device_id }) => {
-    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`
-      }
-    });
+  resumeTrack = ({ playerInstance, device_id }): Observable<any> => {
+    return this._http.put<any>('https://api.spotify.com/v1/me/player/play?device_id=' + device_id, null);
   };
 
-  pauseTrack = ({ playerInstance, device_id }) => {
-    fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${device_id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`
-      }
-    });
+  pauseTrack = ({ playerInstance, device_id }): Observable<any> => {
+    return this._http.put<any>('https://api.spotify.com/v1/me/player/pause?device_id=' + device_id, null);
   };
 
   startPlayer() {
