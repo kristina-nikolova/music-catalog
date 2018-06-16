@@ -64,6 +64,7 @@ export class TrackComponent implements OnInit, OnDestroy {
       this._playerStateSubscription = this._playerService.playerState$.subscribe((state) => {
         if (!state) return;
         if (state.track_window.current_track.id === this.track.id && state.position === 0 && state.paused) {
+          //TODO: call when play again
           this.deselectTrack();
           this._cd.detectChanges();
         }
@@ -72,17 +73,17 @@ export class TrackComponent implements OnInit, OnDestroy {
   }
 
   playTrack() {
-    this.isTrackPlayed = true;
-    this.isTrackSelected = true;
-    this._saveTrackInfo(true, false);
-
     this._playerService
       .playTrack({
         playerInstance: this._playerService.player,
         spotify_uri: this.track.uri,
         device_id: this._playerService.device_id
       })
-      .subscribe();
+      .subscribe(() => {
+        this.isTrackPlayed = true;
+        this.isTrackSelected = true;
+        this._saveTrackInfo(true, false);
+      });
   }
 
   pauseTrack() {

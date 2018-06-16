@@ -21,9 +21,10 @@
       <img class="v-align-middle" src="assets/speaker.png" alt="" />
     </div>
     <div class="track__buttons mlr-10">
-      <button *ngIf="!isTrackPlayed" type="button" (click)="!isTrackPaused ? playTrack() : resumeTrack()" class="track__play-button"
-        title="play"></button>
-      <button *ngIf="isTrackPlayed" type="button" (click)="pauseTrack()" class="track__pause-button" title="pause"></button>
+      <button *ngIf="isTrackPlayed; else trackNotPlay" type="button" (click)="pauseTrack()" class="track__pause-button" title="pause"></button>
+      <ng-template #trackNotPlay>
+        <button type="button" (click)="!isTrackPaused ? playTrack() : resumeTrack()" class="track__play-button" title="play"></button>
+      </ng-template>
     </div>
   </div>
 </ng-container>
