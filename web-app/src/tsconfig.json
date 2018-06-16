@@ -20,7 +20,11 @@
       "@shared/services": ["./app/shared/services/"],
       "@shared/services/*": ["./app/shared/services/*"],
       "@shared/directives": ["./app/shared/directives"],
-      "@shared/directives/*": ["./app/shared/directives/*"]
+      "@shared/directives/*": ["./app/shared/directives/*"],
+      "@shared/guards": ["./app/shared/guards"],
+      "@shared/guards/*": ["./app/shared/guards/*"],
+      "@shared/pipes": ["./app/shared/pipes"],
+      "@shared/pipes/*": ["./app/shared/pipes/*"]
     }
   }
 }

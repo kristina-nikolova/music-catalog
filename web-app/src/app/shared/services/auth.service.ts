@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 
 import { OAuthService } from 'angular2-oauth2/oauth-service';
 import { APP_CONFIG } from '../../shared/app.config';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthClientService {
-  constructor(private _oauthService: OAuthService) {}
+  constructor(private _oauthService: OAuthService, protected _injector: Injector) {}
 
   /**
    * name: userAuthentication
@@ -19,6 +20,16 @@ export class AuthClientService {
     this._oauthService.scope = APP_CONFIG.apiPermissions;
     this._oauthService.setStorage(sessionStorage);
 
-    this._oauthService.tryLogin({});
+    this._oauthService.tryLogin({
+      onTokenReceived: function(context) {}
+    });
+  }
+
+  isAuthenticated() {
+    if (sessionStorage.getItem('access_token')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

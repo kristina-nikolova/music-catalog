@@ -11,13 +11,9 @@ import { PlaylistDetailsComponent } from './my-playlists/playlist-details/playli
 import { RecommendedModule } from './recommended/recommended.module';
 import { MyPlaylistsModule } from './my-playlists/my-playlists.module';
 import { MyTopModule } from './my-top/my-top.module';
+import { CanActivateIfAuthenticated } from '@shared/guards';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  },
   {
     path: 'login',
     component: LoginComponent
@@ -31,22 +27,31 @@ const routes: Routes = [
     children: [
       {
         path: 'recommended',
-        loadChildren: () => RecommendedModule
+        loadChildren: () => RecommendedModule,
+        canActivate: [CanActivateIfAuthenticated]
       },
       {
         path: 'my-playlists',
-        loadChildren: () => MyPlaylistsModule
+        loadChildren: () => MyPlaylistsModule,
+        canActivate: [CanActivateIfAuthenticated]
       },
       {
         path: 'my-top',
-        loadChildren: () => MyTopModule
+        loadChildren: () => MyTopModule,
+        canActivate: [CanActivateIfAuthenticated]
       }
     ]
+  },
+  {
+    path: '**',
+    redirectTo: '/catalog/recommended',
+    pathMatch: 'full'
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [CanActivateIfAuthenticated]
 })
 export class AppRoutingModule {}

@@ -19,13 +19,7 @@ export class LayoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const _defaultPath = '/catalog/recommended';
-
-    if (window.location.pathname === '/catalog') {
-      this._router.navigateByUrl(_defaultPath);
-    } else {
-      this._router.navigateByUrl(window.location.pathname);
-    }
+    this._router.navigate(['/catalog/recommended']);
     this.user = this._route.snapshot.data['layoutResolver'];
     this._userService.myId = this.user.id;
     this._playerService.startPlayer();

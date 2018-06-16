@@ -14,7 +14,7 @@ import {
   MoodWindowComponent
 } from '@shared/components';
 import { ClickOutsideDirective } from '@shared/directives';
-import { SafePipe } from './pipes/safe.pipe';
+import { SafePipe } from '@shared/pipes';
 
 const components = [
   SpinnerComponent,
