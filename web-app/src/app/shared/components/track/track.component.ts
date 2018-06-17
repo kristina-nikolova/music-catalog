@@ -39,6 +39,7 @@ export class TrackComponent implements OnInit, OnDestroy {
   isTrackPlayed = false;
   isTrackPaused = false;
   isTrackSelected = false;
+  startPlaying = false;
 
   private _currentPlayedTrackOrTrackWithMood: TrackMood;
   private _playerStateSubscription: Subscription;
@@ -62,9 +63,13 @@ export class TrackComponent implements OnInit, OnDestroy {
 
       this._playerStateSubscription = this._playerService.playerState$.subscribe((state) => {
         if (!state) return;
-        // Reset track when it finished
-        if (state.track_window.current_track.id === this.track.id && state.position === 0 && state.paused) {
-          //TODO: call when play again
+        // Reset track when it finished playing
+        if (
+          state.track_window.current_track.id === this.track.id &&
+          state.position === 0 &&
+          state.paused &&
+          !this.startPlaying
+        ) {
           this.deselectTrack();
           this._cd.detectChanges();
         }
@@ -73,6 +78,7 @@ export class TrackComponent implements OnInit, OnDestroy {
   }
 
   playTrack() {
+    this.startPlaying = true;
     this._playerService
       .playTrack({
         playerInstance: this._playerService.player,
@@ -82,6 +88,14 @@ export class TrackComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.isTrackPlayed = true;
         this.isTrackSelected = true;
+        this._cd.detectChanges();
+
+        // for playerStateChange initial state on play is the same as on finish,
+        // so use this flag to skip first change and correctly deselect track only when finish
+        setTimeout(() => {
+          this.startPlaying = false;
+        }, 1000);
+
         this._saveTrackInfo(true, false);
       });
   }
@@ -95,6 +109,7 @@ export class TrackComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.isTrackPaused = true;
         this.isTrackPlayed = false;
+        this._cd.detectChanges();
       });
   }
 
