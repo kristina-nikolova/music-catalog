@@ -52,9 +52,11 @@ export class TrackComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    // Subscribe to observable that holds all tracks with mood or played tracks
     this._moodService.playedTracksAndTracksWithMood$.subscribe((tracks) => {
       if (tracks && tracks.length) {
         this._currentPlayedTrackOrTrackWithMood = tracks.find((track) => track.trackId === this.track.id);
+        // If the current track is already played or have mood, update it in the view
         if (this._currentPlayedTrackOrTrackWithMood) {
           this.trackPlaysConter = this._currentPlayedTrackOrTrackWithMood.plays;
           this.selectedMood = this._currentPlayedTrackOrTrackWithMood.mood;
@@ -63,7 +65,7 @@ export class TrackComponent implements OnInit, OnDestroy {
 
       this._playerStateSubscription = this._playerService.playerState$.subscribe((state) => {
         if (!state) return;
-        // Reset track when it finished playing
+        // Deselect track when it finished playing
         if (
           state.track_window.current_track.id === this.track.id &&
           state.position === 0 &&
@@ -148,6 +150,7 @@ export class TrackComponent implements OnInit, OnDestroy {
       date: formattedDate
     });
 
+    // If track is not played and have no mood, save it
     if (!this._currentPlayedTrackOrTrackWithMood) {
       this._moodService.setTrackWithMood(mood).subscribe((data) => {
         if (data) {
@@ -156,12 +159,14 @@ export class TrackComponent implements OnInit, OnDestroy {
         }
       });
     } else {
+      // Update plays count when play track
       if (isTrackPlayed) {
         this._moodService.updatePlaysCountByTrackId(this.track.id, mood.plays).subscribe((data) => {
           if (!data) return;
           this._updatePlayedTracksAndTracksWithMood(data);
         });
       }
+      // Update mood when mood is set
       if (isMoodChanged) {
         this._moodService.updateMoodByTrackId(this.track.id, mood.mood).subscribe((data) => {
           if (!data) return;
@@ -172,6 +177,8 @@ export class TrackComponent implements OnInit, OnDestroy {
   }
 
   private _updatePlayedTracksAndTracksWithMood(newTrack) {
+    // update observable that holds played tracks and tracks with mood,
+    // if track is saved ot updated
     let _currentPlayedTracksAndTracksWithMood = this._moodService.playedTracksAndTracksWithMood$.getValue();
 
     let _findedTrack = _currentPlayedTracksAndTracksWithMood.find((tracks) => tracks.trackId === newTrack.trackId);

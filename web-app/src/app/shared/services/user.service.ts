@@ -15,13 +15,13 @@ export class UserService {
   constructor(private _http: HttpClient) {}
 
   /**
-   * name: getFeaturedPlaylists
+   * name: getProfile
    * params:
-   * description: get all Featured Playlists
+   * description: get spotify user information using spotify api
    */
   getProfile(): Observable<User> {
     return this._http
-      .get(APP_CONFIG.apiMainUrl + '/me')
+      .get(APP_CONFIG.apiSpotifyUrl + '/me')
       .map((res) => new User(res))
       .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }

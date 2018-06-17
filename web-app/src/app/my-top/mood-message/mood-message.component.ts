@@ -6,11 +6,9 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
   styleUrls: ['./mood-message.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MoodMessageComponent implements OnInit {
+export class MoodMessageComponent {
   @Input() text: String;
   @Input() icon: String;
 
   constructor() {}
-
-  ngOnInit() {}
 }

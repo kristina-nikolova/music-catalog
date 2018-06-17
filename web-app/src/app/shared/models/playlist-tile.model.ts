@@ -2,7 +2,7 @@ export class PlaylistTile {
   id: string;
   name: string;
   images: Array<Object>;
-  owner: Object;
+  owner: any;
   followed: Object;
 
   constructor(playlist: any) {

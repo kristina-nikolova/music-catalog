@@ -31,29 +31,21 @@ export class PlaylistDetailsComponent implements OnInit {
   ngOnInit() {
     this.isDataLoading = true;
 
-    this._myPlaylistsService.getMyPlaylistById(this.playlistId, this.userId).subscribe(
-      (data) => {
-        this.isDataLoading = false;
-        this.playlist = data;
+    this._myPlaylistsService.getMyPlaylistById(this.playlistId, this.userId).subscribe((data) => {
+      this.isDataLoading = false;
+      this.playlist = data;
 
-        this._tracksIds = this.playlist.tracks.items.map((item) => item.track.id);
-        this._moodService.getPlayedTracksAndTracksWithMood(this._tracksIds).subscribe((data) => {
-          if (!data) return;
-          this._moodService.playedTracksAndTracksWithMood$.next(data);
-        });
+      // Get which spotify tracks have mood or are played from node server
+      // and save it in observable to use it in track component
+      this._tracksIds = this.playlist.tracks.items.map((item) => item.track.id);
+      this._moodService.getPlayedTracksAndTracksWithMood(this._tracksIds).subscribe((data) => {
+        if (!data) return;
+        this._moodService.playedTracksAndTracksWithMood$.next(data);
+      });
 
-        this._myPlaylistsService.getMyPlaylistCreator(data.owner['id']).subscribe(
-          (res) => {
-            this.playlist.owner['name'] = res.display_name;
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+      this._myPlaylistsService.getMyPlaylistCreator(data.owner['id']).subscribe((res) => {
+        this.playlist.owner['name'] = res.display_name;
+      });
+    });
   }
 }

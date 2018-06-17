@@ -23,5 +23,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this._playerService.startPlayer();
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    // TODO: remove event listener for spotify player
+  }
 }

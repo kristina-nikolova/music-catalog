@@ -11,7 +11,7 @@ export class AuthClientService {
   /**
    * name: userAuthentication
    * params:
-   * description: Authentication using spotify api
+   * description: Setup authentication using oauth and spotify api
    */
   userAuthenticationSetup(): void {
     this._oauthService.loginUrl = APP_CONFIG.apiOAuthUrl;
@@ -25,6 +25,11 @@ export class AuthClientService {
     });
   }
 
+  /**
+   * name: isAuthenticated
+   * params:
+   * description: Check if user is authenticated
+   */
   isAuthenticated() {
     if (sessionStorage.getItem('access_token')) {
       return true;

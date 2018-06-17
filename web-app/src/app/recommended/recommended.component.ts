@@ -10,7 +10,6 @@ import * as _ from 'lodash';
 })
 export class RecommendedComponent implements OnInit {
   playlists: Array<PlaylistTile>;
-  // albums: PlaylistTile[];
   isDataLoading: boolean;
   isFolowing: boolean;
   constructor(private _recommendedService: RecommendedService) {}
@@ -22,76 +21,51 @@ export class RecommendedComponent implements OnInit {
   loadFeaturedPlaylists() {
     this.isDataLoading = true;
 
-    this._recommendedService
-      .getFeaturedPlaylists()
-      .flatMap((data) => {
-        this.playlists = data;
-        this.isDataLoading = false;
-        return this.playlists;
-      })
-      .subscribe((data) => {
-        const _data = data;
-        this._recommendedService.isPlaylistFollowingByUser(data.owner['id'], data.id).subscribe(
-          (res) => {
-            // _data = {..._data, followed: true};
-            _data['followed'] = res[0];
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
+    //TODO: update follow property in playlists when it is ready
+    this._recommendedService.getFeaturedPlaylists().subscribe((data) => {
+      this.isDataLoading = false;
+      data.map((p) => {
+        this._recommendedService.isPlaylistFollowingByUser(p.owner.id, p.id).subscribe((res) => {
+          p['followed'] = res[0];
+        });
       });
-
-    // this._recommendedService.getNewReleasedAlbums()
-    //   .subscribe(data => {
-    //       this.albums = data;
-    //     },
-    //     (err) => { console.log(err); }
-    //   );
+      this.playlists = data;
+    });
   }
 
   followPlaylist(data) {
     const _self = this;
     const playlist = data;
+    this.isFolowing = true;
 
-    this._recommendedService.followFeaturedPlaylists(playlist.ownerId, playlist.playlistId).subscribe(
-      (data) => {
-        _self.isFolowing = true;
-
-        setTimeout(function() {
-          _self.isFolowing = false;
-          _.forEach(_self.playlists, function(pl) {
-            if (pl.id === playlist.playlistId) {
-              pl.followed = true;
-            }
-          });
-        }, 1000);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this._recommendedService
+      .followFeaturedPlaylists(playlist.ownerId, playlist.playlistId)
+      .delay(1000)
+      .subscribe((data) => {
+        this.isFolowing = false;
+        _.forEach(_self.playlists, function(pl) {
+          if (pl.id === playlist.playlistId) {
+            pl.followed = true;
+          }
+        });
+      });
   }
 
   unfollowPlaylist(data) {
     const _self = this;
     const playlist = data;
+    this.isFolowing = true;
 
-    this._recommendedService.unfollowFeaturedPlaylists(data.ownerId, data.playlistId).subscribe(
-      (data) => {
-        _self.isFolowing = true;
-        setTimeout(function() {
-          _self.isFolowing = false;
-          _.forEach(_self.playlists, function(pl) {
-            if (pl.id === playlist.playlistId) {
-              pl.followed = false;
-            }
-          });
-        }, 1000);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this._recommendedService
+      .unfollowFeaturedPlaylists(data.ownerId, data.playlistId)
+      .delay(1000)
+      .subscribe((data) => {
+        this.isFolowing = false;
+        _.forEach(_self.playlists, function(pl) {
+          if (pl.id === playlist.playlistId) {
+            pl.followed = false;
+          }
+        });
+      });
   }
 }

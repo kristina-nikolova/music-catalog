@@ -23,7 +23,6 @@ import { PlaylistTile } from '@shared/models';
       transition('* => void', [animate(200, style({ transform: 'scale(1)' }))])
     ])
   ]
-  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaylistTileComponent {
   @Input() playlist: PlaylistTile;

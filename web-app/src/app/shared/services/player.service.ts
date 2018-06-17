@@ -16,22 +16,38 @@ export class PlayerService {
 
   constructor(private _http: HttpClient) {}
 
+  /**
+   * name: playTrack
+   * params: { spotify_uri, playerInstance, device_id }
+   * description: Play track using Spotify sdk
+   */
   playTrack = ({ spotify_uri, playerInstance, device_id }): Observable<any> => {
     return this._http.put<any>(
-      'https://api.spotify.com/v1/me/player/play?device_id=' + device_id,
+      APP_CONFIG.apiSpotifyUrl + '/me/player/play?device_id=' + device_id,
       JSON.stringify({ uris: [spotify_uri] })
     );
   };
 
+  /**
+   * name: resumeTrack
+   * params: { playerInstance, device_id }
+   * description: Resume track using Spotify sdk
+   */
   resumeTrack = ({ playerInstance, device_id }): Observable<any> => {
-    return this._http.put<any>('https://api.spotify.com/v1/me/player/play?device_id=' + device_id, null);
+    return this._http.put<any>(APP_CONFIG.apiSpotifyUrl + '/me/player/play?device_id=' + device_id, null);
   };
 
+  /**
+   * name: pauseTrack
+   * params: { playerInstance, device_id }
+   * description: Pause track using Spotify sdk
+   */
   pauseTrack = ({ playerInstance, device_id }): Observable<any> => {
-    return this._http.put<any>('https://api.spotify.com/v1/me/player/pause?device_id=' + device_id, null);
+    return this._http.put<any>(APP_CONFIG.apiSpotifyUrl + '/me/player/pause?device_id=' + device_id, null);
   };
 
   startPlayer() {
+    // Create and connect spotify player
     window.onSpotifyWebPlaybackSDKReady = () => {
       this.player = new Spotify.Player({
         name: 'Music Catalog',

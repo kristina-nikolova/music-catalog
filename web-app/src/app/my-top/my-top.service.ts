@@ -15,11 +15,11 @@ export class MyTopService {
   /**
    * name: getTrackById
    * params: {Object} id
-   * description: get track by id
+   * description: get track information by trackId using spotify api
    */
   getTrackById(id: Object): Observable<Track> {
     return this._http
-      .get(APP_CONFIG.apiMainUrl + '/tracks/' + id)
+      .get(APP_CONFIG.apiSpotifyUrl + '/tracks/' + id)
       .map((res) => res)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

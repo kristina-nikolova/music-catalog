@@ -1,6 +1,7 @@
 export interface AppConfig {
   mainUrl: string;
-  apiMainUrl: string;
+  mainApiUrl: string;
+  apiSpotifyUrl: string;
   apiOAuthUrl: string;
   clientId: string;
   apiPermissions: string;
@@ -8,7 +9,8 @@ export interface AppConfig {
 
 export const APP_CONFIG: AppConfig = {
   mainUrl: 'http://localhost:4200',
-  apiMainUrl: 'https://api.spotify.com/v1',
+  mainApiUrl: 'http://localhost:3000/api',
+  apiSpotifyUrl: 'https://api.spotify.com/v1',
   apiOAuthUrl: 'https://accounts.spotify.com/authorize',
   clientId: 'd34fb6af5266455a891cc341fde2b4d0',
   apiPermissions:

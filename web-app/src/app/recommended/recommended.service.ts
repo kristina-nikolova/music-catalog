@@ -20,21 +20,10 @@ export class RecommendedService {
    */
   getFeaturedPlaylists(): Observable<Array<PlaylistTile>> {
     return this._http
-      .get(APP_CONFIG.apiMainUrl + '/browse/featured-playlists')
+      .get(APP_CONFIG.apiSpotifyUrl + '/browse/featured-playlists')
       .map((res: any) => res.playlists.items)
       .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
-
-  /**
-   * name: getNewReleasedAlbums
-   * description: get recommended tracks
-   */
-  //   getNewReleasedAlbums(): Observable<PlaylistTile[]> {
-  //       return this._http
-  //               .get(APP_CONFIG.apiMainUrl + '/browse/new-releases?limit=7')
-  //               .map((res) => res.albums.items)
-  //               .catch((error: any) => Observable.throw(error.error || 'Server error'));
-  //   }
 
   /**
    * name: followFeaturedPlaylists
@@ -42,9 +31,9 @@ export class RecommendedService {
    * params: {String} playlistId
    * description: user can follow a plalist
    */
-  followFeaturedPlaylists(ownerId: string, playlistId: string): Observable<PlaylistTile[]> {
+  followFeaturedPlaylists(ownerId: string, playlistId: string): Observable<Array<PlaylistTile>> {
     return this._http
-      .put(APP_CONFIG.apiMainUrl + '/users/' + ownerId + '/playlists/' + playlistId + '/followers', null, {})
+      .put(APP_CONFIG.apiSpotifyUrl + '/users/' + ownerId + '/playlists/' + playlistId + '/followers', null, {})
       .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
@@ -54,9 +43,9 @@ export class RecommendedService {
    * params: {String} playlistId
    * description: user can follow a plalist
    */
-  unfollowFeaturedPlaylists(ownerId: string, playlistId: string): Observable<PlaylistTile[]> {
+  unfollowFeaturedPlaylists(ownerId: string, playlistId: string): Observable<Array<PlaylistTile>> {
     return this._http
-      .delete(APP_CONFIG.apiMainUrl + '/users/' + ownerId + '/playlists/' + playlistId + '/followers')
+      .delete(APP_CONFIG.apiSpotifyUrl + '/users/' + ownerId + '/playlists/' + playlistId + '/followers')
       .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
@@ -66,10 +55,10 @@ export class RecommendedService {
    * params: {String} playlistId
    * description: check if a playlist is followed by a user
    */
-  isPlaylistFollowingByUser(ownerId: any, playlistId: string): Observable<PlaylistTile[]> {
+  isPlaylistFollowingByUser(ownerId: any, playlistId: string): Observable<Array<PlaylistTile>> {
     return this._http
       .get(
-        APP_CONFIG.apiMainUrl +
+        APP_CONFIG.apiSpotifyUrl +
           '/users/' +
           ownerId +
           '/playlists/' +
