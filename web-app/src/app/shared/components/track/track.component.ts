@@ -60,9 +60,9 @@ export class TrackComponent implements OnInit, OnDestroy {
         }
       }
 
-      // Reset track when it finished
       this._playerStateSubscription = this._playerService.playerState$.subscribe((state) => {
         if (!state) return;
+        // Reset track when it finished
         if (state.track_window.current_track.id === this.track.id && state.position === 0 && state.paused) {
           //TODO: call when play again
           this.deselectTrack();

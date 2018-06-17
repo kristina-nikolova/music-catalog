@@ -1,5 +1,6 @@
 <ng-container *ngIf="!hideNotPlayedTracks || (hideNotPlayedTracks && trackPlaysConter !== 0)">
-  <div class="track flex" [@scale]="'in'" (appClickOutside)="deselectTrack()" [ngClass]="{'track--selected': isTrackSelected}">
+  <div class="track flex" [@scale]="'in'" (appClickOutside)="deselectTrack()" clickOnSpecificComponentClass="track__play-button"
+    [ngClass]="{'track--selected': isTrackSelected}">
     <div class="track__image mlr-10">
       <!--TODO: set default image-->
       <img [src]="track.album.images[0]?.url" alt="track cover" />

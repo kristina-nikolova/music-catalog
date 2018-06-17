@@ -8,6 +8,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy {
    * If the component should process click event.
    * Try always handling this from parent to remove needless checks
    */
+  @Input() clickOnSpecificComponentClass: string;
   @Output() appClickOutside = new EventEmitter();
 
   constructor(private _ngZone: NgZone, private _elementRef: ElementRef) {}
@@ -26,7 +27,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy {
     const targetElement = event.target;
     const clickedInside = this._elementRef.nativeElement.contains(targetElement);
 
-    if (!clickedInside) {
+    if (!clickedInside && targetElement['className'].includes(this.clickOnSpecificComponentClass)) {
       this._ngZone.run(() => {
         this.appClickOutside.emit(null);
       });

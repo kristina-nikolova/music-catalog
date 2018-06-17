@@ -1,4 +1,4 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { UserService, PlayerService } from '@shared/services';
@@ -8,7 +8,7 @@ import { User } from '@shared/models';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
   user: User;
 
   constructor(
@@ -18,8 +18,10 @@ export class LayoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user = this._route.snapshot.data['layoutResolver'];
+    this.user = this._route.snapshot.data['user'];
     this._userService.myId = this.user.id;
     this._playerService.startPlayer();
   }
+
+  ngOnDestroy() {}
 }

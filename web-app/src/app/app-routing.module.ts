@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'catalog',
     component: LayoutComponent,
     resolve: {
-      layoutResolver: LayoutResolver
+      user: LayoutResolver
     },
     children: [
       {

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthClientService {
-  constructor(private _oauthService: OAuthService, protected _injector: Injector) {}
+  constructor(private _oauthService: OAuthService, private _injector: Injector) {}
 
   /**
    * name: userAuthentication

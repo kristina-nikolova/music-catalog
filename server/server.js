@@ -19,6 +19,7 @@ const db = mongoose.connect(
 
 const app = express();
 const corsOptions = {
+  credentials: true,
   origin: "*",
   optionsSuccessStatus: 200
 };
