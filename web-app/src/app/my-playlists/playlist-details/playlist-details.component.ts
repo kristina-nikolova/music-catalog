@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { MyPlaylistsService } from '../my-playlists.service';
 import { Playlist } from '@shared/models';
-import { TracksWithMoodService, PlayerService } from '@shared/services';
+import { TracksWithMoodService } from '@shared/services';
 
 @Component({
   providers: [MyPlaylistsService],
@@ -21,8 +21,7 @@ export class PlaylistDetailsComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _myPlaylistsService: MyPlaylistsService,
-    private _moodService: TracksWithMoodService,
-    private _playerService: PlayerService
+    private _moodService: TracksWithMoodService
   ) {
     this.playlistId = _route.snapshot.params['id'];
     this.userId = _route.snapshot.params['user'];

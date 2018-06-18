@@ -11,7 +11,6 @@ import {
   TracksWithMoodService,
   PlayerService
 } from '@shared/services';
-import { LayoutResolver } from './layout/layout-resolver.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -21,6 +20,7 @@ import { HeaderComponent } from './layout/header/header.component';
 
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
+import { UserResolver } from './shared/resolvers/user-resolver.service';
 
 @NgModule({
   imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, AppRoutingModule, SharedModule],
@@ -35,7 +35,7 @@ import { AppRoutingModule } from './app-routing.module';
     AuthClientService,
     UserService,
     TracksWithMoodService,
-    LayoutResolver,
+    UserResolver,
     PlayerService
   ],
   bootstrap: [AppComponent]

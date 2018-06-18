@@ -11,7 +11,8 @@ import {
   TilesListComponent,
   FollowButtonComponent,
   TrackComponent,
-  MoodWindowComponent
+  MoodWindowComponent,
+  PauseButtonComponent
 } from '@shared/components';
 import { ClickOutsideDirective } from '@shared/directives';
 import { SafePipe } from '@shared/pipes';
@@ -23,7 +24,8 @@ const components = [
   FollowButtonComponent,
   TrackComponent,
   MoodWindowComponent,
-  ClickOutsideDirective
+  ClickOutsideDirective,
+  PauseButtonComponent
 ];
 
 @NgModule({

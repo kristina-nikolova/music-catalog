@@ -7,7 +7,7 @@ import { User } from '@shared/models';
 import { UserService } from '@shared/services';
 
 @Injectable()
-export class LayoutResolver implements Resolve<User> {
+export class UserResolver implements Resolve<User> {
   constructor(private _userService: UserService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<User> {

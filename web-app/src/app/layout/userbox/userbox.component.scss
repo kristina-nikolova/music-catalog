@@ -7,7 +7,16 @@
   }
 
   &__name {
+    display: none;
     vertical-align: middle;
     margin-right: 10px;
+  }
+}
+
+@media (min-width: 48em) {
+  .user {
+    &__name {
+      display: inline;
+    }
   }
 }
