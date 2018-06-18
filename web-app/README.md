@@ -1,39 +1,54 @@
-# MusicCatalogApp
+# Track Moods and Top played tracks for the day using Spotify API
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.26.
+## Summary
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The app allows you to handle your spotify playlist, to follow a new one from list of recommended playlist for you. Also you can play your tracks in the web and to set a **MOOD** to every track from a list of predefined moods.
+Base on your playes tracks and their mood, you can see your **TOP tracks** and your MOOD for this day.
 
-## Code scaffolding
+##Structure
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+- web-app
+- server
+- data
 
-## Build
+Web app and server have their own package.json files
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+## Server
 
-## Running unit tests
+- Node.js - https://nodejs.org/en/
+- Express - `npm install express --save`
+- Mongo DB - https://www.mongodb.com/download-center?jmp=nav#community
+- Mongoose - `npm install mongoose --save`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## APIs
 
-## Running end-to-end tests
+- Spotify Web Api - https://developer.spotify.com/documentation/web-api/reference/
+- Web Playback SDK - https://developer.spotify.com/documentation/web-playback-sdk/reference/#api-spotify-player-pause
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+## Client
 
-## Deploying to GitHub Pages
+- Angular 5.2.10
 
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
+## Start mongo
 
-## Further help
-
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-## Start mongo 
-
-Run `mongod --dbpath /Users/nikolova/music-catalog/data`
+Run `mongod --dbpath {path to the data folder}`
 
 ## Star node and enable debbuging
 
-Run `node ---inspect server.js`
+Run `node server.js`
+To debug Run `node ---inspect server.js`
+
+## Commands
+
+- `npm run start` for a **dev server**. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+- `npm run build` to **build project**. Use the `--prod` flag for a production build.
+
+- `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+- `npm run lint`
+
+- Prettier front-end code formatting:
+  - `npm run format:prettier` - apply Prettier code formatting to all files in the listed folders.
+  - `npm run format:fix` - apply `format:prettier` and `lint --fix` to all files in the `format:prettier` listed folders.
+  - `npm run format:check` - check if some of the files in the listed folders do not fit Prettier formatting.
