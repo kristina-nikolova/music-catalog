@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators/catchError';
+import { AuthClientService } from '.';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -24,13 +25,10 @@ export class HttpInterceptorService implements HttpInterceptor {
           console.warn(errorResponse.error.error.message);
         }
 
-        const router = this._injector.get(Router);
+        const _authService = this._injector.get(AuthClientService);
 
         if (errorResponse.status === 401) {
-          router.navigate(['/login']);
-          if (authToken) {
-            sessionStorage.removeItem('access_token');
-          }
+          _authService.logout();
         }
         return _throw(errorResponse);
       })

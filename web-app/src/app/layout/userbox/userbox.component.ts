@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { User } from '@shared/models';
 
 @Component({
@@ -9,4 +9,11 @@ import { User } from '@shared/models';
 })
 export class UserboxComponent {
   @Input() user: User;
+  @Output() onLogoutClicked: EventEmitter<any> = new EventEmitter<any>();
+
+  showUserDropdown = false;
+
+  onLogoutClick() {
+    this.onLogoutClicked.emit();
+  }
 }

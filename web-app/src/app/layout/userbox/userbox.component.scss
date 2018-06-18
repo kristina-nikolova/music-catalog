@@ -1,15 +1,56 @@
+.userbox {
+  text-align: right;
+}
 .user {
   &__photo {
     width: 44px;
     height: 44px;
+    margin-right: 18px;
     border-radius: 50%;
     vertical-align: middle;
+    cursor: pointer;
   }
 
   &__name {
     display: none;
     vertical-align: middle;
     margin-right: 10px;
+  }
+
+  &__dropdown {
+    z-index: 20;
+    position: relative;
+    top: 15px;
+    cursor: pointer;
+    padding: 0 15px;
+    border-radius: 5px;
+    background: #000;
+    border: 1px solid #2ebd59;
+
+    &:after,
+    &:before {
+      bottom: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: ' ';
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    &:after {
+      border-color: rgba(0, 0, 0, 0);
+      border-bottom-color: #000;
+      border-width: 10px;
+      margin-left: -10px;
+    }
+    &:before {
+      border-color: rgba(46, 189, 89, 0);
+      border-bottom-color: #2ebd59;
+      border-width: 11px;
+      margin-left: -11px;
+    }
   }
 }
 

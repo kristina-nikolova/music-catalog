@@ -3,10 +3,11 @@ import { Injectable, Injector } from '@angular/core';
 import { OAuthService } from 'angular2-oauth2/oauth-service';
 import { APP_CONFIG } from '../../shared/app.config';
 import { Router } from '@angular/router';
+import { PlayerService } from '@shared/services';
 
 @Injectable()
 export class AuthClientService {
-  constructor(private _oauthService: OAuthService, private _injector: Injector) {}
+  constructor(private _oauthService: OAuthService, private _router: Router, private _injector: Injector) {}
 
   /**
    * name: userAuthentication
@@ -36,5 +37,27 @@ export class AuthClientService {
     } else {
       return false;
     }
+  }
+
+  /**
+   * name: login
+   * params:
+   * description: login using oauth
+   */
+  login() {
+    this._oauthService.initImplicitFlow();
+  }
+
+  /**
+   * name: logout
+   * params:
+   * description: logout, navigate to the login page and disconnect the player
+   */
+  logout() {
+    this._router.navigate(['/login']);
+    this._oauthService.logOut();
+
+    const _playerService = this._injector.get(PlayerService);
+    _playerService.player.disconnect();
   }
 }
