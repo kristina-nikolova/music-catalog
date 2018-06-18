@@ -2,10 +2,10 @@
 
 ## Summary
 
-The app allows you to handle your spotify playlist, to follow a new one from list of recommended playlist for you. Also you can play your tracks in the web and to set a **MOOD to every track** from a list of predefined moods.
-Base on your playes tracks and their mood, you can see your **TOP tracks** and your MOOD for this day.
+The app allows you to handle your spotify playlists, to follow a new one from list of recommended playlist for you. Also you can play your tracks in the web and to set a **MOOD to every track** from a list of predefined moods.
+Base on your played tracks and their mood, you can see your **TOP tracks** and your **MOOD** for this day.
 
-##Structure
+## Structure
 
 - web-app
 - server
