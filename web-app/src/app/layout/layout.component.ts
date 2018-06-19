@@ -1,4 +1,4 @@
-import { OnInit, Component, OnDestroy } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { UserService, PlayerService, AuthClientService } from '@shared/services';
@@ -8,7 +8,7 @@ import { User } from '@shared/models';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, OnDestroy {
+export class LayoutComponent implements OnInit {
   user: User;
 
   constructor(
@@ -26,9 +26,5 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   logout() {
     this._authService.logout();
-  }
-
-  ngOnDestroy() {
-    // TODO: remove event listener for spotify player
   }
 }

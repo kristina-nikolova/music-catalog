@@ -58,6 +58,6 @@ export class AuthClientService {
     this._oauthService.logOut();
 
     const _playerService = this._injector.get(PlayerService);
-    _playerService.player.disconnect();
+    _playerService.stopPlayer();
   }
 }

@@ -56,21 +56,32 @@ export class PlayerService {
         }
       });
 
-      this.player.addListener('player_state_changed', (state) => {
-        console.log(state);
-        this.playerState$.next(state);
-      });
-
-      this.player.addListener('ready', ({ device_id }) => {
-        console.log('Ready with Device ID', device_id);
-        this.device_id = device_id;
-      });
-
-      this.player.addListener('not_ready', ({ device_id }) => {
-        console.log('Device ID has gone offline', device_id);
-      });
+      this.player.addListener('player_state_changed', this._playerStateChangedHandler.bind(this));
+      this.player.addListener('ready', this._playerReadyHandler.bind(this));
+      this.player.addListener('not_ready', this._playerNotReadyHandler.bind(this));
 
       this.player.connect();
     };
+  }
+
+  stopPlayer() {
+    this.player.removeListener('player_state_changed', this._playerStateChangedHandler.bind(this));
+    this.player.removeListener('ready', this._playerReadyHandler.bind(this));
+    this.player.removeListener('not_ready', this._playerNotReadyHandler.bind(this));
+    this.player.disconnect();
+  }
+
+  private _playerStateChangedHandler(state) {
+    console.log(state);
+    this.playerState$.next(state);
+  }
+
+  private _playerReadyHandler({ device_id }) {
+    console.log('Ready with Device ID', device_id);
+    this.device_id = device_id;
+  }
+
+  private _playerNotReadyHandler({ device_id }) {
+    console.log('Device ID has gone offline', device_id);
   }
 }
