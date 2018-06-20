@@ -19,7 +19,7 @@ function _formatDate(date) {
 /* GET ALL MOODS */
 router.get("/api/tracks-with-mood", function(req, res, next) {
   let _today = new Date();
-  TrackMood.find(
+  TrackMood.TrackMood.find(
     {
       date: _formatDate(_today)
     },
