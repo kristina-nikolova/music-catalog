@@ -31,12 +31,19 @@ Web app and server have their own package.json files
 
 ## Start mongo
 
-Run `mongod --dbpath {path to the data folder}`
+* Create a data folder in the root of the app /music-catalog
+* Run `mongod --dbpath {path to the data folder}`
 
 ## Star node and enable debbuging
 
-Run `node server.js`
-To debug Run `node ---inspect server.js`
+* Run `npm install` in /server folder to install all the dependencies
+* Run `node server.js`
+* To debug Run `node ---inspect server.js`
+
+## Star web app
+
+* Run `npm install` in /web-app folder to install all the dependencies
+* Run `npm run start`
 
 ## Commands
 
