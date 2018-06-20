@@ -1,6 +1,6 @@
 const express = require("express"),
   router = express.Router(),
-  TrackMood = require("./models/track-mood.model.js");
+  model = require("./models/track-mood.model.js");
 
 function _formatDate(date) {
   return (
@@ -19,7 +19,7 @@ function _formatDate(date) {
 /* GET ALL MOODS */
 router.get("/api/tracks-with-mood", function(req, res, next) {
   let _today = new Date();
-  TrackMood.TrackMood.find(
+  model.TrackMood.find(
     {
       date: _formatDate(_today)
     },
@@ -33,7 +33,7 @@ router.get("/api/tracks-with-mood", function(req, res, next) {
 /* GET PLAYED MOODS OR TRACKS WITH MOOD */
 router.get("/api/played-tracks-with-mood", function(req, res, next) {
   let _today = new Date();
-  TrackMood.find(
+  model.TrackMood.find(
     {
       date: _formatDate(_today),
       trackId: { $in: req.query.tracksIds.split(",") }
@@ -45,17 +45,9 @@ router.get("/api/played-tracks-with-mood", function(req, res, next) {
   );
 });
 
-/* GET SINGLE MOOD BY TRACK ID */
-// router.get("/api/moods/:trackId", function(req, res, next) {
-//   TrackMood.find({ trackId: req.params.trackId }, function(err, data) {
-//     if (err) return next(err);
-//     res.json(data);
-//   });
-// });
-
 /* SAVE TRACK MOOD */
 router.post("/api/tracks-with-mood", function(req, res, next) {
-  TrackMood.create(req.body, function(err, data) {
+  model.TrackMood.create(req.body, function(err, data) {
     if (err) return next(err);
     res.json(data);
   });
@@ -63,7 +55,7 @@ router.post("/api/tracks-with-mood", function(req, res, next) {
 
 /* UPDATE MOOD */
 router.put("/api/moods/:trackId", function(req, res, next) {
-  TrackMood.findOneAndUpdate(
+  model.TrackMood.findOneAndUpdate(
     { trackId: req.params.trackId },
     { $set: req.body },
     { new: true },
@@ -76,7 +68,7 @@ router.put("/api/moods/:trackId", function(req, res, next) {
 
 /* UPDATE MOOD */
 router.put("/api/plays-count/:trackId", function(req, res, next) {
-  TrackMood.findOneAndUpdate(
+  model.TrackMood.findOneAndUpdate(
     { trackId: req.params.trackId },
     { $set: req.body },
     { new: true },
@@ -86,13 +78,5 @@ router.put("/api/plays-count/:trackId", function(req, res, next) {
     }
   );
 });
-
-// /* DELETE MOOD */
-// router.delete('/:id', function(req, res, next) {
-//   TrackMood.findByIdAndRemove(req.params.id, req.body, function (err, post) {
-//     if (err) return next(err);
-//     res.json(post);
-//   });
-// });
 
 module.exports = router;

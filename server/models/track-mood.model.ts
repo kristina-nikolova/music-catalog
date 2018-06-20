@@ -1,6 +1,5 @@
-// const mongoose = require("mongoose");
 import { Document, Schema, model } from "mongoose";
-import { ITrackMood } from "./track-mood.interface";
+import { ITrackMood } from "./../../shared/interfaces/track-mood.interface";
 
 const TrackMoodSchema = new Schema({
   trackId: String,
@@ -16,5 +15,3 @@ export const TrackMood = model<TrackMoodType>(
   TrackMoodSchema,
   "TrackMood"
 );
-
-// module.exports = mongoose.model("TrackMood", TrackMoodSchema, "TrackMood");
