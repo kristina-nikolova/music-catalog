@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
-
-const TrackMoodSchema = new mongoose.Schema({
-  trackId: String,
-  plays: Number,
-  mood: String,
-  date: String
+"use strict";
+exports.__esModule = true;
+var mongoose_1 = require("mongoose");
+var TrackMoodSchema = new mongoose_1.Schema({
+    trackId: String,
+    plays: Number,
+    mood: String,
+    date: String
 });
-
-module.exports = mongoose.model("TrackMood", TrackMoodSchema, "TrackMood");
+exports.TrackMood = mongoose_1.model("TrackMood", TrackMoodSchema, "TrackMood");

@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "server": "node \"server/server.js\""
+    "server": "npm run tsc:compile && node server.js",
+    "server:inspect": "node --inspect server.js",
+    "tsc:compile": "tsc models/*.ts"
   },
   "private": true,
   "dependencies": {

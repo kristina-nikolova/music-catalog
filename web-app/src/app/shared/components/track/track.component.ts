@@ -12,6 +12,8 @@ import {
 } from '@angular/core';
 import { TracksWithMoodService, PlayerService } from '@shared/services';
 import { TrackMood, Track } from '@shared/models';
+import { ITrackMood } from '../../../../../../shared/interfaces/track-mood.interface';
+
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 
@@ -41,7 +43,7 @@ export class TrackComponent implements OnInit, OnDestroy {
   isTrackSelected = false;
   startPlaying = false;
 
-  private _currentPlayedTrackOrTrackWithMood: TrackMood;
+  private _currentPlayedTrackOrTrackWithMood: ITrackMood;
   private _playerStateSubscription: Subscription;
 
   constructor(
@@ -196,6 +198,7 @@ export class TrackComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._playerStateSubscription.unsubscribe();
+    //TODO: move this code back
+    // this._playerStateSubscription.unsubscribe();
   }
 }
