@@ -21,7 +21,9 @@ const app = express();
 const corsOptions = {
   credentials: true,
   origin: "*",
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  allowedHeaders: ["Content-Type", "Origin", "Authorization"],
+  methods: ["GET", "POST", "PUT", "DELETE"]
 };
 
 app.use(express.static(path.join(__dirname, "app")));
