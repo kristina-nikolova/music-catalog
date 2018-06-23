@@ -2,7 +2,6 @@
   <div class="track flex" [@scale]="'in'" (appClickOutside)="deselectTrack()" clickOnSpecificComponentClass="track__play-button"
     [ngClass]="{'track--selected': isTrackSelected}">
     <div class="track__image mlr-10">
-      <!--TODO: set default image-->
       <img [src]="track.album.images[0]?.url" alt="track cover" />
     </div>
     <div class="track__info mlr-10">

@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { PlaylistTile } from '@shared/models';
 
 @Component({
   selector: 'app-tiles-list',
   templateUrl: './tiles-list.component.html',
-  styleUrls: ['./tiles-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./tiles-list.component.scss']
 })
 export class TilesListComponent {
   @Input() title: string;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { RecommendedService } from './recommended.service';
 import { PlaylistTile } from '@shared/models';
@@ -12,6 +12,7 @@ export class RecommendedComponent implements OnInit {
   playlists: Array<PlaylistTile>;
   isDataLoading: boolean;
   isFolowing: boolean;
+
   constructor(private _recommendedService: RecommendedService) {}
 
   ngOnInit() {
@@ -21,21 +22,19 @@ export class RecommendedComponent implements OnInit {
   loadFeaturedPlaylists() {
     this.isDataLoading = true;
 
-    //TODO: update follow property in playlists when it is ready
     this._recommendedService.getFeaturedPlaylists().subscribe((data) => {
       this.isDataLoading = false;
-      data.map((p) => {
+      this.playlists = data;
+
+      this.playlists.map((p) => {
         this._recommendedService.isPlaylistFollowingByUser(p.owner.id, p.id).subscribe((res) => {
           p['followed'] = res[0];
         });
       });
-      this.playlists = data;
     });
   }
 
-  followPlaylist(data) {
-    const _self = this;
-    const playlist = data;
+  followPlaylist(playlist) {
     this.isFolowing = true;
 
     this._recommendedService
@@ -43,7 +42,7 @@ export class RecommendedComponent implements OnInit {
       .delay(1000)
       .subscribe((data) => {
         this.isFolowing = false;
-        _.forEach(_self.playlists, function(pl) {
+        _.forEach(this.playlists, function(pl) {
           if (pl.id === playlist.playlistId) {
             pl.followed = true;
           }
@@ -51,17 +50,15 @@ export class RecommendedComponent implements OnInit {
       });
   }
 
-  unfollowPlaylist(data) {
-    const _self = this;
-    const playlist = data;
+  unfollowPlaylist(playlist) {
     this.isFolowing = true;
 
     this._recommendedService
-      .unfollowFeaturedPlaylists(data.ownerId, data.playlistId)
+      .unfollowFeaturedPlaylists(playlist.ownerId, playlist.playlistId)
       .delay(1000)
       .subscribe((data) => {
         this.isFolowing = false;
-        _.forEach(_self.playlists, function(pl) {
+        _.forEach(this.playlists, function(pl) {
           if (pl.id === playlist.playlistId) {
             pl.followed = false;
           }
