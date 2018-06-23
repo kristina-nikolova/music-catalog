@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { MyTopService } from './my-top.service';
 import { TracksWithMoodService } from '@shared/services';
+import { SortByPipe } from '@shared/pipes';
 
 @Component({
   selector: 'app-my-top',
   templateUrl: './my-top.component.html',
   styleUrls: ['./my-top.component.scss'],
-  providers: [MyTopService]
+  providers: [MyTopService, SortByPipe]
 })
 export class MyTopComponent implements OnInit {
   isDataLoading: boolean;
@@ -20,7 +21,12 @@ export class MyTopComponent implements OnInit {
     this._loadMyTopTracks();
   }
 
-  setCurrentMood(trackMoods) {
+  onTrackPlayed(tracks) {
+    this._setCurrentMood(tracks);
+    // this.topTracks = new SortByPipe().transform(this.topTracks, 'plays');
+  }
+
+  private _setCurrentMood(trackMoods) {
     let moodsNames = [];
 
     const mostPlayed = trackMoods.reduce(function(prevTrack, currentTrack) {
@@ -53,13 +59,17 @@ export class MyTopComponent implements OnInit {
       } else {
         // Update observable to use it in track component
         this._moodService.playedTracksAndTracksWithMood$.next(tracks);
-        this.setCurrentMood(tracks);
+        this._setCurrentMood(tracks);
 
-        // Get track information from spotify for every track that have set moood from spotify
+        // Go throught all tracks with mood from node server,
+        // get track information from spotify for every track
         // And construct topTraks
-        tracks.forEach((mood, index) => {
-          this._myTopService.getTrackById(mood.trackId).subscribe((track) => {
+        tracks.forEach((trackMood, index) => {
+          this._myTopService.getTrackById(trackMood.trackId).subscribe((track) => {
+            // attach plays count to spotify tracks to sort them
+            track['plays'] = trackMood.plays;
             this.topTracks.push(track);
+            this.topTracks = new SortByPipe().transform(this.topTracks, 'plays');
             // Stop loading when last track is got
             if (index === tracks.length - 1) {
               this.isDataLoading = false;

@@ -15,7 +15,7 @@ import {
   PauseButtonComponent
 } from '@shared/components';
 import { ClickOutsideDirective } from '@shared/directives';
-import { SafePipe } from '@shared/pipes';
+import { SafePipe, SortByPipe } from '@shared/pipes';
 
 const components = [
   SpinnerComponent,
@@ -30,13 +30,13 @@ const components = [
 
 @NgModule({
   imports: [RouterModule, CommonModule],
-  declarations: [...components, SafePipe],
+  declarations: [...components, SafePipe, SortByPipe],
   providers: [
     {
       provide: MAIN_CONFIG,
       useValue: APP_CONFIG
     }
   ],
-  exports: [...components, RouterModule, CommonModule]
+  exports: [...components, SortByPipe, RouterModule, CommonModule]
 })
 export class SharedModule {}
