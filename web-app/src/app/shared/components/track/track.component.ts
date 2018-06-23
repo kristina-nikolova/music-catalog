@@ -8,7 +8,9 @@ import {
   transition,
   animate,
   ChangeDetectorRef,
-  OnDestroy
+  OnDestroy,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { TracksWithMoodService, PlayerService } from '@shared/services';
 import { TrackMood, Track } from '@shared/models';
@@ -34,6 +36,7 @@ export class TrackComponent implements OnInit, OnDestroy {
   @Input() track: Track;
   @Input() isMoodEditable: boolean;
   @Input() hideNotPlayedTracks: boolean;
+  @Output() onTrackPlay: EventEmitter<any> = new EventEmitter<any>(null);
 
   showAllMoods = false;
   trackPlaysConter = 0;
@@ -141,6 +144,10 @@ export class TrackComponent implements OnInit, OnDestroy {
     this._saveTrackInfo(false, true);
   }
 
+  ngOnDestroy() {
+    this._playerStateSubscription.unsubscribe();
+  }
+
   private _saveTrackInfo(isTrackPlayed?: boolean, isMoodChanged?: boolean) {
     const now = Date.now();
     const formattedDate = this._datePipe.transform(now, 'shortDate');
@@ -195,10 +202,6 @@ export class TrackComponent implements OnInit, OnDestroy {
       _currentPlayedTracksAndTracksWithMood = _currentPlayedTracksAndTracksWithMood.concat(newTrack);
     }
     this._moodService.playedTracksAndTracksWithMood$.next(_currentPlayedTracksAndTracksWithMood);
-  }
-
-  ngOnDestroy() {
-    //TODO: move this code back
-    // this._playerStateSubscription.unsubscribe();
+    this.onTrackPlay.emit(_currentPlayedTracksAndTracksWithMood);
   }
 }

@@ -14,42 +14,13 @@ export class MyTopComponent implements OnInit {
   currentMood: string;
   topTracks = [];
 
-  private _moods;
-
   constructor(private _myTopService: MyTopService, private _moodService: TracksWithMoodService) {}
 
   ngOnInit() {
     this._loadMyTopTracks();
   }
 
-  private _loadMyTopTracks() {
-    this.isDataLoading = true;
-
-    // Get all tracks with mood from node server
-    this._moodService.getAllTracksWithsMood().subscribe((tracks) => {
-      if (!tracks.length) {
-        this.isDataLoading = false;
-      } else {
-        // Update observable to use it in track component
-        this._moodService.playedTracksAndTracksWithMood$.next(tracks);
-        this._getCurrentMood(tracks);
-
-        // Get track information from spotify for every track that have set moood from spotify
-        // And construct topTraks
-        tracks.forEach((mood, index) => {
-          this._myTopService.getTrackById(mood.trackId).subscribe((track) => {
-            this.topTracks.push(track);
-            // Stop loading when last track is got
-            if (index === tracks.length - 1) {
-              this.isDataLoading = false;
-            }
-          });
-        });
-      }
-    });
-  }
-
-  private _getCurrentMood(trackMoods) {
+  setCurrentMood(trackMoods) {
     let moodsNames = [];
 
     const mostPlayed = trackMoods.reduce(function(prevTrack, currentTrack) {
@@ -70,6 +41,33 @@ export class MyTopComponent implements OnInit {
     if (moodsNames) {
       this.currentMood = this._getHighlyOccuredElement(moodsNames);
     }
+  }
+
+  private _loadMyTopTracks() {
+    this.isDataLoading = true;
+
+    // Get all tracks with mood from node server
+    this._moodService.getAllTracksWithsMood().subscribe((tracks) => {
+      if (!tracks.length) {
+        this.isDataLoading = false;
+      } else {
+        // Update observable to use it in track component
+        this._moodService.playedTracksAndTracksWithMood$.next(tracks);
+        this.setCurrentMood(tracks);
+
+        // Get track information from spotify for every track that have set moood from spotify
+        // And construct topTraks
+        tracks.forEach((mood, index) => {
+          this._myTopService.getTrackById(mood.trackId).subscribe((track) => {
+            this.topTracks.push(track);
+            // Stop loading when last track is got
+            if (index === tracks.length - 1) {
+              this.isDataLoading = false;
+            }
+          });
+        });
+      }
+    });
   }
 
   // Helper method for getting most occured elemnt from array
