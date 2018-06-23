@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { SharedModule } from './../shared/shared.module';
 
-import { RecommendedService } from './recommended.service';
-import { RecommendedComponent } from './recommended.component';
 import { RecommendedRoutingModule } from './recommended-routing.module';
+import { RecommendedComponent } from './recommended.component';
+import { RecommendedService } from './recommended.service';
 
 const components = [RecommendedComponent];
 

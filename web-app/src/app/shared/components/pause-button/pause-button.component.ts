@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { PlayerService } from '@shared/services';
-import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-pause-button',
@@ -10,7 +10,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class PauseButtonComponent implements OnInit {
   @Output() onClicked: EventEmitter<string> = new EventEmitter<string>();
 
-  isTrackPlayed: boolean = false;
+  isTrackPlayed = false;
 
   constructor(private _playerService: PlayerService, private _router: Router) {}
 

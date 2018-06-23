@@ -1,8 +1,8 @@
-import { OnInit, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { UserService, PlayerService, AuthClientService } from '@shared/services';
 import { User } from '@shared/models';
+import { AuthClientService, PlayerService, UserService } from '@shared/services';
 
 @Component({
   templateUrl: './layout.component.html',

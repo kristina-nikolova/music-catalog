@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthClientService } from '@shared/services';
 import { Router } from '@angular/router';
+import { AuthClientService } from '@shared/services';
 
 @Component({
   selector: 'music-catalog',

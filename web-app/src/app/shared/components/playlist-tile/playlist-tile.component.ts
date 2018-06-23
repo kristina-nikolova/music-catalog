@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, trigger, state, style, transition, animate } from '@angular/core';
+import { animate, Component, EventEmitter, Input, Output, state, style, transition, trigger } from '@angular/core';
 import { PlaylistTile } from '@shared/models';
 
 @Component({

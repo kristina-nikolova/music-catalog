@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { SharedModule } from './../shared/shared.module';
 
-import { MyPlaylistsService } from './my-playlists.service';
+import { MyPlaylistsRoutingModule } from './my-playlists-routing.module';
 import { MyPlaylistsComponent } from './my-playlists.component';
+import { MyPlaylistsService } from './my-playlists.service';
 import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 import { PlaylistComponent } from './playlist/playlist.component';
-import { MyPlaylistsRoutingModule } from './my-playlists-routing.module';
 
 const components = [MyPlaylistsComponent, PlaylistDetailsComponent];
 

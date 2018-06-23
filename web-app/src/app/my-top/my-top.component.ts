@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MyTopService } from './my-top.service';
-import { TracksWithMoodService } from '@shared/services';
 import { SortByPipe } from '@shared/pipes';
+import { TracksWithMoodService } from '@shared/services';
+import { MyTopService } from './my-top.service';
 
 @Component({
   selector: 'app-my-top',
@@ -27,7 +27,7 @@ export class MyTopComponent implements OnInit {
   }
 
   private _setCurrentMood(trackMoods) {
-    let moodsNames = [];
+    const moodsNames = [];
 
     const mostPlayed = trackMoods.reduce(function(prevTrack, currentTrack) {
       return prevTrack.plays > currentTrack.plays ? prevTrack : currentTrack;

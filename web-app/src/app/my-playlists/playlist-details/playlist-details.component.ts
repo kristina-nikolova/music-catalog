@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import 'rxjs/add/operator/switchMap';
-import { MyPlaylistsService } from '../my-playlists.service';
 import { Playlist } from '@shared/models';
 import { TracksWithMoodService } from '@shared/services';
+import 'rxjs/add/operator/switchMap';
+import { MyPlaylistsService } from '../my-playlists.service';
 
 @Component({
   providers: [MyPlaylistsService],
@@ -37,6 +37,7 @@ export class PlaylistDetailsComponent implements OnInit {
       // Get which spotify tracks have mood or are played from node server
       // and save it in observable to use it in track component
       this._tracksIds = this.playlist.tracks.items.map((item) => item.track.id);
+      // tslint:disable-next-line:no-shadowed-variable
       this._moodService.getPlayedTracksAndTracksWithMood(this._tracksIds).subscribe((data) => {
         if (!data) return;
         this._moodService.playedTracksAndTracksWithMood$.next(data);

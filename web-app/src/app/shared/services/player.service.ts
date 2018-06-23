@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
-import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 import { APP_CONFIG } from '../../shared/app.config';
 

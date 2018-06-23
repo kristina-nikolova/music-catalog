@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RecommendedService } from './recommended.service';
 import { PlaylistTile } from '@shared/models';
 import * as _ from 'lodash';
+import { RecommendedService } from './recommended.service';
 
 @Component({
   providers: [RecommendedService],

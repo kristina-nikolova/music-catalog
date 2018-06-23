@@ -1,18 +1,18 @@
-import { NgModule, InjectionToken } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { InjectionToken, NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { APP_CONFIG } from './app.config';
 export let MAIN_CONFIG = new InjectionToken('app.config');
 
 import {
-  SpinnerComponent,
-  PlaylistTileComponent,
-  TilesListComponent,
   FollowButtonComponent,
-  TrackComponent,
   MoodWindowComponent,
-  PauseButtonComponent
+  PauseButtonComponent,
+  PlaylistTileComponent,
+  SpinnerComponent,
+  TilesListComponent,
+  TrackComponent
 } from '@shared/components';
 import { ClickOutsideDirective } from '@shared/directives';
 import { SafePipe, SortByPipe } from '@shared/pipes';

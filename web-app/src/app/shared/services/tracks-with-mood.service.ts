@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
-import { ITrackMood } from '../../../../../shared/interfaces/track-mood.interface';
 import { APP_CONFIG } from 'app/shared/app.config';
+import { ITrackMood } from '../../../../../shared/interfaces/track-mood.interface';
 
 @Injectable()
 export class TracksWithMoodService {

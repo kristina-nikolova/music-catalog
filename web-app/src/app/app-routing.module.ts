@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './login/login.component';
-import { LayoutComponent } from './layout/layout.component';
-import { RecommendedComponent } from './recommended/recommended.component';
-import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
-import { MyTopComponent } from './my-top/my-top.component';
-import { PlaylistDetailsComponent } from './my-playlists/playlist-details/playlist-details.component';
-import { RecommendedModule } from './recommended/recommended.module';
-import { MyPlaylistsModule } from './my-playlists/my-playlists.module';
-import { MyTopModule } from './my-top/my-top.module';
 import { CanActivateIfAuthenticated } from '@shared/guards';
+import { LayoutComponent } from './layout/layout.component';
+import { LoginComponent } from './login/login.component';
+import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
+import { MyPlaylistsModule } from './my-playlists/my-playlists.module';
+import { PlaylistDetailsComponent } from './my-playlists/playlist-details/playlist-details.component';
+import { MyTopComponent } from './my-top/my-top.component';
+import { MyTopModule } from './my-top/my-top.module';
+import { RecommendedComponent } from './recommended/recommended.component';
+import { RecommendedModule } from './recommended/recommended.module';
 import { UserResolver } from './shared/resolvers/user-resolver.service';
 
 const routes: Routes = [

@@ -1,9 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 
-import { OAuthService } from 'angular2-oauth2/oauth-service';
-import { APP_CONFIG } from '../../shared/app.config';
 import { Router } from '@angular/router';
 import { PlayerService } from '@shared/services';
+import { OAuthService } from 'angular2-oauth2/oauth-service';
+import { APP_CONFIG } from '../../shared/app.config';
 
 @Injectable()
 export class AuthClientService {

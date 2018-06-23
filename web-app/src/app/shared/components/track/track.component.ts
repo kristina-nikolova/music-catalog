@@ -1,23 +1,23 @@
 import {
+  animate,
+  ChangeDetectorRef,
   Component,
-  OnInit,
+  EventEmitter,
   Input,
-  trigger,
+  OnDestroy,
+  OnInit,
+  Output,
   state,
   style,
   transition,
-  animate,
-  ChangeDetectorRef,
-  OnDestroy,
-  Output,
-  EventEmitter
+  trigger
 } from '@angular/core';
-import { TracksWithMoodService, PlayerService } from '@shared/services';
-import { TrackMood, Track } from '@shared/models';
+import { Track, TrackMood } from '@shared/models';
+import { PlayerService, TracksWithMoodService } from '@shared/services';
 import { ITrackMood } from '../../../../../../shared/interfaces/track-mood.interface';
 
 import { DatePipe } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-track',
@@ -68,6 +68,7 @@ export class TrackComponent implements OnInit, OnDestroy {
         }
       }
 
+      // tslint:disable-next-line:no-shadowed-variable
       this._playerStateSubscription = this._playerService.playerState$.subscribe((state) => {
         if (!state) return;
         // Deselect track when it finished playing
@@ -190,7 +191,7 @@ export class TrackComponent implements OnInit, OnDestroy {
     // if track is saved ot updated
     let _currentPlayedTracksAndTracksWithMood = this._moodService.playedTracksAndTracksWithMood$.getValue();
 
-    let _findedTrack = _currentPlayedTracksAndTracksWithMood.find((tracks) => tracks.trackId === newTrack.trackId);
+    const _findedTrack = _currentPlayedTracksAndTracksWithMood.find((tracks) => tracks.trackId === newTrack.trackId);
     if (_findedTrack) {
       _currentPlayedTracksAndTracksWithMood.map((tracks) => {
         if (tracks.trackId === newTrack.trackId) {

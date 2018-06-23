@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx';
 
-import { APP_CONFIG } from './../shared/app.config';
 import { Track } from '@shared/models';
+import { APP_CONFIG } from './../shared/app.config';
 
 @Injectable()
 export class MyTopService {
