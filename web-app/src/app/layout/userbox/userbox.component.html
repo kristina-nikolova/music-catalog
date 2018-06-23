@@ -1,4 +1,4 @@
-<div class="userbox">
+<div class="userbox" (appClickOutside)="showUserDropdown = false">
   <span class="user__name">{{ user?.display_name }}</span>
   <img [src]="user?.images[0].url" alt="user photo" class="user__photo" (click)="showUserDropdown = !showUserDropdown" />
   <div class="user__dropdown" *ngIf="showUserDropdown" (click)="onLogoutClick()">Logout</div>

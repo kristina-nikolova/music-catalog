@@ -27,7 +27,10 @@ export class ClickOutsideDirective implements OnInit, OnDestroy {
     const targetElement = event.target;
     const clickedInside = this._elementRef.nativeElement.contains(targetElement);
 
-    if (!clickedInside && targetElement['className'].includes(this.clickOnSpecificComponentClass)) {
+    if (
+      !clickedInside &&
+      (!this.clickOnSpecificComponentClass || targetElement['className'].includes(this.clickOnSpecificComponentClass))
+    ) {
       this._ngZone.run(() => {
         this.appClickOutside.emit(null);
       });

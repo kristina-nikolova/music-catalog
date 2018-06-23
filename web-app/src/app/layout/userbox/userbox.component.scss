@@ -19,8 +19,9 @@
 
   &__dropdown {
     z-index: 20;
-    position: relative;
-    top: 15px;
+    position: absolute;
+    top: 60px;
+    right: 10px;
     cursor: pointer;
     padding: 0 15px;
     border-radius: 5px;
