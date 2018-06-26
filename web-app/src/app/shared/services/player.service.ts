@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { APP_CONFIG } from '../../shared/app.config';
+import { AuthClientService } from './auth.service';
 
 @Injectable()
 export class PlayerService {
@@ -14,7 +15,7 @@ export class PlayerService {
   device_id: string;
   playerState$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private _authService: AuthClientService) {}
 
   /**
    * name: playTrack
@@ -56,6 +57,7 @@ export class PlayerService {
         }
       });
 
+      this.player.addListener('authentication_error', this._playerAuthErrorHandler.bind(this));
       this.player.addListener('player_state_changed', this._playerStateChangedHandler.bind(this));
       this.player.addListener('ready', this._playerReadyHandler.bind(this));
       this.player.addListener('not_ready', this._playerNotReadyHandler.bind(this));
@@ -65,10 +67,13 @@ export class PlayerService {
   }
 
   stopPlayer() {
-    this.player.removeListener('player_state_changed', this._playerStateChangedHandler.bind(this));
-    this.player.removeListener('ready', this._playerReadyHandler.bind(this));
-    this.player.removeListener('not_ready', this._playerNotReadyHandler.bind(this));
-    this.player.disconnect();
+    if (this.player) {
+      this.player.removeListener('authentication_error', this._playerAuthErrorHandler.bind(this));
+      this.player.removeListener('player_state_changed', this._playerStateChangedHandler.bind(this));
+      this.player.removeListener('ready', this._playerReadyHandler.bind(this));
+      this.player.removeListener('not_ready', this._playerNotReadyHandler.bind(this));
+      this.player.disconnect();
+    }
   }
 
   private _playerStateChangedHandler(state) {
@@ -83,5 +88,11 @@ export class PlayerService {
 
   private _playerNotReadyHandler({ device_id }) {
     console.log('Device ID has gone offline', device_id);
+  }
+
+  private _playerAuthErrorHandler(e) {
+    console.log(e);
+    this.stopPlayer();
+    this._authService.logout();
   }
 }

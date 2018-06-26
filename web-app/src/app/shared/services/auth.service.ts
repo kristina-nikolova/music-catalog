@@ -1,13 +1,12 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, NgZone } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { PlayerService } from '@shared/services';
 import { OAuthService } from 'angular2-oauth2/oauth-service';
 import { APP_CONFIG } from '../../shared/app.config';
 
 @Injectable()
 export class AuthClientService {
-  constructor(private _oauthService: OAuthService, private _router: Router, private _injector: Injector) {}
+  constructor(private _oauthService: OAuthService, private _router: Router, private _ngZone: NgZone) {}
 
   /**
    * name: userAuthentication
@@ -51,13 +50,14 @@ export class AuthClientService {
   /**
    * name: logout
    * params:
-   * description: logout, navigate to the login page and disconnect the player
+   * description: logout and navigate to the login page
    */
   logout() {
-    this._router.navigate(['/login']);
+    // Need explicitly to run router.navigate in the ngZone
+    // when want to navigate from lazily loaded child component to parent
+    this._ngZone.run(() => {
+      this._router.navigate(['/login']);
+    });
     this._oauthService.logOut();
-
-    const _playerService = this._injector.get(PlayerService);
-    _playerService.stopPlayer();
   }
 }

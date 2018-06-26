@@ -1,10 +1,10 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable, Injector, isDevMode } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
 import { catchError } from 'rxjs/operators/catchError';
-import { AuthClientService } from '.';
+import { AuthClientService } from './auth.service';
+import { PlayerService } from './player.service';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -26,9 +26,11 @@ export class HttpInterceptorService implements HttpInterceptor {
         }
 
         const _authService = this._injector.get(AuthClientService);
-        console.log(errorResponse.status);
+        const _playerService = this._injector.get(PlayerService);
+
         if (errorResponse.status === 401) {
           _authService.logout();
+          _playerService.stopPlayer();
         }
         return _throw(errorResponse);
       })

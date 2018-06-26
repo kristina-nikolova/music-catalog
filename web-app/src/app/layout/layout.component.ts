@@ -26,5 +26,6 @@ export class LayoutComponent implements OnInit {
 
   logout() {
     this._authService.logout();
+    this._playerService.stopPlayer();
   }
 }
