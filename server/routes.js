@@ -18,10 +18,9 @@ function _formatDate(date) {
 
 /* GET ALL MOODS */
 router.get("/api/tracks-with-mood", function(req, res, next) {
-  let _today = new Date();
   model.TrackMood.find(
     {
-      date: _formatDate(_today)
+      date: _formatDate(new Date())
     },
     function(err, data) {
       if (err) return next(err);
@@ -32,10 +31,9 @@ router.get("/api/tracks-with-mood", function(req, res, next) {
 
 /* GET PLAYED MOODS OR TRACKS WITH MOOD */
 router.get("/api/played-tracks-with-mood", function(req, res, next) {
-  let _today = new Date();
   model.TrackMood.find(
     {
-      date: _formatDate(_today),
+      date: _formatDate(new Date()),
       trackId: { $in: req.query.tracksIds.split(",") }
     },
     function(err, data) {
@@ -56,7 +54,7 @@ router.post("/api/tracks-with-mood", function(req, res, next) {
 /* UPDATE MOOD */
 router.put("/api/moods/:trackId", function(req, res, next) {
   model.TrackMood.findOneAndUpdate(
-    { trackId: req.params.trackId },
+    { trackId: req.params.trackId, date: _formatDate(new Date()) },
     { $set: req.body },
     { new: true },
     function(err, data) {
@@ -69,7 +67,7 @@ router.put("/api/moods/:trackId", function(req, res, next) {
 /* UPDATE MOOD */
 router.put("/api/plays-count/:trackId", function(req, res, next) {
   model.TrackMood.findOneAndUpdate(
-    { trackId: req.params.trackId },
+    { trackId: req.params.trackId, date: _formatDate(new Date()) },
     { $set: req.body },
     { new: true },
     function(err, data) {
