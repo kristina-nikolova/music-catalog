@@ -48,51 +48,49 @@ export class PlayerService {
   };
 
   startPlayer() {
-    // Create and connect spotify player
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      this.player = new Spotify.Player({
-        name: 'Music Catalog',
-        getOAuthToken: (cb) => {
-          cb(this.token);
-        }
-      });
-
-      this.player.addListener('authentication_error', this._playerAuthErrorHandler.bind(this));
-      this.player.addListener('player_state_changed', this._playerStateChangedHandler.bind(this));
-      this.player.addListener('ready', this._playerReadyHandler.bind(this));
-      this.player.addListener('not_ready', this._playerNotReadyHandler.bind(this));
-
-      this.player.connect();
-    };
+    window.onSpotifyWebPlaybackSDKReady = () => this._playerStartHandler();
   }
 
   stopPlayer() {
     if (this.player) {
-      this.player.removeListener('authentication_error', this._playerAuthErrorHandler.bind(this));
-      this.player.removeListener('player_state_changed', this._playerStateChangedHandler.bind(this));
-      this.player.removeListener('ready', this._playerReadyHandler.bind(this));
-      this.player.removeListener('not_ready', this._playerNotReadyHandler.bind(this));
+      // window.removeEventListener('onSpotifyWebPlaybackSDKReady', this._playerStartHandler.bind(this));
+      window.onSpotifyWebPlaybackSDKReady = () => {};
+      this.player.removeListener('authentication_error');
+      this.player.removeListener('player_state_changed');
+      this.player.removeListener('ready');
+      this.player.removeListener('not_ready');
       this.player.disconnect();
     }
   }
 
-  private _playerStateChangedHandler(state) {
-    console.log(state);
-    this.playerState$.next(state);
-  }
+  private _playerStartHandler() {
+    this.player = new Spotify.Player({
+      name: 'Music Catalog',
+      getOAuthToken: (cb) => {
+        cb(this.token);
+      }
+    });
 
-  private _playerReadyHandler({ device_id }) {
-    console.log('Ready with Device ID', device_id);
-    this.device_id = device_id;
-  }
+    this.player.addListener('authentication_error', (e) => {
+      console.log(e);
+      this.stopPlayer();
+      this._authService.logout();
+    });
 
-  private _playerNotReadyHandler({ device_id }) {
-    console.log('Device ID has gone offline', device_id);
-  }
+    this.player.addListener('player_state_changed', (state) => {
+      console.log(state);
+      this.playerState$.next(state);
+    });
 
-  private _playerAuthErrorHandler(e) {
-    console.log(e);
-    this.stopPlayer();
-    this._authService.logout();
+    this.player.addListener('ready', ({ device_id }) => {
+      console.log('Ready with Device ID', device_id);
+      this.device_id = device_id;
+    });
+
+    this.player.addListener('not_ready', ({ device_id }) => {
+      console.log('Device ID has gone offline', device_id);
+    });
+
+    this.player.connect();
   }
 }
