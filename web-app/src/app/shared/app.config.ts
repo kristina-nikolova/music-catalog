@@ -14,5 +14,5 @@ export const APP_CONFIG: AppConfig = {
   apiOAuthUrl: 'https://accounts.spotify.com/authorize',
   clientId: 'd34fb6af5266455a891cc341fde2b4d0',
   apiPermissions:
-    'user-read-private user-top-read playlist-read-private playlist-modify-public playlist-modify-private playlist-read-collaborative streaming user-read-birthdate user-read-email'
+    'user-read-private user-top-read playlist-read-private playlist-modify-public playlist-modify-private playlist-read-collaborative streaming user-read-birthdate user-read-email user-read-playback-state'
 };

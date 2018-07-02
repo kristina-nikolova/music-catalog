@@ -79,7 +79,9 @@ export class TrackComponent implements OnInit, OnDestroy {
           !this.startPlaying
         ) {
           this.deselectTrack();
-          this._cd.detectChanges();
+          if (!this._cd['destroyed']) {
+            this._cd.detectChanges();
+          }
         }
       });
     });

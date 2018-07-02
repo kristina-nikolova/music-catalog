@@ -10,8 +10,4 @@ const TrackMoodSchema = new Schema({
 
 type TrackMoodType = ITrackMood & Document;
 
-export const TrackMood = model<TrackMoodType>(
-  "TrackMood",
-  TrackMoodSchema,
-  "TrackMood"
-);
+export const TrackMood = model<TrackMoodType>("TrackMood", TrackMoodSchema);

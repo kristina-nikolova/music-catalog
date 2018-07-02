@@ -1,9 +1,8 @@
 const express = require("express"),
   bodyParser = require("body-parser"),
-  path = require("path");
-(cors = require("cors")),
-  (mongoose = require("mongoose")),
-  (router = require("./routes.js"));
+  cors = require("cors"),
+  mongoose = require("mongoose"),
+  router = require("./routes.js");
 
 // MongoDB port is 27017 by default.
 const db = mongoose.connect(
@@ -19,6 +18,12 @@ const db = mongoose.connect(
 );
 
 const app = express();
+
+// Parsers for POST data
+app.use(bodyParser.json({ type: "application/json" }));
+// encode the data using querystring parsing
+app.use(bodyParser.urlencoded({ extended: false }));
+
 const corsOptions = {
   credentials: true,
   origin: "*",
@@ -26,15 +31,6 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Origin", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE"]
 };
-
-// app.use(express.static(path.join(__dirname, "app")));
-
-// Parsers for POST data
-// app.use(bodyParser.json());
-app.use(bodyParser.json({ type: "application/json" }));
-// encode the data using querystring parsing
-app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(cors(corsOptions));
 
 app.use(errorHandler);
