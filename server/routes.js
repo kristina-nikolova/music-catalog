@@ -56,7 +56,7 @@ router.put("/api/moods/:trackId", function(req, res, next) {
   model.TrackMood.findOneAndUpdate(
     { trackId: req.params.trackId, date: _formatDate(new Date()) },
     { $set: req.body },
-    { new: true },
+    { new: true }, //use ths to return updated mood
     function(err, data) {
       if (err) return next(err);
       res.json(data);

@@ -10,7 +10,8 @@ const db = mongoose.connect(
   "mongodb://localhost:27017/music-catalog",
   function(err, response) {
     if (err) {
-      console.log(err);
+      console.error(err);
+      throw err;
     } else {
       console.log("Connected to " + db, " + ", response);
     }
@@ -26,19 +27,20 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE"]
 };
 
-app.use(express.static(path.join(__dirname, "app")));
+// app.use(express.static(path.join(__dirname, "app")));
 
 // Parsers for POST data
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(bodyParser.json({ type: "application/json" }));
+// encode the data using querystring parsing
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors(corsOptions));
 
 app.use(errorHandler);
 function errorHandler(err, req, res, next) {
+  console.error(err);
   res.status(500);
-  res.render("error", { error: err });
 }
 
 app.use("/", router);

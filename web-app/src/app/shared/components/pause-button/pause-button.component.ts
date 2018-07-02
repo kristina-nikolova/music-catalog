@@ -16,7 +16,7 @@ export class PauseButtonComponent implements OnInit {
 
   ngOnInit() {
     this._router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
+      if (val instanceof NavigationEnd && this._playerService.player) {
         this._playerService.player.getCurrentState().then((state) => {
           if (state && !state.paused) {
             this.isTrackPlayed = true;
